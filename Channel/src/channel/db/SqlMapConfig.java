@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class SqlMapConfig {
-
+	
 	private SqlSessionFactory sqlSessionFactory;
 	
 	public SqlSessionFactory getSqlSessionFactory() {
@@ -26,8 +26,8 @@ public class SqlMapConfig {
 			
 			e.printStackTrace();
 		}
-		
+			
 		return sqlSessionFactory;
 	}
-	
+
 }

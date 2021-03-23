@@ -4,18 +4,27 @@
 
 	<properties resource="channel/db/db.properties"></properties>
 	
-  <environments default="development">
-    <environment id="development">
-      <transactionManager type="JDBC"/>
-      <dataSource type="POOLED">
-        <property name="driver" value="${driver}"/>
-        <property name="url" value="${url}"/>
-        <property name="username" value="${username}"/>
-        <property name="password" value="${password}"/>
-      </dataSource>
-    </environment>
-  </environments>
-  <mappers>
-    <mapper resource="channel/db/channel-mapper-jbo.xml"/>
-  </mappers>
+	<typeAliases>
+		<typeAlias type="channel.member.dto.MemberDto" alias="memberDto"/>
+	</typeAliases>
+		
+  	<environments default="development">
+    	<environment id="development">
+      	<transactionManager type="JDBC"/>
+	      	<dataSource type="POOLED">
+	        	<property name="driver" value="${driver}"/>
+	        	<property name="url" value="${url}"/>
+	        	<property name="username" value="${username}"/>
+	        	<property name="password" value="${password}"/>
+	      	</dataSource>
+    	</environment>
+  	</environments>
+
+	<mappers>
+		
+		<mapper resource="channel/db/channel-mapper-ksp.xml"/>
+		
+	</mappers>
+
+
 </configuration>
