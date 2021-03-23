@@ -16,10 +16,6 @@
     </environment>
   </environments>
   <mappers>
-    <mapper resource="channel/db/channel-mapper-lyj.xml"/>
-    <mapper resource="channel/db/channel-mapper-ksp.xml"/>
-    <mapper resource="channel/db/channel-mapper-pjs.xml"/>
-    <mapper resource="channel/db/channel-mapper-peh.xml"/>
     <mapper resource="channel/db/channel-mapper-jbo.xml"/>
   </mappers>
 </configuration>
