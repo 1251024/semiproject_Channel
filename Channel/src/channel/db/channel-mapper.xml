@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="channelmapper">
+
+	<resultMap type="memberDto" id="memberMap">
+		<result property="member_num" column="MEMBER_NUM" />
+		<result property="member_id" column="MEMBER_ID" />
+		<result property="member_pw" column="MEMBER_PW" />
+		<result property="member_name" column="MEMBER_NAME" />
+		<result property="member_email" column="MEMBER_EMAIL" />
+		<result property="member_phone" column="MEMBER_PHONE" />
+		<result property="member_pscode" column="MEMBER_PSCODE" />
+		<result property="member_addr" column="MEMBER_ADDR" />
+		<result property="member_addrdt" column="MEMBER_ADDRDT" />
+		<result property="member_type" column="MEMBER_TYPE" />
+		<result property="member_auth" column="MEMBER_AUTH" />
+		<result property="member_date" column="MEMBER_DATE" />
+		<result property="member_enabled" column="MEMBER_ENABLED" />
+		<result property="member_statement" column="MEMBER_STATEMENT" />
+	</resultMap>
+
+	<resultMap type="roomDto" id="roomMap">
+		<result property="channel_num" column="CHANNEL_NUM" />
+		<result property="channel_name" column="CHANNEL_NAME" />
+		<result property="channel_information" column="CHANNEL_INFORMATION" />
+		<result property="channel_enabled" column="CHANNEL_ENABLED" />
+		<result property="channel_regdate" column="CHANNEL_REGDATE" />
+	</resultMap>
+	
+	<resultMap type="chatDto" id="chatMap">
+		<result property="chat_seq" column="CHAT_SEQ"/>
+		<result property="channel_num" column="CHANNEL_NUM"/>
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="member_name" column="MEMBER_NAME"/>
+		<result property="chat_content" column="CHAT_CONTENT"/>
+		<result property="chat_regdate" column="CHAT_REGDATE"/>	
+	</resultMap>
+
+	<insert id="roomMemberAdd" parameterType="roomMemberDto">
+		INSERT INTO ROOMMEMBER
+		VALUES
+		(ROOMMEMBERSEQ.NEXTVAL,
+		#{channel_name},
+		#{member_id},
+		SYSDATE)
+	</insert>
+	
+	<select id="channelAdminList" resultMap="roomMap">
+		SELECT CHANNEL_NUM, CHANNEL_NAME, CHANNEL_INFORMATION, CHANNEL_ENABLED, CHANNEL_REGDATE
+		FROM CHANNELROOM
+		ORDER BY CHANNEL_NUM
+	</select>
+	
+	<select id="channelList" parameterType="String" resultMap="roomMap">
+		SELECT CHANNEL_NUM, CHANNEL_NAME, CHANNEL_INFORMATION, CHANNEL_ENABLED, CHANNEL_REGDATE
+		FROM CHANNELROOM
+		WHERE CHANNEL_NAME IN (SELECT CHANNEL_NAME FROM ROOMMEMBER WHERE MEMBER_ID = #{member_id})
+	</select>
+	
+	<select id="channelSelect" parameterType="int" resultMap="roomMap">
+		SELECT CHANNEL_NUM, CHANNEL_NAME, CHANNEL_INFORMATION, CHANNEL_ENABLED, CHANNEL_REGDATE
+		FROM CHANNELROOM
+		WHERE CHANNEL_NUM = #{channel_num}
+	</select>
+	
+	<update id="channelUpdate" parameterType="roomDto">
+		UPDATE CHANNELROOM
+		SET CHANNEL_NAME = #{channel_name}, CHANNEL_INFORMATION = #{channel_information}
+		WHERE CHANNEL_NUM = #{channel_num}
+	</update>
+	
+	<select id="permissionCheck" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM CHANNELROOM
+		WHERE MEMBER_ID = #{member_id}
+	</select>
+	
+	<insert id="createRoom" parameterType="roomDto">
+		INSERT INTO CHANNELROOM
+		VALUES
+		(CHANNELROOMSEQ.NEXTVAL,
+		#{channel_name},
+		#{channel_information},
+		#{member_id},
+		'Y',
+		SYSDATE)
+	</insert>
+	
+	<select id="callChatList" parameterType="int" resultMap="chatMap">
+		SELECT CHAT_SEQ, MEMBER_ID, MEMBER_NAME, CHAT_CONTENT, CHAT_REGDATE
+		FROM CHAT
+		WHERE CHANNEL_NUM = #{channel_num}
+		ORDER BY CHAT_REGDATE
+	</select>
+	
+	<insert id="insertChat" parameterType="chatDto">
+		INSERT INTO CHAT
+		VALUES (CHATSEQ.NEXTVAL,
+		#{channel_num},
+		#{member_id},
+		#{member_name},
+		#{chat_content}, 
+		SYSDATE)
+	</insert>
+
+
+
+
+
+
+
+
+
+	<select id="login" parameterType="memberDto"
+		resultMap="memberMap">
+		SELECT MEMBER_NUM, MEMBER_ID, MEMBER_PW, MEMBER_NAME,
+		MEMBER_EMAIL, MEMBER_PHONE,
+		MEMBER_PSCODE, MEMBER_ADDR, MEMBER_ADDRDT,
+		MEMBER_TYPE, MEMBER_AUTH, MEMBER_DATE,
+		MEMBER_ENABLED, MEMBER_STATEMENT
+		FROM MEMBER
+		WHERE MEMBER_ID = #{member_id} AND MEMBER_PW = #{member_pw}
+	</select>
+
+	<select id="idCheck" parameterType="String"
+		resultMap="memberMap">
+		SELECT MEMBER_NUM, MEMBER_ID, MEMBER_PW, MEMBER_NAME,
+		MEMBER_EMAIL, MEMBER_PHONE,
+		MEMBER_PSCODE, MEMBER_ADDR, MEMBER_ADDRDT,
+		MEMBER_TYPE, MEMBER_AUTH, MEMBER_DATE,
+		MEMBER_ENABLED, MEMBER_STATEMENT
+		FROM MEMBER
+		WHERE MEMBER_ID = #{member_id}
+	</select>
+
+	<insert id="insertUser" parameterType="memberDto">
+		INSERT INTO MEMBER VALUES
+		(MEMBERSEQ.NEXTVAL, #{member_id}, #{member_pw}, #{member_name},
+		#{member_email},
+		#{member_phone}, #{member_pscode}, #{member_addr},
+		#{member_addrdt},
+		'NORMAL', '1', SYSDATE, 'Y', '0')
+	</insert>
+
+	<select id="selectUser" parameterType="int"
+		resultMap="memberMap">
+		SELECT MEMBER_NUM, MEMBER_ID, MEMBER_PW, MEMBER_NAME,
+		MEMBER_EMAIL, MEMBER_PHONE,
+		MEMBER_PSCODE, MEMBER_ADDR, MEMBER_ADDRDT,
+		MEMBER_TYPE, MEMBER_AUTH, MEMBER_DATE,
+		MEMBER_ENABLED, MEMBER_STATEMENT
+		FROM MEMBER
+		WHERE MEMBER_NUM = #{member_num}
+	</select>
+
+	<update id="updateUser" parameterType="memberDto">
+		UPDATE MEBER
+		SET
+		MEMBER_NAME = #{member_name}, MEMBER_EMAIL = #{member_email},
+		MEMBER_PSCODE = #{member_pscode}, MEMBER_ADDR = #{member_addr},
+		MEMBER_ADDRDT = #{member_addrdt}, MEMBER_PHONE = #{member_phone}
+		WHERE
+		MEMBER_NUM = #{member_num}
+	</update>
+
+	<update id="updatePw" parameterType="memberDto">
+		UPDATE MEBER
+		SET MEMBER_PW =
+		#{member_pw}
+		WHERE MEMBER_NUM = #{member_num}
+	</update>
+
+	<update id="deleteUser" parameterType="int">
+		UPDATE MEBER
+		SET
+		MEMBER_ENABLED = 'N'
+		WHERE MEMBER_NUM = #{member_num}
+	</update>
+
+	<update id="updateStatement" parameterType="memberDto">
+		UPDATE MEBER
+		SET
+		MEMBER_STATEMENT = #{member_statement}
+		WHERE MEMBER_NUM = #{member_num}
+	</update>
+
+
+
+</mapper>

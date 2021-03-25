@@ -6,6 +6,9 @@
 	
 	<typeAliases>
 		<typeAlias type="channel.member.dto.MemberDto" alias="memberDto"/>
+		<typeAlias type="channel.room.dto.RoomDto" alias="roomDto"/>
+		<typeAlias type="channel.room.dto.RoomMemberDto" alias="roomMemberDto"/>
+		<typeAlias type="channel.chat.dto.ChatDto" alias="chatDto"/>
 	</typeAliases>
 		
   	<environments default="development">
@@ -22,7 +25,7 @@
 
 	<mappers>
 		
-		<mapper resource="channel/db/channel-mapper-ksp.xml"/>
+		<mapper resource="channel/db/channel-mapper.xml"/>
 		
 	</mappers>
 

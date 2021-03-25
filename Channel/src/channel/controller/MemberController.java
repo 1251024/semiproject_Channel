@@ -14,83 +14,55 @@ import channel.member.dto.MemberDto;
 @WebServlet("/MemberController")
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-    public MemberController() {      
-    }	
+	
+    public MemberController() {
+    }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
 		MemberBiz biz = new MemberBiz();
-		String command = request.getParameter("command");
 		
-		if (command.equals("member_login_page")) {
-			response.sendRedirect("jsp/member_login.jsp");
+		String command = request.getParameter("command");
+		System.out.println("["+command+"]");
+		
+		if (command.equals("memberlogin")) {
 			
-		} else if (command.equals("member_insert_page")) {
-			response.sendRedirect("jsp/member_insert.jsp");
+			String member_id = request.getParameter("member_id");
+			String member_pw = request.getParameter("member_pw");
 			
-		} else if (command.equals("member_insert")) {
-			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");
-			String re_pw = request.getParameter("re_pw");
-			String name = request.getParameter("name");
-			String email = request.getParameter("email");
-			String phone = request.getParameter("phone");
-			String pscode = request.getParameter("pscode");
-			String addr = request.getParameter("addr");
-			String addrdt = request.getParameter("addrdt");
-			
-			MemberDto dto = new MemberDto();
-			if (pw.equals(re_pw)) {
-				dto.setMember_id(id);
-				dto.setMember_pw(pw);
-				dto.setMember_name(name);
-				dto.setMember_email(email);
-				dto.setMember_phone(phone);
-				dto.setMember_pscode(pscode);
-				dto.setMember_addr(addr);
-				dto.setMemeber_addrdt(addrdt);
-				
-			} else {
-				response.sendRedirect("MemberController?command=member_insert_page");
-			}
-			
-			int res = biz.insertUser(dto);
-			
-			if(res > 0) {
-				response.sendRedirect("MemberController?command=member_login_page");
-			} else {
-				response.sendRedirect("index.html");
-			}
-			
-		} else if (command.equals("member_update")) {
-			System.out.println("회원정보 업데이트");
-			
-		} else if (command.equals("member_update_pw")){
-			response.sendRedirect("jsp/member_update_pw.jsp");
-			System.out.println("비밀번호 업데이트");			
-		} else if (command.equals("member_login")) {
-			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");
-			
-			MemberDto dto = biz.login(id, pw);
+			MemberDto dto = biz.login(member_id, member_pw);
 			HttpSession session = request.getSession();
 			
 			if (dto != null) {
 				session.setAttribute("loginDto", dto);
-				response.sendRedirect("jsp/main.jsp");
+				
+				if (dto.getMember_type().equals("ADMIN")) {
+					response.sendRedirect("ChatController?command=channelAdminList&member_id="+member_id);	
+				} else {
+					response.sendRedirect("ChatController?command=channelList&member_id="+member_id);
+				}
+				
+				
 			} else {
-				response.sendRedirect("MemberController?command=member_login_page");
-			}					
-		} 
-		
-	}
-
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+				response.sendRedirect("login.html");
+			}
+			
+		} else if (command.equals("memberinsertform")) {
+			
+			response.sendRedirect("member_insert.jsp");
+			
+		} else if (command.equals("memberinsert")) {
+			
+			
+			
+		}
+				
 	}
 
 }
