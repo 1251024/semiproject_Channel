@@ -15,7 +15,7 @@ public class MemberDao extends SqlMapConfig {
 		
 		try {
 			session = getSqlSessionFactory().openSession(true);
-			resDto = session.selectOne("kspmapper.login", dto);
+			resDto = session.selectOne("channelmapper.login", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -32,7 +32,7 @@ public class MemberDao extends SqlMapConfig {
 			
 		try {
 			session = getSqlSessionFactory().openSession(true);
-			resDto = session.selectOne("kspmapper.idCheck", member_id);
+			resDto = session.selectOne("channelmapper.idCheck", member_id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -48,7 +48,7 @@ public class MemberDao extends SqlMapConfig {
 			
 		try {
 			session = getSqlSessionFactory().openSession(false);			
-			res = session.insert("kspmapper.insertUser", dto);
+			res = session.insert("channelmapper.insertUser", dto);
 			
 			if(res >0) {
 				session.commit();
@@ -68,7 +68,7 @@ public class MemberDao extends SqlMapConfig {
 			
 		try {
 			session = getSqlSessionFactory().openSession(true);
-			resDto = session.selectOne("kspmapper.selectUser", member_num);
+			resDto = session.selectOne("channelmapper.selectUser", member_num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -84,7 +84,7 @@ public class MemberDao extends SqlMapConfig {
 			
 		try {
 			session = getSqlSessionFactory().openSession(false);
-			res = session.update("kspmapper.updateUser", dto);
+			res = session.update("channelmapper.updateUser", dto);
 			if (res > 0) {
 				session.commit();
 			}
@@ -103,7 +103,7 @@ public class MemberDao extends SqlMapConfig {
 			
 		try {
 			session = getSqlSessionFactory().openSession(false);
-			res = session.update("kspmapper.updatePw", dto);
+			res = session.update("channelmapper.updatePw", dto);
 			if (res > 0) {
 				session.commit();
 			}
@@ -122,7 +122,7 @@ public class MemberDao extends SqlMapConfig {
 			
 		try {
 			session = getSqlSessionFactory().openSession(false);
-			res = session.update("kspmapper.deleteUser", member_num);
+			res = session.update("channelmapper.deleteUser", member_num);
 			if (res > 0) {
 				session.commit();
 			}
@@ -141,7 +141,7 @@ public class MemberDao extends SqlMapConfig {
 			
 		try {
 			session = getSqlSessionFactory().openSession(false);
-			res = session.update("kspmapper.updateStatement", dto);
+			res = session.update("channelmapper.updateStatement", dto);
 			if (res > 0) {
 				session.commit();
 			}
