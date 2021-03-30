@@ -3,8 +3,6 @@ var channel_num = $("#channel_num").val();
 var member_id = $("#member_id").val();
 var member_name = $("#member_name").val();
 
-// 부트스트랩 JS
-
 //채널추가 시
 function addChannel() {		
 
@@ -40,7 +38,7 @@ function channeldelcon(chnum) {
 	if (con) {
 		
 		$.ajax({
-			url:"RoomControllerlyj"+getParameterValues(),
+			url:"RoomController"+getParameterValues(),
 			dataType: "text",
 			method: "post",
 			success:function(msg){
@@ -57,23 +55,10 @@ function channeldelcon(chnum) {
 }
 //채널 수정 시
 function channelAdmin(chnum, chname, chinfo, chac) {
-	//화면을 가리는 레이어의 사이즈 조정
 	var channel_num = chnum;
 	var channel_name = chname;
 	var channel_information = chinfo;
-	var channel_access = chac;
-	
-	var width = $(window).width();
-	var height = $(window).height();
-	$("#backLayer").width(width);
-	$("#backLayer").height(height);
-	
-	//화면을 가리는 레이어를 보여준다 (0.5초동안 30%의 농도의 투명도) 
-	$("#backLayer").fadeTo(300, 0.3);
-	
-	//채널추가란 보여주기
-	$('#channel_info_update').fadeIn(300);
-	
+	var channel_access = chac;	
 	$("#update_channel_num").val(channel_num);
 	$("#update_channel_name").val(channel_name);
 	$("#update_channel_information").val(channel_information);
@@ -99,7 +84,7 @@ function callChatList(chnum) {
 	$('#chatarea').children().remove();
 	var user = $("#member_id").val();
 	$.ajax ({
-		url:"ChatControllerlyj?command=callChatList&channel_num="+chnum,
+		url:"ChatController?command=callChatList&channel_num="+chnum,
 		dataType: "json",
 		method: "post",
 		success:function(data){
@@ -229,7 +214,7 @@ function callChatList(chnum) {
 function channelInfo(chnum) {
 	
 	$.ajax ({
-		url:"RoomControllerlyj?command=channelSelect&channel_num="+chnum,
+		url:"RoomController?command=channelSelect&channel_num="+chnum,
 		dataType: "text",
 		method: "post",
 		success:function(data){
@@ -383,7 +368,7 @@ function send(msg) {
 		}
 		
 		$.ajax({
-			url:"ChatControllerlyj"+getParameterValues(),
+			url:"ChatController"+getParameterValues(),
 			dataType: "text",
 			method: "post",
 			success:function(){

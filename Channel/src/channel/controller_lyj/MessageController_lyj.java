@@ -20,6 +20,14 @@ public class MessageController_lyj extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		// 메세지 창 추가할 함수
+		
+		// 메세지 저장할 함수
+		
+		// 메세지 로그 출력할 함수
 		
 	}
 
