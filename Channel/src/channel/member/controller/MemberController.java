@@ -156,8 +156,10 @@ public class MemberController extends HttpServlet {
 				response.sendRedirect("MemberController?command=member_login_page");
 			}
 			
-			
-			
+			// 주석이다. 주석...
+			// 이 부분이 수정된 부분이다.
+			String test = "깃허브테스트";
+			System.out.println(test);
 			
 			
 		} else if (command.equals("idcheck")) {
