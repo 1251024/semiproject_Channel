@@ -26,6 +26,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import channel.lyj_room.RoomBiz;
+import channel.lyj_room.RoomBizImpl;
+import channel.lyj_room.RoomMemberDto;
 import channel.member.biz.MemberBiz;
 import channel.member.dto.MemberDto;
 import channel.member.dto.MemberGoogleDto;
@@ -42,6 +45,7 @@ public class MemberController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		MemberBiz biz = new MemberBiz();
+		RoomBiz roomBiz = new RoomBizImpl();
 		String command = request.getParameter("command");
 		
 		if (command.equals("member_login_page")) {
@@ -78,8 +82,23 @@ public class MemberController extends HttpServlet {
 			
 			int res = biz.insertUser(dto);
 			
+			
+			
 			if(res > 0) {
-				response.sendRedirect("MemberController?command=member_login_page");
+				// 회원가입 성공시 전채채팅방 맴버에 해당 회원 정보 추가
+				RoomMemberDto roomDto = new RoomMemberDto();
+				roomDto.setChannel_name("전체채팅방");
+				roomDto.setMember_id(id);
+				roomDto.setMember_name(name);
+				int roomRes = roomBiz.roomMemberAdd(roomDto);
+				
+				if (roomRes > 0) {
+					response.sendRedirect("MemberController?command=member_login_page");
+				} else {
+					request.setAttribute("msg", "전체채팅방 입장에 실패하였습니다. 관리자에게 문의해주세요.");
+					response.sendRedirect("MemberController?command=member_login_page");
+				}
+					
 			} else {
 				response.sendRedirect("index.html");
 			}
@@ -106,16 +125,34 @@ public class MemberController extends HttpServlet {
 			MemberDto dto = biz.login(id, biz.getSHA256(pw));
 			HttpSession session = request.getSession();
 			
+			// 로그인 세션과 채널리스트 세션을 담아서 같이 전송한다.
+			
+//			if (dto != null) {
+//				if(dto.getMember_type() == "ADMIN") {
+//					session.setAttribute("loginDto", dto);
+//					response.sendRedirect("admin.jsp");
+//				} else {
+//					session.setAttribute("loginDto", dto);
+//					
+//					response.sendRedirect("main.jsp");					
+//				}				
+//			}
 			
 			if (dto != null) {
 				if(dto.getMember_type() == "ADMIN") {
 					session.setAttribute("loginDto", dto);
-					response.sendRedirect("admin.jsp");
+					// 관리자는 모든 채널리스트를 list에 담아서 전송
+					// 메세지리스트도 list에 담아서 전송
+					response.sendRedirect("RoomController?command=channelAdminList");
 				} else {
 					session.setAttribute("loginDto", dto);
-					response.sendRedirect("main.jsp");					
+					// 사용자는 본인 id가 매칭된 채널의 리스트만 list에 담아서 전송
+					// 메세지리스트도 list에 담아서 전송
+					response.sendRedirect("RoomController?command=channelList&member_id="+id);					
 				}				
-			} else {
+			}
+			
+			else {
 				response.sendRedirect("MemberController?command=member_login_page");
 			}
 			
