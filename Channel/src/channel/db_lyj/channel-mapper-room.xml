@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="channelmapper-room">
+
+	<resultMap type="roomDto" id="roomMap">
+		<result property="channel_num" column="CHANNEL_NUM" />
+		<result property="channel_name" column="CHANNEL_NAME" />
+		<result property="channel_information" column="CHANNEL_INFORMATION" />
+		<result property="member_id" column="MEMBER_ID" />
+		<result property="channel_access" column="CHANNEL_ACCESS" />
+		<result property="channel_enabled" column="CHANNEL_ENABLED" />
+		<result property="channel_regdate" column="CHANNEL_REGDATE" />
+	</resultMap>
+	
+	<resultMap type="roomMemberDto" id="roomMemberMap">
+		<result property="roommember_seq" column="ROOMMEMBER_SEQ"/>
+		<result property="channel_name" column="CHANNEL_NAME"/>
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="member_name" column="MEMBER_NAME"/>
+		<result property="regdate" column="REGDATE"/>	
+	</resultMap>
+	
+	<select id="channelAdminList" resultMap="roomMap">
+		SELECT CHANNEL_NUM, CHANNEL_NAME, CHANNEL_INFORMATION, MEMBER_ID, CHANNEL_ACCESS, CHANNEL_ENABLED, CHANNEL_REGDATE
+		FROM CHANNELROOM
+		ORDER BY CHANNEL_NUM
+	</select>
+	
+	<select id="channelList" parameterType="String" resultMap="roomMap">
+		SELECT CHANNEL_NUM, CHANNEL_NAME, CHANNEL_INFORMATION, MEMBER_ID, CHANNEL_ACCESS, CHANNEL_ENABLED, CHANNEL_REGDATE
+		FROM CHANNELROOM
+		WHERE CHANNEL_NAME IN (SELECT CHANNEL_NAME FROM ROOMMEMBER WHERE MEMBER_ID = #{member_id})
+		ORDER BY CHANNEL_NUM
+	</select>
+	
+	<select id="channelSelect" parameterType="int" resultMap="roomMap">
+		SELECT CHANNEL_NUM, CHANNEL_NAME, CHANNEL_INFORMATION, MEMBER_ID, CHANNEL_ACCESS, CHANNEL_ENABLED, CHANNEL_REGDATE
+		FROM CHANNELROOM
+		WHERE CHANNEL_NUM = #{channel_num}
+	</select>
+	
+	<insert id="createRoom" parameterType="roomDto">
+		INSERT INTO CHANNELROOM
+		VALUES
+		(CHANNELROOMSEQ.NEXTVAL, #{channel_name}, #{channel_information}, #{member_id}, #{channel_access}, 'Y',	SYSDATE)	
+	</insert>
+	
+	<insert id="roomMemberAdd" parameterType="roomMemberDto">
+		INSERT INTO ROOMMEMBER
+		VALUES
+		(ROOMMEMBERSEQ.NEXTVAL,
+		#{channel_name},
+		#{member_id},
+		#{member_name},
+		SYSDATE)
+	</insert>
+	
+	<select id="adminCheck" parameterType="int" resultType="String">
+		SELECT MEMBER_ID
+		FROM CHANNELROOM
+		WHERE CHANNEL_NUM = #{channel_num}
+	</select>
+	
+	<delete id="channelDelete" parameterType="int">
+		DELETE FROM CHANNELROOM
+		WHERE CHANNEL_NUM = #{channel_num}
+	</delete>
+	
+	<update id="channelUpdate" parameterType="roomDto">
+		UPDATE CHANNELROOM
+		SET CHANNEL_NAME = #{channel_name}, CHANNEL_INFORMATION = #{channel_information}, CHANNEL_ACCESS = #{channel_access}
+		WHERE CHANNEL_NUM = #{channel_num}
+	</update>
+	
+
+</mapper>

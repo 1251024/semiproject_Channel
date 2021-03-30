@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="channelmapper-chat">
+	
+	<resultMap type="chatDto" id="chatMap">
+		<result property="chat_seq" column="CHAT_SEQ"/>
+		<result property="channel_num" column="CHANNEL_NUM"/>
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="member_name" column="MEMBER_NAME"/>
+		<result property="chat_content" column="CHAT_CONTENT"/>
+		<result property="chat_regdate" column="CHAT_REGDATE"/>	
+	</resultMap>
+
+	<select id="callChatList" parameterType="int" resultMap="chatMap">
+		SELECT CHAT_SEQ, MEMBER_ID, MEMBER_NAME, CHAT_CONTENT, CHAT_REGDATE
+		FROM CHAT
+		WHERE CHANNEL_NUM = #{channel_num}
+		ORDER BY CHAT_REGDATE
+	</select>
+	
+	<insert id="chatInsert" parameterType="chatDto">
+		INSERT INTO CHAT
+		VALUES (CHATSEQ.NEXTVAL,
+		#{channel_num},
+		#{member_id},
+		#{member_name},
+		#{chat_content}, 
+		SYSDATE)
+	</insert>
+
+</mapper>
