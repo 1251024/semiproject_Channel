@@ -19,7 +19,7 @@ import channel.lyj_chat.ChatBiz;
 import channel.lyj_chat.ChatBizImpl;
 import channel.lyj_chat.ChatDto;
 
-@WebServlet("/ChatControllerlyj")
+@WebServlet("/ChatController")
 public class ChatController_lyj extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
