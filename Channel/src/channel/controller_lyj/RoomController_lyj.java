@@ -16,7 +16,7 @@ import channel.lyj_room.RoomBizImpl;
 import channel.lyj_room.RoomDto;
 import channel.lyj_room.RoomMemberDto;
 
-@WebServlet("/RoomControllerlyj")
+@WebServlet("/RoomController")
 public class RoomController_lyj extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -47,7 +47,7 @@ public class RoomController_lyj extends HttpServlet {
 
 			if (list != null) {
 				request.setAttribute("channelAdminlist", list);
-				dispatch("admin_lyj.jsp", request, response);
+				dispatch("admin.jsp", request, response);
 			}
 
 		// 로그인시 일반 유저로 로그인 할 경우
@@ -58,7 +58,7 @@ public class RoomController_lyj extends HttpServlet {
 
 			if (list != null) {
 				request.setAttribute("channelList", list);
-				dispatch("main_lyj.jsp", request, response);
+				dispatch("main.jsp", request, response);
 			}
 		
 		// 1개 채널 SELECT
@@ -107,10 +107,10 @@ public class RoomController_lyj extends HttpServlet {
 			
 			if (res > 0 && resAdd > 0) {
 				System.out.println("채널 생성 완료");
-				dispatch("RoomControllerlyj?command=channelList&member_id"+member_id, request, response);
+				dispatch("RoomController?command=channelList&member_id"+member_id, request, response);
 			} else {
 				System.out.println("채널 생성 실패");
-				dispatch("RoomControllerlyj?command=channelList&member_id"+member_id, request, response);
+				dispatch("RoomController?command=channelList&member_id"+member_id, request, response);
 			}
 			
 			
