@@ -163,6 +163,7 @@ public class MemberController extends HttpServlet {
 			}
 			
 			// 주석이다. 주석...
+			// 우와..주석..
 			// 이 부분이 수정된 부분이다.
 			String test = "깃허브테스트";
 			System.out.println(test);
