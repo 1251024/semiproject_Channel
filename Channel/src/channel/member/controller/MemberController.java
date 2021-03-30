@@ -148,6 +148,12 @@ public class MemberController extends HttpServlet {
 					session.setAttribute("loginDto", dto);
 					// 사용자는 본인 id가 매칭된 채널의 리스트만 list에 담아서 전송
 					// 메세지리스트도 list에 담아서 전송
+					/*
+					PAYMENT 테이블에서 PAY_TYPE 조건 확인하여 결제됬는지 안됬는지 확인하기
+					if (결제한 사람 : CREDIT) {
+					} else (임시체험자 : TEMP) { 
+					} else(결제안한사람:NULL) {
+					 */
 					response.sendRedirect("RoomController?command=channelList&member_id="+id);					
 				}				
 			}
