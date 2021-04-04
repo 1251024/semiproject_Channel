@@ -3,13 +3,14 @@
 
 <% request.setCharacterEncoding("UTF-8"); %>    
 <% response.setContentType("text/html; charset=UTF-8"); %> 
-
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript" src="resources/js/member_statement.js"></script>
-
-    <style>
+<!-- include summernote css/js -->
+<link href="resources/summernote/summernote.css" rel="stylesheet">
+<script src="resources/summernote/summernote.js"></script>
+<style>
         body {
             padding-top: 50px;
         }
@@ -110,10 +111,7 @@
                     <li><a style="font-size: 1.5rem;" href="">&#128365; alarm</a></li>
                     <li><a style="font-size: 1.5rem;" href="">&#128100; my</a></li> 
                 </ul>
-
-                <form style="background-color:#222;" class="navbar-form navbar-right">
-
-
+                <form class="navbar-form navbar-right">
                     <input type="text" class="form-control" placeholder="Search...">
                 </form>
             </div>
@@ -125,19 +123,68 @@
             <div id="side-navbar" class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
                     <li><a href="">Main</a></li>
-                    <li><a href="">People</a></li>
-                    <li><a href="">Channel</a></li>
-                    <li><a href="">Chat</a></li>
+                    <li>
+                    <div class="panel-heading" role="tab" id="collapseListWorkspace">
+							<h4 class="panel-title" id="-collapsible-list-group-">
+								<a class="collapsed" data-toggle="collapse" href="#workspacelist"
+									aria-expanded="false" aria-controls="workspacelist">Workspace </a>
+							</h4>
+					</div>
+                    <div id="workspacelist" class="panel-collapse collapse"
+							role="tabpanel" aria-labelledby="collapseListWorkspace"
+							aria-expanded="false" style="height: 0px;">
+							<ul class="list-group">
+								<li class="list-group-item">
+									<button type="button" class="btn btn-default btn-lg btn-block"
+										onclick="location.href='workspace.jsp'">Change Workspace</button>
+								</li>
+							</ul>
+					</div>
+                    </li>
+                    <li>
+                    <div class="panel-heading" role="tab" id="collapseListChannel">
+						<h4 class="panel-title" id="-collapsible-list-group-">
+						<a class="collapsed" data-toggle="collapse" href="#channellist"
+						aria-expanded="false" aria-controls="channellist">Channel </a>
+						</h4>
+					</div>
+					<div id="channellist" class="panel-collapse collapse"
+							role="tabpanel" aria-labelledby="collapseListChannel"
+							aria-expanded="false" style="height: 0px;">
+						<ul class="list-group" id="ChannelArea">
+							<li class="list-group-item">
+								<button type="button" class="btn btn-default btn-lg btn-block"
+						data-toggle="modal" data-target="#addChannelForm">새 채널 생성</button>
+							</li>
+						</ul>
+					</div>	
+                    </li>
+                    <li>
+					<div class="panel-heading" role="tab" id="collapseListChannel">
+							<h4 class="panel-title" id="-collapsible-list-group-">
+								<a class="collapsed" data-toggle="collapse" href="#messagelist"
+									aria-expanded="false" aria-controls="messagelist">Message </a>
+							</h4>
+						</div>
+						<div id="messagelist" class="panel-collapse collapse"
+							role="tabpanel" aria-labelledby="collapseListChannel"
+							aria-expanded="false" style="height: 0px;">
+						<ul class="list-group" id="MessageArea">
+							<li class="list-group-item">
+								<button type="button" class="btn btn-default btn-lg btn-block"
+								data-toggle="modal" data-target="#addMessageForm" onclick="selectInviteMessageMemberList();">새 메세지</button>
+							</li>
+						</ul>
+							
+						</div>
+					</li>
                 </ul>
                 <ul class="nav nav-sidebar">
                     <li><a href="">지도</a></li>
                     <li><a href="">날씨</a></li>
-
-
-                    <li><a href="covid.jsp">covid</a></li>
-                    <li><a href="paint.jsp">그림판</a></li>
-                    <li><a href="trans.jsp">번역</a></li>
-
+                    <li><a href="">covid</a></li>
+                    <li><a href="">그림판</a></li>
+                    <li><a href="">번역</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
                     <li><a href="">화상통화</a></li>
