@@ -36,6 +36,10 @@ public class WebSocket {
 	
 	@OnClose
 	public void onClose(Session session) {
+			
+			
+		
+		
 		clients.remove(session);
 	}
 	
