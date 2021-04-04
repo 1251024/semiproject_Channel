@@ -3,10 +3,14 @@ package channel.member.biz;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import channel.member.dao.MemberDao;
 import channel.member.dto.MemberDto;
+import channel.member.dto.SearchMemberDto;
 
 public class MemberBiz {
 	
@@ -129,7 +133,60 @@ public class MemberBiz {
 		int res = dao.googleLoginInsert(dto);		
 		return res;
 	}
+
+	// 12. 워크스페이스 리스트 전부 가져오기. (자신의 멤버넘이 들어 있는 워크 스페이스만 가져오기.)
+	public List<SearchMemberDto> searchMemberList(int member_num){
+		List<SearchMemberDto> list = dao.searchMemberList();
+		List<Integer> workspace_num = new ArrayList<Integer>();
+		List<SearchMemberDto> newlist = new ArrayList<SearchMemberDto>();
+		
+		for(SearchMemberDto searchDto : list) {
+			if(searchDto.getMember_num() == member_num) {
+				workspace_num.add(searchDto.getWorkspace_num());
+			}
+		}
+		
+		for(SearchMemberDto searchDto : list) {
+			if(workspace_num.contains(searchDto.getWorkspace_num())) {
+				SearchMemberDto dto = new SearchMemberDto();
+				dto.setWorkspacemember_num(searchDto.getWorkspacemember_num());
+				dto.setWorkspace_num(searchDto.getWorkspace_num());
+				dto.setWorkspace_name(searchDto.getWorkspace_name());
+				dto.setMember_num(searchDto.getMember_num());
+				dto.setWorkspacemember_regdate(searchDto.getWorkspacemember_regdate());
+				newlist.add(dto);
+			}
+		}
+			
+		return newlist;
+	}
 	
+	// 13. member_num에 따른 statement 가져오기. (name도 사용함)
+	public MemberDto memberStatement(int member_num) {
+		return dao.memberStatement(member_num);
+	}
+	
+	// 14. worklist를 넣으면 그에 해당하는 사람들의 member_num에 따른 리스트 가져오기.
+	public List<MemberDto> selectedMemberList(List<SearchMemberDto> worklist){
+		
+		Map<Integer, Integer> member_numlist= new HashMap<Integer, Integer>();
+		
+		for(SearchMemberDto searchDto : worklist) {
+			member_numlist.put(searchDto.getMember_num(), searchDto.getMember_num());
+		}
+		
+		List<MemberDto> allmemberlist =  dao.allCheck();
+		List<MemberDto> workmemberlist = new ArrayList<MemberDto>();
+		
+		for(MemberDto memdto : allmemberlist) {
+			if(member_numlist.containsKey(memdto.getMember_num())) {
+				workmemberlist.add(memdto);
+			}
+		}
+			
+		return workmemberlist;
+	}
+
 	
 	
 

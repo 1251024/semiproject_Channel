@@ -346,7 +346,14 @@ public class MemberController extends HttpServlet {
 					response.sendRedirect("MemberController?command=member_login_page");
 				}				
 			}			
-		} 
+		} else if (command.equals("logout")) {
+			
+			HttpSession session = request.getSession();
+			session.invalidate();
+			
+			response.sendRedirect("index.html");
+			
+		}
 			
 		
 		
