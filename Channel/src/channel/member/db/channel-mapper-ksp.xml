@@ -81,5 +81,18 @@
 		'GOOGLE', 'GOOGLE', SYSDATE, 'Y', '0')	
 	</insert>
 
+	<select id="searchMemberList" resultType="searchMemberDto">
+		SELECT WORKSPACEMEMBER_NUM, WORKSPACE_NUM, WORKSPACE_NAME, MEMBER_NUM, WORKSPACEMEMBER_REGDATE
+		FROM WORKSPACEMEMBER	
+	</select>
+
+	<select id="memberStatement" resultType="memberDto" parameterType="int">
+		SELECT MEMBER_NUM, MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_EMAIL, MEMBER_PHONE,
+		MEMBER_PSCODE, MEMBER_ADDR, MEMBER_ADDRDT, MEMBER_TYPE, MEMBER_AUTH, MEMBER_DATE,
+		MEMBER_ENABLED, MEMBER_STATEMENT
+		FROM MEMBER
+		WHERE MEMBER_NUM = #{member_num}	
+	</select>
+
 
 </mapper>

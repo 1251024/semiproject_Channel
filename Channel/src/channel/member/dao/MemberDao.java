@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import channel.member.db.SqlMapConfig;
 import channel.member.dto.MemberDto;
+import channel.member.dto.SearchMemberDto;
 
 public class MemberDao extends SqlMapConfig {
 	
@@ -180,6 +181,43 @@ public class MemberDao extends SqlMapConfig {
 			return res;
 		}	
 		
+	// 12. 워크스페이스 리스트 전부 가져오기.
+		public List<SearchMemberDto> searchMemberList(){
+			
+			SqlSession session = null;
+			
+			List<SearchMemberDto> list = new ArrayList<SearchMemberDto>();
+			
+			try {
+				session = getSqlSessionFactory().openSession(true);
+				list = session.selectList("kspmapper.searchMemberList");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				session.close();
+			}
+			
+			return list;
+		}
+		
+	// 13. member_num에 따른 statement 가져오기.
+	public MemberDto memberStatement(int member_num) {
+			SqlSession session = null;
+			MemberDto dto = null;
+			
+			try {
+				session = getSqlSessionFactory().openSession(true);
+				dto = session.selectOne("kspmapper.memberStatement", member_num);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				session.close();
+			}			
+			
+		return dto;
+	}
+	
+	
 	
 
 }
