@@ -46,6 +46,17 @@
 			$(".memberlistclass").remove();
 		});
 		
+
+		$("#searchTag").click(function(){
+			var search = $("#searchBox").val();
+			if(search == null || search.trim()==''){
+				alert("검색어를 입력해 주세요");
+			} else {
+				location.href="search.jsp?search="+search;
+			}			
+		});
+		
+		
 		
 	});
 
@@ -130,7 +141,7 @@
             color:black;
             font-size: 1.5rem;
         }
-          #serachBox{
+          #searchFrame{
         	style="background-color:#222;" 
         }
 
@@ -160,9 +171,10 @@
                     <li><a style="font-size: 1.5rem;" id="memberlist" href="search_member.jsp">&#128100; my</a></li> 
                 </ul>
 
-                <form style="background-color:#222;" class="navbar-form navbar-right">
-                    <input type="text" class="form-control" placeholder="Search...">
-                </form>
+               <form id="searchFrame" class="navbar-form navbar-right">
+                    <input type="text" id="searchBox" class="form-control" placeholder="Search...">
+                    <input type="button" id="searchTag" value="검색" />
+               </form>
             </div>
         </div>
     </nav>
