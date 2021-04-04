@@ -13,9 +13,9 @@
 </head>
 <body>
 <%@include file="common.jsp" %>
-<input type="hidden" id="member_num" value="24"> <!-- 임시 맴버 num 값 -->
-<input type="hidden" id="member_id" value="tt"> <!-- 임시 맴버 id 값 -->
-<input type="hidden" id="member_name" value="aaa"> <!-- 임시 맴버 name 값 -->
+<input type="hidden" id="member_num" value="${loginDto.member_num }">
+<input type="hidden" id="member_id" value="${loginDto.member_id }">
+<input type="hidden" id="member_name" value="${loginDto.member_name }">
 <div id="workspaceArea">
 	워크스페이스를 선택하세요.<br>
 	<button type="button" class="btn btn-default btn-lg btn-block"
@@ -53,7 +53,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="workspaceAdminForm" tabindex="-1" role="dialog"	aria-labelledby="addWorkspaceLable" aria-hidden="true">
+	<div class="modal fade" id="workspaceAdminForm" tabindex="-1" role="dialog"	aria-labelledby="adminWorkspaceLable" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -61,13 +61,29 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h3 class="modal-title" id="addWorkspaceLable">워크스페이스 관리</h3>
+					<h3 class="modal-title" id="adminWorkspaceLable">워크스페이스 관리</h3>
 				</div>
 				<div class="modal-body">
-					<div id="workspaceAdminCommand">
-						
-					</div>
-					<label for="recipient-name" class="control-label"><input class="btn btn-default" type="button" value="맴버 목록"></label>
+					<form action="WorkSpaceController" method="post" id="workspaceUpdateSubmit">
+						<input type="hidden" name="command" value="updateWorkSpace">
+							<div id="workspaceAdminCommand">
+								
+							</div>			
+						<div class="form-group">
+							<label for="recipient-name" class="control-label">회사명을 입력해주세요.</label>
+							<input type="text" class="form-control" name="workspace_name">
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="control-label">무슨 일을 하는 회사인가요? 회사정보입력</label>
+							<textarea class="form-control" name="workspace_information"></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" form="workspaceUpdateSubmit">정보수정</button>
+				</div>
+				<div class="modal-body">	
+				<label for="recipient-name" class="control-label"><input class="btn btn-default" type="button" value="맴버 목록"></label>
 						<div id="workspaceMemberList">
 							
 						</div>
