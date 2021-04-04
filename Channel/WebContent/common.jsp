@@ -11,8 +11,6 @@
 <!-- include summernote css/js -->
 <link href="resources/summernote/summernote.css" rel="stylesheet">
 <script src="resources/summernote/summernote.js"></script>
-<style>
-
 <script>
 	$(document).ready(function(){
 		$("#memberlist").mouseover(function(){	
@@ -65,13 +63,8 @@
 		
 	});
 
-
-
-
-
 </script>
-
-    <style>
+<style>
 
         body {
             padding-top: 50px;
@@ -151,7 +144,7 @@
         	style="background-color:#222;" 
         }
 
-    </style>
+</style>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
