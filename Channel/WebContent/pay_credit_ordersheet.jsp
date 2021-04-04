@@ -44,11 +44,11 @@ textarea {
 		</p>
 		
 		<p>
-			<span>가격:</span><input name="totalPrice" value="1" readonly="readonly">
+			<span>가격:</span><input name="totalPrice" value="9900" readonly="readonly">
 		</p>
 		<input type="submit" value="결제하기"> 
 		<input type="reset"	value="취소하기">
-		<input type="button" value="뒤로가기" onclick="location.href='index.jsp'">
+		<input type="button" value="뒤로가기" onclick="location.href='index.html'">
 	</form>
 
 
