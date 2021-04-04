@@ -3,38 +3,12 @@
 
 <% request.setCharacterEncoding("UTF-8"); %>    
 <% response.setContentType("text/html; charset=UTF-8"); %> 
-   
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Channel Main Page</title>
 
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript" src="resources/js/member_statement.js"></script>
-<script type="text/javascript">
 
-	$("#myalarm").mouseon(function() {
-		$.ajax({
-			
-			url : "AlarmController?command=alarmlist";
-			async:true;
-			success:function(data){
-				alarmlist=data; 				
-				}
-			});
-		}
-		
-		
-	});
-
-
-
-</script>
     <style>
         body {
             padding-top: 50px;
@@ -112,9 +86,7 @@
         }
 
     </style>
-</head>
 
-<body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -135,7 +107,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a id="myalarm" href="" style="font-size: 1.5rem;" >&#128365; alarm</a></li>
+                    <li><a style="font-size: 1.5rem;" href="">&#128365; alarm</a></li>
                     <li><a style="font-size: 1.5rem;" href="">&#128100; my</a></li> 
                 </ul>
                 <form class="navbar-form navbar-right">
@@ -157,9 +129,9 @@
                 <ul class="nav nav-sidebar">
                     <li><a href="">지도</a></li>
                     <li><a href="">날씨</a></li>
-                    <li><a href="">covid</a></li>
-                    <li><a href="">그림판</a></li>
-                    <li><a href="">번역</a></li>
+                    <li><a href="covid.jsp">covid</a></li>
+                    <li><a href="paint.jsp">그림판</a></li>
+                    <li><a href="trans.jsp">번역</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
                     <li><a href="">화상통화</a></li>
@@ -173,27 +145,3 @@
                 
                 
 
-
-
-                
-                <h1>Welcome!</h1>
-
-                <div class="col-xs-12">
-
-                    여기부터 작성가능영역!!   
-                     
-                </div>
-
-
-
-
-
-
-
-
-            </div>
-        </div>
-    </div>
-</body>
-
-</html>
