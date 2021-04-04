@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pehmapper">
+  
+  <resultMap type="alarmDto" id="alarmMap">
+  	<result property="member_name" column="MEMBER_NAME"/>
+  	<result property="ala_content" column="ALA_CONTENT"/>
+  	<result property="ala_regdate" column="ALA_REGDATE"/>
+  </resultMap>
+  
+  
+  
+  <select id="alarmlist" resultType="alarmDto">
+  	SELECT ALA_SEQ, MEMBER_NUM, LASTCHAT_NUM
+  	FROM ALARM
+  </select>
+  
+  
+</mapper>

@@ -110,7 +110,10 @@
                     <li><a style="font-size: 1.5rem;" href="">&#128365; alarm</a></li>
                     <li><a style="font-size: 1.5rem;" href="">&#128100; my</a></li> 
                 </ul>
+
                 <form style="background-color:#222;" class="navbar-form navbar-right">
+
+
                     <input type="text" class="form-control" placeholder="Search...">
                 </form>
             </div>
@@ -129,9 +132,12 @@
                 <ul class="nav nav-sidebar">
                     <li><a href="">지도</a></li>
                     <li><a href="">날씨</a></li>
-                    <li><a href="">covid</a></li>
-                    <li><a href="">그림판</a></li>
-                    <li><a href="">번역</a></li>
+
+
+                    <li><a href="covid.jsp">covid</a></li>
+                    <li><a href="paint.jsp">그림판</a></li>
+                    <li><a href="trans.jsp">번역</a></li>
+
                 </ul>
                 <ul class="nav nav-sidebar">
                     <li><a href="">화상통화</a></li>
