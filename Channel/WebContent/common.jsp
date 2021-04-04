@@ -7,10 +7,61 @@
 <script src="resources/js/bootstrap.min.js"></script>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript" src="resources/js/member_statement.js"></script>
+
 <!-- include summernote css/js -->
 <link href="resources/summernote/summernote.css" rel="stylesheet">
 <script src="resources/summernote/summernote.js"></script>
 <style>
+
+<script>
+	$(document).ready(function(){
+		$("#memberlist").mouseover(function(){	
+			$.ajax({
+				url : "SearchController?command=memberlist",
+				type : "get",
+				success : function(data){
+					var jsonObj = JSON.parse(data);
+					
+					var $div = $("<div>");
+					$div.append("<br/>")
+					for(i = 0; i<3; i++){
+						$div.append(" 이름 : ");
+						$div.append(jsonObj[i].member_name);
+						$div.append(" (");
+						$div.append((jsonObj[i].member_statement == '1')?"온라인":"오프라인");
+						$div.append(")");
+						$div.append("<br/>")
+					}
+					$div.append(".....")
+					$div.css("color", "black");
+					$div.css("backgroundcolor", "gray");
+					$div.css("position", "fixed");
+					$div.css("width", "200px");
+					$div.css("top", "30px");
+					$div.css("right", "10px");
+					$div.addClass("memberlistclass");
+					$("#memberlist").after($div);
+				},
+				error : function(){
+					$(".memberlistclass").remove();
+				}				
+			});			
+		});
+		$("#memberlist").mouseleave(function(){
+			$(".memberlistclass").remove();
+		});
+		
+		
+	});
+
+
+
+
+
+</script>
+
+    <style>
+
         body {
             padding-top: 50px;
         }
@@ -85,6 +136,9 @@
             color:black;
             font-size: 1.5rem;
         }
+          #serachBox{
+        	style="background-color:#222;" 
+        }
 
     </style>
 
@@ -109,9 +163,11 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a style="font-size: 1.5rem;" href="">&#128365; alarm</a></li>
-                    <li><a style="font-size: 1.5rem;" href="">&#128100; my</a></li> 
+                    <li><a style="font-size: 1.5rem;" id="memberlist" href="search_member.jsp">&#128100; my</a></li> 
                 </ul>
+
                 <form class="navbar-form navbar-right">
+
                     <input type="text" class="form-control" placeholder="Search...">
                 </form>
             </div>
@@ -182,14 +238,16 @@
                 <ul class="nav nav-sidebar">
                     <li><a href="">지도</a></li>
                     <li><a href="">날씨</a></li>
-                    <li><a href="">covid</a></li>
-                    <li><a href="">그림판</a></li>
-                    <li><a href="">번역</a></li>
+
+                    <li><a href="covid.jsp">covid</a></li>
+                    <li><a href="paint.jsp">그림판</a></li>
+                    <li><a href="trans.jsp">번역</a></li>
+
+
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href="">화상통화</a></li>
-                    <li><a href="">회원정보 수정</a></li>
-                    <li><a href="">LogOut</a></li>
+                    <li><a href="member_update.jsp">회원정보 수정</a></li>
+                    <li><a href="MemberController?command=logout">LogOut</a></li>
                 </ul>
             </div>
             

@@ -6,6 +6,7 @@
 	
 	<typeAliases>
 		<typeAlias type="channel.member.dto.MemberDto" alias="memberDto"/>
+		<typeAlias type="channel.member.dto.SearchMemberDto" alias="searchMemberDto"/>
 	</typeAliases>
 		
   	<environments default="development">

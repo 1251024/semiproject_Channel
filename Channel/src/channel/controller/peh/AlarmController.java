@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import channel.lyj_chat.ChatDto;
-import channel.lyj_message.MessageDto;
 import channel.member.dto.MemberDto;
 
 @WebServlet("/AlarmController")
