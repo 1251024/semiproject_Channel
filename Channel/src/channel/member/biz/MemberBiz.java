@@ -3,7 +3,6 @@ package channel.member.biz;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.List;
 
 import channel.member.dao.MemberDao;
@@ -19,48 +18,48 @@ public class MemberBiz {
 	
 	// 1. 로그인
 	public MemberDto login(String member_id, String member_pw) {
-		List<MemberDto> list = dao.allCheck();
+		List<MemberDto> lists = dao.allCheck();
 		MemberDto dto = null;
-		for(MemberDto lists : list) {
-			if(lists.getMember_id().equals(member_id) && lists.getMember_pw().equals(member_pw)) {
-				dto = new MemberDto(lists.getMember_num(),
-									lists.getMember_id(),
-									lists.getMember_pw(),
-									lists.getMember_name(),
-									lists.getMember_email(),
-									lists.getMember_phone(),
-									lists.getMember_pscode(),
-									lists.getMember_addr(),
-									lists.getMember_addrdt(),
-									lists.getMember_type(),
-									lists.getMember_auth(),
-									lists.getMember_date(),
-									lists.getMember_enabled(),
-									lists.getMember_statement());
+		for(MemberDto list : lists) {
+			if(list.getMember_id().equals(member_id) && list.getMember_pw().equals(member_pw)) {
+				dto = new MemberDto(list.getMember_num(),
+									list.getMember_id(),
+									list.getMember_pw(),
+									list.getMember_name(),
+									list.getMember_email(),
+									list.getMember_phone(),
+									list.getMember_pscode(),
+									list.getMember_addr(),
+									list.getMember_addrdt(),
+									list.getMember_type(),
+									list.getMember_auth(),
+									list.getMember_date(),
+									list.getMember_enabled(),
+									list.getMember_statement());
 			}
 		}		
 		return dto;
 	}
 	// 2. 중복체크
 	public MemberDto idCheck(String member_id) {
-		List<MemberDto> list = dao.allCheck();
+		List<MemberDto> lists = dao.allCheck();
 		MemberDto dto = null;
-		for(MemberDto lists : list) {
-			if(lists.getMember_id().equals(member_id)) {
-				dto = new MemberDto(lists.getMember_num(),
-									lists.getMember_id(),
-									lists.getMember_pw(),
-									lists.getMember_name(),
-									lists.getMember_email(),
-									lists.getMember_phone(),
-									lists.getMember_pscode(),
-									lists.getMember_addr(),
-									lists.getMember_addrdt(),
-									lists.getMember_type(),
-									lists.getMember_auth(),
-									lists.getMember_date(),
-									lists.getMember_enabled(),
-									lists.getMember_statement());
+		for(MemberDto list : lists) {
+			if(list.getMember_id().equals(member_id)) {
+				dto = new MemberDto(list.getMember_num(),
+									list.getMember_id(),
+									list.getMember_pw(),
+									list.getMember_name(),
+									list.getMember_email(),
+									list.getMember_phone(),
+									list.getMember_pscode(),
+									list.getMember_addr(),
+									list.getMember_addrdt(),
+									list.getMember_type(),
+									list.getMember_auth(),
+									list.getMember_date(),
+									list.getMember_enabled(),
+									list.getMember_statement());
 			}
 		}		
 		return dto;				
@@ -111,6 +110,24 @@ public class MemberBiz {
 		}		
 		
 		return result.toString();
+	}
+	
+	// 10. 네이버 로그인 인서트
+	public int naverLoginInsert(String email) {
+		MemberDto dto = new MemberDto(0, email, this.getSHA256(email), email.split("@")[0], email,
+									"010-0000-0000", "00000", "주소를 입력해주세요", "상세주소를 입력해주세요", "NAVER", "NAVER",
+									null, "Y", "0");
+		int res = dao.naverLoginInsert(dto);
+		return res;
+	}
+	
+	// 11. 구글 로그인 인서트
+	public int googleLoginInsert(String email) {
+		MemberDto dto = new MemberDto(0, email, this.getSHA256(email), email.split("@")[0], email,
+									"010-0000-0000", "00000", "주소를 입력해주세요", "상세주소를 입력해주세요", "GOOGLE", "GOOGLE",
+									null, "Y", "0");
+		int res = dao.googleLoginInsert(dto);		
+		return res;
 	}
 	
 	

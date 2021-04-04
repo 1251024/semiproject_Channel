@@ -140,5 +140,46 @@ public class MemberDao extends SqlMapConfig {
 			
 		return res;
 	}
+	
+	// 10. 네이버 로그인 인서트
+	public int naverLoginInsert(MemberDto dto) {
+		SqlSession session = null;
+		int res = 0;
+		try {
+			session = getSqlSessionFactory().openSession(false);
+			res = session.insert("kspmapper.naverLoginInsert", dto);
+			if(res > 0) {
+				session.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}		
+			
+		return res;
+	}
+	
+	// 11. 구글 로그인 인서트
+		public int googleLoginInsert(MemberDto dto) {
+			SqlSession session = null;
+			int res = 0;
+			
+			try {
+				session = getSqlSessionFactory().openSession(false);
+				res = session.insert("kspmapper.googleLoginInsert", dto);
+				if(res > 0) {
+					session.commit();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				session.close();
+			}		
+				
+			return res;
+		}	
+		
+	
 
 }

@@ -9,5 +9,4 @@
         VALUES(#{pay_member_no}, PAYMENTSEQ.NEXTVAL, #{pay_name}, #{pay_email}, #{pay_phone}, 'card', #{pay_price}, SYSDATE)
     </insert>
 
-
 </mapper>

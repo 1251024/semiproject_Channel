@@ -42,7 +42,7 @@
 	</select>
 	
 	<update id="updateUser" parameterType="memberDto">
-		UPDATE MEBER
+		UPDATE MEMBER
 		SET MEMBER_NAME = #{member_name}, MEMBER_EMAIL = #{member_email},
 		MEMBER_PSCODE = #{member_pscode}, MEMBER_ADDR = #{member_addr},
 		MEMBER_ADDRDT = #{member_addrdt}, MEMBER_PHONE = #{member_phone}
@@ -50,13 +50,13 @@
 	</update>
 	
 	<update id="updatePw" parameterType="memberDto">
-		UPDATE MEBER
+		UPDATE MEMBER
 		SET MEMBER_PW = #{member_pw}
 		WHERE MEMBER_NUM = #{member_num}	
 	</update>
 
 	<update id="deleteUser" parameterType="int">
-		UPDATE MEBER
+		UPDATE MEMBER
 		SET MEMBER_ENABLED = 'N'
 		WHERE MEMBER_NUM = #{member_num}	
 	</update>
@@ -66,7 +66,20 @@
 		SET MEMBER_STATEMENT = #{member_statement}
 		WHERE MEMBER_NUM = #{member_num}		
 	</update>
+	
+	<insert id="naverLoginInsert" parameterType="memberDto">
+		INSERT INTO MEMBER VALUES
+		(MEMBERSEQ.NEXTVAL, #{member_id}, #{member_pw}, #{member_name}, #{member_email},
+		#{member_phone}, #{member_pscode}, #{member_addr}, #{member_addrdt},
+		'NAVER', 'NAVER', SYSDATE, 'Y', '0')	
+	</insert>
 
+	<insert id="googleLoginInsert" parameterType="memberDto">
+		INSERT INTO MEMBER VALUES
+		(MEMBERSEQ.NEXTVAL, #{member_id}, #{member_pw}, #{member_name}, #{member_email},
+		#{member_phone}, #{member_pscode}, #{member_addr}, #{member_addrdt},
+		'GOOGLE', 'GOOGLE', SYSDATE, 'Y', '0')	
+	</insert>
 
 
 </mapper>

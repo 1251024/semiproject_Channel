@@ -18,19 +18,6 @@
 <script type="text/javascript" src="resources/js/member_statement.js"></script>
 <script type="text/javascript">
 
-	$("#myalarm").mouseon(function() {
-		$.ajax({
-			
-			url : "AlarmController?command=alarmlist";
-			async:true;
-			success:function(data){
-				alarmlist=data; 				
-				}
-			});
-		}
-		
-		
-	});
 
 
 
@@ -194,6 +181,7 @@
             </div>
         </div>
     </div>
+
 </body>
 
 </html>
