@@ -168,7 +168,7 @@ body {
 	<input type="hidden" id="member_name" value="${loginDto.member_name }">
 
 	<%
-	List<RoomDto> list = (List<RoomDto>) request.getAttribute("channelList");
+	List<RoomDto> list = (List<RoomDto>) request.getAttribute("channelList"); 
 	%>
 
 	<nav class="navbar navbar-inverse navbar-fixed-top">
