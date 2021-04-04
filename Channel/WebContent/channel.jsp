@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>CHANNEL / Channel / ${loginDto.member_name }</title>
 <style type="text/css">
 /* 이용준 main css 수정 부분 */
 #channelinfo {
@@ -57,10 +57,10 @@
 %>
 <body>
 <%@include file="common.jsp" %>
-	<input type="hidden" id="member_num" value="<%=member_num %>">
 	<input type="hidden" id="workspace_num" value="<%=workspace_num %>">
-	<input type="hidden" id="member_id" value="tt">
-	<input type="hidden" id="member_name" value="aaa">
+	<input type="hidden" id="member_num" value="${loginDto.member_num }">
+	<input type="hidden" id="member_id" value="${loginDto.member_id }">
+	<input type="hidden" id="member_name" value="${loginDto.member_name }">
 		<div class="col-xs-12" id="content_container">
 			<div id="roominfo">
 				<span>채널 or 메세지를 선택해주세요</span>
