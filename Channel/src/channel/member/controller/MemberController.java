@@ -353,6 +353,17 @@ public class MemberController extends HttpServlet {
 			
 			response.sendRedirect("index.html");
 			
+		} else if (command.equals("member_delete")) {
+			HttpSession session = request.getSession();
+			MemberDto dto = (MemberDto)session.getAttribute("loginDto");
+			int res = biz.deleteUser(dto.getMember_num());
+			
+			if (res > 0) {
+				response.sendRedirect("index.html");
+			} else {
+				response.sendRedirect("member_update.jsp");
+			}
+			
 		}
 			
 		

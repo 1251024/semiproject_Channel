@@ -94,5 +94,16 @@
 		WHERE MEMBER_NUM = #{member_num}	
 	</select>
 
+	<select id="allChatList" resultType="searchDto">
+		SELECT CHAT_NUM, CHANNEL_NUM, MEMBER_NUM, MEMBER_ID, MEMBER_NAME, CHAT_CONTENT, CHAT_REGDATE
+		FROM CHAT	
+	</select>
+
+	<select id="workspacenum" resultType="searchChannelDto" parameterType="int">
+		SELECT CHANNEL_NUM, WORKSPACE_NUM, MEMBER_NUM, CHANNEL_NAME, CHANNEL_INFORMATION, CHANNEL_REGDATE
+		FROM CHANNEL
+		WHERE CHANNEL_NUM = #{channel_num}	
+	</select>
+
 
 </mapper>

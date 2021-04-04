@@ -10,6 +10,8 @@ import java.util.Map;
 
 import channel.member.dao.MemberDao;
 import channel.member.dto.MemberDto;
+import channel.member.dto.SearchChannelDto;
+import channel.member.dto.SearchDto;
 import channel.member.dto.SearchMemberDto;
 
 public class MemberBiz {
@@ -165,15 +167,16 @@ public class MemberBiz {
 	public MemberDto memberStatement(int member_num) {
 		return dao.memberStatement(member_num);
 	}
-	
-	// 14. worklist를 넣으면 그에 해당하는 사람들의 member_num에 따른 리스트 가져오기.
-	public List<MemberDto> selectedMemberList(List<SearchMemberDto> worklist){
+
+	// 14. worklist를 넣으면 그에 해당하는 사람들의 member_num에 따른 리스트 가져오기. 로그인한 사람 제외.
+	public List<MemberDto> selectedMemberList(List<SearchMemberDto> worklist, int member_num){
 		
 		Map<Integer, Integer> member_numlist= new HashMap<Integer, Integer>();
 		
 		for(SearchMemberDto searchDto : worklist) {
 			member_numlist.put(searchDto.getMember_num(), searchDto.getMember_num());
 		}
+		member_numlist.remove(member_num);
 		
 		List<MemberDto> allmemberlist =  dao.allCheck();
 		List<MemberDto> workmemberlist = new ArrayList<MemberDto>();
@@ -187,6 +190,33 @@ public class MemberBiz {
 		return workmemberlist;
 	}
 
+	// 15. all chat list 내가 있는 채팅방의 채팅만 가져오기.
+	public List<SearchDto> allChatList(int member_num){
+		
+		List<SearchDto> allChatList = dao.allChatList();		
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();		
+		for(SearchDto sDto : allChatList) {
+			if(sDto.getMember_num() == member_num) {
+				map.put(sDto.getChannel_num(), sDto.getChannel_num());
+			}
+		}
+		
+		List<SearchDto> newlist = new ArrayList<SearchDto>();		
+		for(SearchDto nDto : allChatList) {
+			if(map.containsKey(nDto.getChannel_num())) {
+				newlist.add(nDto);
+			}
+		}
+		
+		return newlist;
+	}
+	
+	// 16. 채널 넘을 넣어주면 워크스페이스 넘이 나오게.
+	public int workspace_num(int channel_num) {
+		SearchChannelDto dto = dao.workspace_num(channel_num);
+		return dto.getWorkspace_num();
+	}
+	
 	
 	
 

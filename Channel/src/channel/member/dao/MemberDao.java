@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 
 import channel.member.db.SqlMapConfig;
 import channel.member.dto.MemberDto;
+import channel.member.dto.SearchChannelDto;
+import channel.member.dto.SearchDto;
 import channel.member.dto.SearchMemberDto;
 
 public class MemberDao extends SqlMapConfig {
@@ -216,6 +218,42 @@ public class MemberDao extends SqlMapConfig {
 			
 		return dto;
 	}
+
+	// 15. all chat list
+	public List<SearchDto> allChatList(){
+		SqlSession session = null;
+		List<SearchDto> allChatList = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession(true);
+			allChatList = session.selectList("kspmapper.allChatList");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}		
+			
+		return allChatList;
+	}
+	
+	
+	// 16. 채널 넘을 넣어주면 워크스페이스 넘이 나오게.
+	public SearchChannelDto workspace_num(int channel_num) {
+		SqlSession session = null;
+		SearchChannelDto dto = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession(true);
+			dto = session.selectOne("kspmapper.workspacenum", channel_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+			
+		return dto;
+	}
+
 	
 	
 	
