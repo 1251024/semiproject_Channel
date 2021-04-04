@@ -85,8 +85,8 @@
 					<form action="ChannelController" method="post" id="channelAddSubmit">
 						<div id="channelCommand">
 							<input type="hidden" name="command" value="addChannel">
-								<input type="hidden" name="member_id" value="tt">
-								<input type="hidden" name="member_name" value="aaa">
+								<input type="hidden" name="member_id" value="${loginDto.member_id }">
+								<input type="hidden" name="member_name" value="${loginDto.member_name }">
 						</div>
 						
 						<div class="form-group">

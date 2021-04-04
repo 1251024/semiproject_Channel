@@ -1,5 +1,5 @@
 //채팅영역 Websocket 접속 함수들
-var webSocket = new WebSocket('ws://localhost:8787/semiPartOfChat/websocket');
+var webSocket = new WebSocket('ws://localhost:8787/Channel/websocket');
 var re_send = "";
 webSocket.onerror = function(event) {
 	onError(event)
@@ -11,14 +11,26 @@ webSocket.onmessage = function(event) {
 	onMessage(event)
 };
 webSocket.onclose = function() {
+	var member_name = $('#member_name').val();
+
+	var query = document.querySelector('#chatarea');
+	
 	var div = document.createElement('div');
-	div.innerHTML = member_name + "님이 나가셨습니다.";
+	div.style["float"] = "left";
+
+	div.innerHTML = member_name + "님 이 채팅방에서 퇴장하였습니다.";
+	query.appendChild(div);
+
+	var clear = document.createElement('div');
+	clear.style["clear"] = "both";
+	query.appendChild(clear);
+
 };
 // 웹소캣으로 send한 메세지를 출력시켜주는 함수
 function onMessage(event) {
 
 	var message = event.data.split("|\|");
-
+	
 	if (message[0] != re_send) {
 		var who = document.createElement('div');
 		// who.style["float"]="right";
@@ -70,16 +82,19 @@ function onMessage(event) {
 }
 // 웹소켓에 접속시 실행되는 함수
 function onOpen() {
+	var member_name = $('#member_name').val();
 
+	var query = document.querySelector('#chatarea');
+	
 	var div = document.createElement('div');
 	div.style["float"] = "left";
 
 	div.innerHTML = member_name + "님 이 채팅방에 입장하였습니다.";
-	document.getElementById('chatarea').appendChild(div);
+	query.appendChild(div);
 
 	var clear = document.createElement('div');
 	clear.style["clear"] = "both";
-	document.getElementById('chatarea').appendChild(clear);
+	query.appendChild(clear);
 
 	webSocket.send(member_name + "님이 채팅방에 입장하였습니다.|\|메세지를 보내주세요.");
 
@@ -92,14 +107,14 @@ function onError(event) {
 function send(msg) {
 	// 채팅 메세지가 널이 아니면~
 	var content = msg;
-	console.log(re_send);
+
 	if (content.value != "") {
 		// 맴버 2아이디가 널이 아니면~ 메세지인서트
 		var member2_id = $("#messageInfo_member2_id").val();
 		console.log(member2_id);
-
+		var member_id = $("#member_id").val();
 		if (member2_id != null) {
-
+			 
 			var messageroom_num = $("#messageroom_num").val();
 			var to_num = $("#messageInfo_member_num").val();
 			var to_id = $("#messageInfo_member_id").val();
@@ -129,9 +144,9 @@ function send(msg) {
 				}
 			})
 
-			webSocket.send(to_id + "|\|" + message_content);
-
-			if (to_id != re_send) {
+			webSocket.send(to_name + "|\|" + message_content);
+			
+			if (to_name != re_send) {
 				var who = document.createElement('div');
 				// who.style["float"]="left";
 				who.style["display"] = "inline-block";
@@ -140,7 +155,7 @@ function send(msg) {
 				who.style["padding-top"] = "5px;"
 				who.style["padding-bottom"] = "2px;"
 				who.style["padding-left"] = "10px;"
-				who.innerHTML = to_id;
+				who.innerHTML = to_name;
 
 				var icon = document.createElement('span');
 				icon.style["color"] = "gold";
@@ -155,7 +170,8 @@ function send(msg) {
 				clear.style["clear"] = "both";
 				document.getElementById('chatarea').appendChild(clear);
 
-				re_send = to_id;
+				re_send = to_name;
+
 
 			}
 
@@ -179,7 +195,8 @@ function send(msg) {
 
 			chatarea.scrollTop = chatarea.scrollHeight;
 
-			re_send = to_id;
+			re_send = to_name;
+
 
 			// 그게 아니면 채팅 인서트
 		} else {
@@ -209,9 +226,9 @@ function send(msg) {
 				}
 			})
 
-			webSocket.send(member_id + "|\|" + chat_content);
+			webSocket.send(member_name + "|\|" + chat_content);
 			
-			if (member_id != re_send) {
+			if (member_name != re_send) {
 				var who = document.createElement('div');
 				// who.style["float"]="left";
 				who.style["display"] = "inline-block";
@@ -220,7 +237,7 @@ function send(msg) {
 				who.style["padding-top"] = "5px;"
 				who.style["padding-bottom"] = "2px;"
 				who.style["padding-left"] = "10px;"
-				who.innerHTML = member_id;
+				who.innerHTML = member_name;
 
 				var icon = document.createElement('span');
 				icon.style["color"] = "gold";
@@ -235,7 +252,7 @@ function send(msg) {
 				clear.style["clear"] = "both";
 				document.getElementById('chatarea').appendChild(clear);
 
-				re_send = member_id;
+				re_send = member_name;
 
 			}
 
@@ -259,7 +276,7 @@ function send(msg) {
 
 			chatarea.scrollTop = chatarea.scrollHeight;
 
-			re_send = member_id;
+			re_send = member_name;
 		}
 
 	}
