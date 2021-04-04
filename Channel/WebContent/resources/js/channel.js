@@ -409,7 +409,8 @@ function selectChatList(chnum, memnum) {
 			var firstname = "";
 			for (var i = 0; i < list[0].length; i++) {
 				if (list[0][i].member_num == member_num) {
-					if (list[0][i].member_id != firstname) {
+					var query = document.querySelector('#chatarea');
+					if (list[0][i].member_name != firstname) {
 						var who = document.createElement('div');
 						// who.style["float"]="left";
 						who.style["display"] = "inline-block";
@@ -418,7 +419,8 @@ function selectChatList(chnum, memnum) {
 						who.style["padding-top"] = "5px;"
 						who.style["padding-bottom"] = "2px;"
 						who.style["padding-left"] = "10px;"
-						who.append(list[0][i].member_id);
+						who.append(list[0][i].member_name);
+						
 							var icon = document.createElement('span');
 								icon.setAttribute("class",
 										"glyphicon glyphicon-user");
@@ -427,17 +429,14 @@ function selectChatList(chnum, memnum) {
 								icon.style["width"] = "15px;";
 								icon.style["height"] = "15px;";
 
-								document.getElementById('chatarea')
-										.appendChild(icon);
-								document.getElementById('chatarea')
-										.appendChild(who);
+								query.appendChild(icon);
+								query.appendChild(who);
 
 								var clear = document.createElement('div');
 								clear.style["clear"] = "both";
-								document.getElementById('chatarea')
-										.appendChild(clear);
+								query.appendChild(clear);
 
-								firstname = list[0][i].member_id;
+								firstname = list[0][i].member_name;
 
 							}
 
@@ -450,16 +449,15 @@ function selectChatList(chnum, memnum) {
 							div.style["padding-top"] = "3px;"
 							div.style["padding-bottom"] = "3px;"
 							div.innerHTML = list[0][i].chat_content;
-							document.getElementById('chatarea')
-									.appendChild(div);
+							query.appendChild(div);
 
 							var clear = document.createElement('div');
 							clear.style["clear"] = "both";
-							document.getElementById('chatarea').appendChild(clear);
+							query.appendChild(clear);
 
 						} else {
-
-							if (list[0][i].member_id != firstname) {
+							var query = document.querySelector('#chatarea');
+							if (list[0][i].member_name != firstname) {
 								var who = document.createElement('div');
 								// who.style["float"]="right";
 								who.style["display"] = "inline-block";
@@ -468,7 +466,7 @@ function selectChatList(chnum, memnum) {
 								who.style["padding-top"] = "5px;"
 								who.style["padding-bottom"] = "2px;"
 								who.style["padding-left"] = "10px;"
-								who.innerHTML = list[0][i].member_id;
+								who.innerHTML = list[0][i].member_name;
 
 								var icon = document.createElement('span');
 								// icon.style["float"]="right";
@@ -479,17 +477,15 @@ function selectChatList(chnum, memnum) {
 								icon.style["width"] = "15px;";
 								icon.style["height"] = "15px;";
 
-								document.getElementById('chatarea')
-										.appendChild(icon);
-								document.getElementById('chatarea')
-										.appendChild(who);
+								query.appendChild(icon);
+								query.appendChild(who);
+
 
 								var clear = document.createElement('div');
 								clear.style["clear"] = "both";
-								document.getElementById('chatarea')
-										.appendChild(clear);
+								query.appendChild(clear);
 
-								firstname = list[0][i].member_id;
+								firstname = list[0][i].member_name;
 
 							}
 
@@ -502,12 +498,11 @@ function selectChatList(chnum, memnum) {
 							div.style["padding-top"] = "3px;"
 							div.style["padding-bottom"] = "3px;"
 							div.innerHTML = list[0][i].chat_content;
-							document.getElementById('chatarea')
-									.appendChild(div);
+							query.appendChild(div);
 
 							var clear = document.createElement('div');
 							clear.style["clear"] = "both";
-							document.getElementById('chatarea').appendChild(clear);
+							query.appendChild(clear);
 
 						}
 
@@ -522,7 +517,7 @@ function selectChatList(chnum, memnum) {
 					div.style["text-align"] = "center";
 					div.innerHTML = "------------------------------이전 채팅은 여기까지 입니다.------------------------------";
 
-					document.getElementById('chatarea').appendChild(div);
+					query.appendChild(div);
 
 					chatarea.scrollTop = chatarea.scrollHeight;
 				},

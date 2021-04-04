@@ -199,7 +199,7 @@ function callMessageList(msgRoomNum, memnum) {
 	re_send = "";
 	var member_num = memnum;
 	var messageroom_num = msgRoomNum;
-	
+	console.log(member_num);
 	$.ajax({url : "ChatController?command=callMessageList&messageroom_num="+ messageroom_num,
 				dataType : "json",
 				method : "post",
@@ -207,8 +207,11 @@ function callMessageList(msgRoomNum, memnum) {
 					var list = data.result;
 					var firstname = "";
 					for (var i = 0; i < list[0].length; i++) {
+					
 						if (list[0][i].to_num == member_num) {
-							if (list[0][i].to_id != firstname) {
+							console.log(list[0][i].to_num + " : " + firstname);
+							var query = document.querySelector('#chatarea');
+							if (list[0][i].to_name != firstname) {
 								var who = document.createElement('div');
 								// who.style["float"]="left";
 								who.style["display"] = "inline-block";
@@ -217,7 +220,7 @@ function callMessageList(msgRoomNum, memnum) {
 								who.style["padding-top"] = "5px;"
 								who.style["padding-bottom"] = "2px;"
 								who.style["padding-left"] = "10px;"
-								who.append(list[0][i].to_id);
+								who.append(list[0][i].to_name);
 
 								var icon = document.createElement('span');
 								icon.setAttribute("class",
@@ -227,17 +230,14 @@ function callMessageList(msgRoomNum, memnum) {
 								icon.style["width"] = "15px;";
 								icon.style["height"] = "15px;";
 
-								document.getElementById('chatarea')
-										.appendChild(icon);
-								document.getElementById('chatarea')
-										.appendChild(who);
+								query.appendChild(icon);
+								query.appendChild(who);
 
 								var clear = document.createElement('div');
 								clear.style["clear"] = "both";
-								document.getElementById('chatarea')
-										.appendChild(clear);
+								query.appendChild(clear);
 
-								firstname = list[0][i].to_id;
+								firstname = list[0][i].to_name;
 
 							}
 
@@ -250,17 +250,18 @@ function callMessageList(msgRoomNum, memnum) {
 							div.style["padding-top"] = "3px;"
 							div.style["padding-bottom"] = "3px;"
 							div.innerHTML = list[0][i].message_content;
-							document.getElementById('chatarea')
-									.appendChild(div);
+							query.appendChild(div);
 
 							var clear = document.createElement('div');
 							clear.style["clear"] = "both";
-							document.getElementById('chatarea').appendChild(
-									clear);
+							query.appendChild(clear);
 
+							
 						} else {
-
-							if (list[0][i].from_id != firstname) {
+							var query = document.querySelector('#chatarea');
+							console.log(list[0][i].to_num + " : " + firstname);
+							if (list[0][i].to_name != firstname) {
+								
 								var who = document.createElement('div');
 								// who.style["float"]="right";
 								who.style["display"] = "inline-block";
@@ -269,7 +270,7 @@ function callMessageList(msgRoomNum, memnum) {
 								who.style["padding-top"] = "5px;"
 								who.style["padding-bottom"] = "2px;"
 								who.style["padding-left"] = "10px;"
-								who.innerHTML = list[0][i].from_id;
+								who.innerHTML = list[0][i].to_name;
 
 								var icon = document.createElement('span');
 								// icon.style["float"]="right";
@@ -280,17 +281,14 @@ function callMessageList(msgRoomNum, memnum) {
 								icon.style["width"] = "15px;";
 								icon.style["height"] = "15px;";
 
-								document.getElementById('chatarea')
-										.appendChild(icon);
-								document.getElementById('chatarea')
-										.appendChild(who);
+								query.appendChild(icon);
+								query.appendChild(who);
 
 								var clear = document.createElement('div');
 								clear.style["clear"] = "both";
-								document.getElementById('chatarea')
-										.appendChild(clear);
+								query.appendChild(clear);
 
-								firstname = list[0][i].from_id;
+								firstname = list[0][i].to_name;
 
 							}
 
@@ -303,13 +301,11 @@ function callMessageList(msgRoomNum, memnum) {
 							div.style["padding-top"] = "3px;"
 							div.style["padding-bottom"] = "3px;"
 							div.innerHTML = list[0][i].message_content;
-							document.getElementById('chatarea')
-									.appendChild(div);
+							query.appendChild(div);
 
 							var clear = document.createElement('div');
 							clear.style["clear"] = "both";
-							document.getElementById('chatarea').appendChild(
-									clear);
+							query.appendChild(clear);
 
 						}
 
@@ -324,7 +320,7 @@ function callMessageList(msgRoomNum, memnum) {
 					div.style["text-align"] = "center";
 					div.innerHTML = "------------------------------이전 메세지는 여기까지 입니다.------------------------------";
 
-					document.getElementById('chatarea').appendChild(div);
+					query.appendChild(div);
 
 					chatarea.scrollTop = chatarea.scrollHeight;
 				},
@@ -335,7 +331,7 @@ function callMessageList(msgRoomNum, memnum) {
 
 	$("#roominfo").children().remove();
 
-	messsageInfo(msgRoomNum);
+	messsageInfo(msgRoomNum, member_num);
 
 }
 // 메세지방 정보 불러오는 ajax
@@ -359,47 +355,90 @@ function messsageInfo(msgRoomNum, memnum) {
 			var member2_name = res[7];
 			var messsageroom_regdate = res[8];
 
+			var query = document.querySelector('#roominfo');
+			
 			var input = document.createElement('input');
 			input.id = "messageroom_num";
 			input.type = "hidden";
 			input.value = messageroom_num;
-			document.getElementById('roominfo').appendChild(input);
+			query.appendChild(input);
 
-			var input = document.createElement('input');
-			input.id = "messageInfo_member_num";
-			input.type = "hidden";
-			input.value = member_num;
-			document.getElementById('roominfo').appendChild(input);
+			if (member_num == memnum) {
 			
-			var input = document.createElement('input');
-			input.id = "messageInfo_member_id";
-			input.type = "hidden";
-			input.value = member_id;
-			document.getElementById('roominfo').appendChild(input);
+				var input = document.createElement('input');
+				input.id = "messageInfo_member_num";
+				input.type = "hidden";
+				input.value = member_num;
+				query.appendChild(input);
+				
+				var input = document.createElement('input');
+				input.id = "messageInfo_member_id";
+				input.type = "hidden";
+				input.value = member_id;
+				query.appendChild(input);
 
-			var input = document.createElement('input');
-			input.id = "messageInfo_member_name";
-			input.type = "hidden";
-			input.value = member_name;
-			document.getElementById('roominfo').appendChild(input);
+				var input = document.createElement('input');
+				input.id = "messageInfo_member_name";
+				input.type = "hidden";
+				input.value = member_name;
+				query.appendChild(input);
 
-			var input = document.createElement('input');
-			input.id = "messageInfo_member2_num";
-			input.type = "hidden";
-			input.value = member2_num;
-			document.getElementById('roominfo').appendChild(input);
-			
-			var input = document.createElement('input');
-			input.id = "messageInfo_member2_id";
-			input.type = "hidden";
-			input.value = member2_id;
-			document.getElementById('roominfo').appendChild(input);
+				var input = document.createElement('input');
+				input.id = "messageInfo_member2_num";
+				input.type = "hidden";
+				input.value = member2_num;
+				query.appendChild(input);
+				
+				var input = document.createElement('input');
+				input.id = "messageInfo_member2_id";
+				input.type = "hidden";
+				input.value = member2_id;
+				query.appendChild(input);
 
-			var input = document.createElement('input');
-			input.id = "messageInfo_member2_name";
-			input.type = "hidden";
-			input.value = member2_name;
-			document.getElementById('roominfo').appendChild(input);
+				var input = document.createElement('input');
+				input.id = "messageInfo_member2_name";
+				input.type = "hidden";
+				input.value = member2_name;
+				query.appendChild(input);
+				
+			} else {
+				
+				var input = document.createElement('input');
+				input.id = "messageInfo_member_num";
+				input.type = "hidden";
+				input.value = member2_num;
+				query.appendChild(input);
+				
+				var input = document.createElement('input');
+				input.id = "messageInfo_member_id";
+				input.type = "hidden";
+				input.value = member2_id;
+				query.appendChild(input);
+
+				var input = document.createElement('input');
+				input.id = "messageInfo_member_name";
+				input.type = "hidden";
+				input.value = member2_name;
+				query.appendChild(input);
+
+				var input = document.createElement('input');
+				input.id = "messageInfo_member2_num";
+				input.type = "hidden";
+				input.value = member_num;
+				query.appendChild(input);
+				
+				var input = document.createElement('input');
+				input.id = "messageInfo_member2_id";
+				input.type = "hidden";
+				input.value = member_id;
+				query.appendChild(input);
+
+				var input = document.createElement('input');
+				input.id = "messageInfo_member2_name";
+				input.type = "hidden";
+				input.value = member_name;
+				query.appendChild(input);
+			}
 
 			var span = document.createElement('span');
 			span.style["font-size"] = "10px";
@@ -409,7 +448,7 @@ function messsageInfo(msgRoomNum, memnum) {
 					+ "(" + member_id + ")와 " + member2_name + "(" + member2_id
 					+ ")의 채팅방 <br>" + " 채널생성일 : " + messsageroom_regdate;
 
-			document.getElementById('roominfo').appendChild(span);
+			query.appendChild(span);
 		},
 		error : function() {
 			alert("통신 실패")

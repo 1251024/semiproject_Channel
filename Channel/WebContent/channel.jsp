@@ -58,9 +58,6 @@
 <body>
 <%@include file="common.jsp" %>
 	<input type="hidden" id="workspace_num" value="<%=workspace_num %>">
-	<input type="hidden" id="member_num" value="${loginDto.member_num }">
-	<input type="hidden" id="member_id" value="${loginDto.member_id }">
-	<input type="hidden" id="member_name" value="${loginDto.member_name }">
 		<div class="col-xs-12" id="content_container">
 			<div id="roominfo">
 				<span>채널 or 메세지를 선택해주세요</span>
@@ -85,8 +82,8 @@
 					<form action="ChannelController" method="post" id="channelAddSubmit">
 						<div id="channelCommand">
 							<input type="hidden" name="command" value="addChannel">
-								<input type="hidden" name="member_id" value="tt">
-								<input type="hidden" name="member_name" value="aaa">
+								<input type="hidden" name="member_id" value="${loginDto.member_id }">
+								<input type="hidden" name="member_name" value="${loginDto.member_name }">
 						</div>
 						
 						<div class="form-group">
