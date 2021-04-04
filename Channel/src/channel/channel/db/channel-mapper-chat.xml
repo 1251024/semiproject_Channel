@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="channelmapper-chat">
+	
+	<resultMap type="chatDto" id="chatMap">
+		<result property="chat_num" column="CHAT_NUM"/>
+		<result property="channel_num" column="CHANNEL_NUM"/>
+		<result property="member_num" column="MEMBER_NUM"/>
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="member_name" column="MEMBER_NAME"/>
+		<result property="chat_content" column="CHAT_CONTENT"/>
+		<result property="chat_regdate" column="CHAT_REGDATE"/>	
+	</resultMap>
+	
+	<resultMap type="messageDto" id="messageMap">
+		<result property="message_num" column="MESSAGE_NUM"/>
+		<result property="messageroom_num" column="MESSAGEROOM_NUM"/>
+		<result property="to_id" column="TO_ID"/>
+		<result property="to_name" column="TO_NAME"/>
+		<result property="from_id" column="FROM_ID"/>
+		<result property="from_name" column="FROM_NAME"/>
+		<result property="message_content" column="MESSAGE_CONTENT"/>
+		<result property="message_regdate" column="MESSAGE_REGDATE"/>	
+	</resultMap>
+	
+	<resultMap type="messageRoomDto" id="messageRoomMap">
+		<result property="messageroom_num" column="MESSAGEROOM_NUM"/>
+		<result property="workspace_num" column="WORKSPACE_NUM"/>
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="member_name" column="MEMBER_NAME"/>
+		<result property="member2_id" column="MEMBER2_ID"/>
+		<result property="member2_name" column="MEMBER2_NAME"/>
+		<result property="messageroom_regdate" column="MESSAGEROOM_REGDATE"/>	
+	</resultMap>
+
+	<select id="selectChatList" parameterType="int" resultMap="chatMap">
+		SELECT CHAT_NUM, CHANNEL_NUM, MEMBER_NUM, MEMBER_ID, MEMBER_NAME, CHAT_CONTENT, CHAT_REGDATE
+		FROM CHAT
+		WHERE CHANNEL_NUM = #{channel_num}
+		ORDER BY CHAT_REGDATE
+	</select>
+	
+	<insert id="insertChat" parameterType="chatDto">
+		INSERT INTO CHAT
+		VALUES (CHATSEQ.NEXTVAL,
+		#{channel_num},
+		#{member_num},
+		#{member_id},
+		#{member_name},
+		#{chat_content}, 
+		SYSDATE)
+	</insert>
+	
+	<insert id="createMessageRoom" parameterType="messageRoomDto">
+		INSERT INTO MESSAGEROOM
+		VALUES (MESSAGEROOMSEQ.NEXTVAL, #{workspace_num}, #{member_num}, #{member_id}, #{member_name}, #{member2_num}, #{member2_id}, #{member2_name}, SYSDATE)
+	</insert>
+	
+	<select id="messageRoomList" parameterType="MessageRoomDto" resultMap="messageRoomMap">
+		SELECT MESSAGEROOM_NUM, WORKSPACE_NUM, MEMBER_NUM, MEMBER_ID, MEMBER_NAME, MEMBER2_NUM, MEMBER2_ID, MEMBER2_NAME, MESSAGEROOM_REGDATE
+		FROM MESSAGEROOM
+		WHERE WORKSPACE_NUM = #{workspace_num}
+		AND (MEMBER_NUM = #{member_num} OR MEMBER2_NUM = #{member_num})
+	</select>
+	
+	<select id="callMessageList" parameterType="int" resultMap="messageMap">
+		SELECT MESSAGE_NUM, MESSAGEROOM_NUM, TO_NUM, TO_ID, TO_NAME, FROM_NUM, FROM_ID, FROM_NAME, MESSAGE_CONTENT, MESSAGE_REGDATE
+		FROM MESSAGE
+		WHERE MESSAGEROOM_NUM = #{messageroom_num}
+	</select>	
+	
+	<select id="msgRoomSelect" parameterType="int" resultType="messageRoomDto">
+		SELECT MESSAGEROOM_NUM, WORKSPACE_NUM, MEMBER_NUM, MEMBER_ID, MEMBER_NAME, MEMBER2_NUM, MEMBER2_ID, MEMBER2_NAME, MESSAGEROOM_REGDATE
+		FROM MESSAGEROOM
+		WHERE MESSAGEROOM_NUM = #{messageroom_num}
+	</select>	
+
+	<insert id="messageInsert" parameterType="messageDto">
+		INSERT INTO MESSAGE
+		VALUES (MESSAGESEQ.NEXTVAL, #{messageroom_num}, #{to_num}, #{to_id}, #{to_name}, #{from_num}, #{from_id}, #{from_name}, #{message_content}, SYSDATE)
+	</insert>
+	
+	<delete id="deleteMessageRoom" parameterType="MessageRoomDto">
+		DELETE FROM MESSAGEROOM
+		WHERE MESSAGEROOM_NUM = #{messageroom_num}
+		AND MEMBER_NUM = #{member_num}
+		OR MEMBER2_NUM = #{member_num}
+	</delete>
+	
+	
+	
+
+</mapper>

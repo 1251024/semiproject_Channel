@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="channelmapper-workspace">
+
+	<resultMap type="memberDto" id="memberMap">
+		<result property="member_num" column="MEMBER_NUM" />
+		<result property="member_id" column="MEMBER_ID" />
+		<result property="member_pw" column="MEMBER_PW" />
+		<result property="member_name" column="MEMBER_NAME" />
+		<result property="member_email" column="MEMBER_EMAIL" />
+		<result property="member_phone" column="MEMBER_PHONE" />
+		<result property="member_pscode" column="MEMBER_PSCODE" />
+		<result property="member_addr" column="MEMBER_ADDR" />
+		<result property="member_addrdt" column="MEMBER_ADDRDT" />
+		<result property="member_type" column="MEMBER_TYPE" />
+		<result property="member_auth" column="MEMBER_AUTH" />
+		<result property="member_date" column="MEMBER_DATE" />
+		<result property="member_enabled" column="MEMBER_ENABLED" />
+		<result property="member_statement" column="MEMBER_STATEMENT" />
+	</resultMap>
+
+	<resultMap type="workSpaceDto" id="workSpaceMap">
+		<result property="workspace_num" column="WORKSPACE_NUM"/>
+		<result property="workspace_name" column="WORKSPACE_NAME"/>
+		<result property="workspace_information" column="WORKSPACE_INFORMATION"/>
+		<result property="member_num" column="MEMBER_NUM"/>
+		<result property="workspace_regdate" column="WORKSPACE_REGDATE"/>
+	</resultMap>
+	
+	<resultMap type="workSpaceMemberDto" id="workSpaceMemberMap">
+		<result property="workspacemember_num" column="WORKSPACEMEMBER_NUM"/>
+		<result property="workspace_num" column="WORKSPACE_NUM"/>
+		<result property="workspace_name" column="WORKSPACE_NAME"/>
+		<result property="member_num" column="MEMBER_NUM"/>
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="member_name" column="MEMBER_NAME"/>
+		<result property="workspacemember_regdate" column="WORKSPACEMEMBER_REGDATE"/>	
+	</resultMap>
+
+	<resultMap type="channelDto" id="channelMap">
+		<result property="channel_num" column="CHANNEL_NUM" />
+		<result property="workspace_num" column="WORKSPACE_NUM" />
+		<result property="channel_name" column="CHANNEL_NAME" />
+		<result property="channel_information" column="CHANNEL_INFORMATION" />
+		<result property="member_id" column="MEMBER_ID" />
+		<result property="channel_access" column="CHANNEL_ACCESS" />
+		<result property="channel_enabled" column="CHANNEL_ENABLED" />
+		<result property="channel_regdate" column="CHANNEL_REGDATE" />
+	</resultMap>
+	
+	<resultMap type="channelMemberDto" id="channelMemberMap">
+		<result property="channelmember_num" column="CHANNELMEMBER_NUM"/>
+		<result property="channel_num" column="CHANNEL_NUM" />
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="member_name" column="MEMBER_NAME"/>
+		<result property="regdate" column="REGDATE"/>	
+	</resultMap>
+	
+	<select id="selectMemberWorkSpace" parameterType="int" resultMap="workSpaceMap">
+		SELECT WORKSPACEMEMBER_NUM, WORKSPACE_NUM, WORKSPACE_NAME, MEMBER_NUM, WORKSPACEMEMBER_REGDATE
+		FROM WORKSPACEMEMBER
+		WHERE MEMBER_NUM = #{member_num}
+		ORDER BY WORKSPACEMEMBER_NUM
+	</select>
+	
+	<insert id="createWorkSpace" parameterType="workSpaceDto">
+		INSERT INTO WORKSPACE
+		VALUES (WORKSPACESEQ.NEXTVAL, #{workspace_name}, #{workspace_information}, #{member_num}, SYSDATE)
+	</insert>
+	
+	<insert id="insertWorkSpaceMember" parameterType="workSpaceMemberDto">
+		INSERT INTO WORKSPACEMEMBER
+		VALUES (WORKSPACEMEMBERSEQ.NEXTVAL, #{workspace_num}, #{workspace_name}, #{member_num}, #{member_id}, #{member_name}, SYSDATE)
+	</insert>
+	
+	<delete id="deleteWorkSpace" parameterType="int">
+		DELETE FROM WORKSPACE WHERE WORKSPACE_NUM = #{workspace_num}
+	</delete>
+	
+	<select id="getLastWorkSpaceSeq" resultType="int">
+		SELECT WORKSPACE_NUM
+		FROM (SELECT WORKSPACE_NUM, ROWNUM FROM WORKSPACE ORDER BY WORKSPACE_NUM DESC)
+		WHERE ROWNUM = 1
+	</select>
+	
+	<select id="selectWorkspaceMemberList" parameterType="workSpaceMemberDto" resultMap="workSpaceMemberMap">
+		SELECT WORKSPACEMEMBER_NUM, WORKSPACE_NUM, WORKSPACE_NAME, MEMBER_NUM, MEMBER_ID, MEMBER_NAME, WORKSPACEMEMBER_REGDATE
+		FROM WORKSPACEMEMBER
+		WHERE WORKSPACE_NUM = #{workspace_num}
+		AND MEMBER_NUM != #{member_num}
+	</select>
+	
+	<select id="selectWorkspaceInviteList" parameterType="int" resultMap="memberMap">
+		SELECT MEMBER_NUM, MEMBER_ID, MEMBER_NAME
+		FROM MEMBER
+		WHERE MEMBER_ID NOT IN (SELECT MEMBER_ID FROM WORKSPACEMEMBER WHERE WORKSPACE_NUM = #{workspace_num})
+	</select>
+	
+	<delete id="deleteWorkSpaceMember">
+		DELETE FROM WORKSPACEMEMBER
+		WHERE WORKSPACE_NUM = #{workspace_num}
+		AND MEMBER_NUM = #{member_num}
+	</delete>
+
+	
+
+</mapper>
