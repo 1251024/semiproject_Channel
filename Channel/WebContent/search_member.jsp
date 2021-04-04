@@ -28,14 +28,12 @@
 	MemberBiz biz = new MemberBiz();	
 	
 	List<SearchMemberDto> workspacelist = biz.searchMemberList(member_num);
-	List<MemberDto> memberlist = biz.selectedMemberList(workspacelist);
+	List<MemberDto> memberlist = biz.selectedMemberList(workspacelist, member_num);
 	
 	for(MemberDto memdto : memberlist){
-		if(memdto.getMember_num() != member_num){
 %>
-			이름 : <%=memdto.getMember_name() %> (<%=(memdto.getMember_statement().equals("1"))?"온라인":"오프라인" %>)<br>
-<%		
-		}		
+		이름 : <%=memdto.getMember_name() %> (<%=(memdto.getMember_statement().equals("1"))?"온라인":"오프라인" %>)<br>
+<%						
 	}
 %>	
 	

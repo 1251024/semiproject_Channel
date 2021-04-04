@@ -11,6 +11,7 @@
 <!-- include summernote css/js -->
 <link href="resources/summernote/summernote.css" rel="stylesheet">
 <script src="resources/summernote/summernote.js"></script>
+
 <script>
 	$(document).ready(function(){
 		$("#memberlist").mouseover(function(){	

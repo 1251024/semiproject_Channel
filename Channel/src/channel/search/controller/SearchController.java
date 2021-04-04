@@ -36,19 +36,20 @@ public class SearchController extends HttpServlet {
 		
 		String command = request.getParameter("command");
 		MemberBiz biz = new MemberBiz();
-		
+
 		if (command.equals("memberlist")) {			
 			HttpSession session = request.getSession();
 			MemberDto dto = (MemberDto) session.getAttribute("loginDto");
 			
 			List<SearchMemberDto> worklist = biz.searchMemberList(dto.getMember_num());
-			List<MemberDto> newlist = biz.selectedMemberList(worklist);
+			List<MemberDto> newlist = biz.selectedMemberList(worklist, dto.getMember_num());
 			
 			Gson gson = new Gson();
 			String str = gson.toJson(newlist);
 			
 			PrintWriter out = response.getWriter();
 			out.append(str);
+			
 			
 		}
 		
