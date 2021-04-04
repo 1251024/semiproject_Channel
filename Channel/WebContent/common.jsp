@@ -145,7 +145,9 @@
         }
 
 </style>
-
+	<input type="hidden" id="member_num" value="${loginDto.member_num }">
+	<input type="hidden" id="member_id" value="${loginDto.member_id }">
+	<input type="hidden" id="member_name" value="${loginDto.member_name }">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">

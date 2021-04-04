@@ -13,9 +13,6 @@
 </head>
 <body>
 <%@include file="common.jsp" %>
-<input type="hidden" id="member_num" value="${loginDto.member_num }">
-<input type="hidden" id="member_id" value="${loginDto.member_id }">
-<input type="hidden" id="member_name" value="${loginDto.member_name }">
 <div id="workspaceArea">
 	워크스페이스를 선택하세요.<br>
 	<button type="button" class="btn btn-default btn-lg btn-block"
