@@ -2,6 +2,8 @@ package payment.dto;
 
 import java.util.Date;
 
+import javax.xml.crypto.Data;
+
 public class PaymentDto {
 
 	private int pay_member_no;
@@ -12,14 +14,14 @@ public class PaymentDto {
 	private String pay_type;
 	private String pay_price;
 	private Date pay_date;
-	
+
 	public PaymentDto() {
-		
+
 	}
 
 	public PaymentDto(int pay_member_no, int pay_no, String pay_name, String pay_email, String pay_phone,
 			String pay_type, String pay_price, Date pay_date) {
-		super();
+
 		this.pay_member_no = pay_member_no;
 		this.pay_no = pay_no;
 		this.pay_name = pay_name;
@@ -93,6 +95,12 @@ public class PaymentDto {
 	public void setPay_date(Date pay_date) {
 		this.pay_date = pay_date;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "PaymentDto [pay_member_no=" + pay_member_no + ", pay_no=" + pay_no + ", pay_name=" + pay_name
+				+ ", pay_email=" + pay_email + ", pay_phone=" + pay_phone + ", pay_type=" + pay_type + ", pay_price="
+				+ pay_price + ", pay_date=" + pay_date + "]";
+	}
+
 }

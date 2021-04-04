@@ -2,11 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="paymentmapper">
 
+<resultMap type="paymentdto" id="paymap">
+	<result property="pay_no" column="PAY_NO"/>
+	<result property="pay_name" column="PAY_NAME"/>
+	<result property="pay_email" column="PAY_EMAIL"/>
+	<result property="pay_phone" column="PAY_PHONE"/>
+	<result property="pay_type" column="PAY_TYPE"/>
+	<result property="pay_price" column="PAY_PRICE"/>
+	<result property="pay_date" column="PAY_DATE"/>
+</resultMap>
 
-
-	<insert id="paymentres" parameterType="paymentDto">
+	<insert id="insertcredit" parameterType="PaymentDto">
         INSERT INTO PAYMENT
         VALUES(#{pay_member_no}, PAYMENTSEQ.NEXTVAL, #{pay_name}, #{pay_email}, #{pay_phone}, 'card', #{pay_price}, SYSDATE)
     </insert>
+    
+	<select id="paymentList" resultType="PaymentDto" parameterType="_int">
+		SELECT PAY_MEMBER_NO, PAY_NO, PAY_NAME, PAY_EMAIL, PAY_PHONE, PAY_TYPE, PAY_PRICE, PAY_DATE 
+		FROM PAYMENT
+		WHERE PAY_MEMBER_NO = #{id}
+		ORDER BY PAY_DATE DESC
+	</select>
+
+
 
 </mapper>
