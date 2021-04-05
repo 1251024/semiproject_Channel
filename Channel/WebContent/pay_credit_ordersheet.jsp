@@ -1,3 +1,4 @@
+<%@page import="channel.member.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
@@ -24,23 +25,36 @@ textarea {
 
 </head>
 <body>
+<%
+MemberDto memberdto =(MemberDto)session.getAttribute("loginDto");//(형변환)오브젝트상태로가져오는것-세션가져오기
+
+int pay_member_no = memberdto.getMember_num();
+String pay_member_email = memberdto.getMember_email();
+String Pay_member_phone = memberdto.getMember_phone();
+%>
+
+	<!-- include 영역 -->
+	<%@ include file="common.jsp"%>
+	
+	
 <h2>CHANNEL 이용료 결제</h2>
 
 	<form action="pay_credit_checkout.jsp" method="post">
-
+	<input type="hidden" name="type" value="CREDIT">
+	<input type="hidden" name="member_num" value="${loginDto.member_num }">
 		<p>
-			<span>name:</span> <input type="text" name="name" placeholder="주문자의 성함을 입력해주세요" autofocus="autofocus">
+			<span>name:</span> <input type="text" name="name" value="${loginDto.member_name }" readonly="readonly" autofocus="autofocus">
 
 
 			<!-- 값 가져오기 -->
 		</p>
 		<p>
-			<span>이메일:</span> <input type="text" name="email" placeholder="email을 입력해주세요">
+			<span>이메일:</span> <input type="text" name="email" value="${loginDto.member_email }"placeholder="이메일을 입력해주세요">
 			
 		</p>
 		
 		<p>
-			<span>폰넘버:</span><input type="text" name="phone" placeholder="연락처를 입력해주세요">
+			<span>폰넘버:</span><input type="text" name="phone" value="${loginDto.member_phone }" placeholder="연락처를 입력해주세요">
 		</p>
 		
 		<p>

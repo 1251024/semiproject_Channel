@@ -2,7 +2,6 @@ package payment.dto;
 
 import java.util.Date;
 
-import javax.xml.crypto.Data;
 
 public class PaymentDto {
 

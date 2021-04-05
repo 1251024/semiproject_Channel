@@ -1,7 +1,5 @@
 package payment.dao;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -11,36 +9,37 @@ import payment.dto.PaymentDto;
 public class PaymentDaoImpl extends SqlMapConfig implements PaymentDao {
 
 	private String namespace = "paymentmapper.";
-	
+
 	@Override
-	public int insertcredit(PaymentDto dto) {
-		int res = 0; 
-		try(SqlSession session = getSqlSessionFactory().openSession(true);){
-			res = session.insert(namespace + "insertcredit", dto);
-			         
-			}catch(Exception e) {
-			 e.printStackTrace();
-			  }
-			      
+	public int insertcredit(PaymentDto paydto) {
+		int res = 0;
+		try (SqlSession session = getSqlSessionFactory().openSession(true);) {
+			res = session.insert(namespace + "insertcredit", paydto);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// System.out.println("daoimpl");
 		return res;
 	}
 
 	@Override
-	public List<PaymentDto> paymentList(int id) {
-		
-		List<PaymentDto> list = new ArrayList<PaymentDto>();
-		
+	public PaymentDto selectPaystate(int pay_member_no) {
+
+		PaymentDto paydto = new PaymentDto();
+
 		SqlSession session = null;
-		
+
 		try {
-		session = getSqlSessionFactory().openSession(false);
-		list = session.selectList("paymentList",id);
+			session = getSqlSessionFactory().openSession(false);
+			paydto = session.selectOne(namespace + "paymentList", pay_member_no);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			session.close();
 		}
-		return list;
+		return paydto;
 	}
+
 
 }
