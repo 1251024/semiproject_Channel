@@ -11,6 +11,7 @@ $(document).ready(function(){
 		console.log(selectChatList(channel_num, member_num));
 		setTimeout(function(){
 			document.getElementById(chat_num).scrollIntoView();
+			document.getElementById(chat_num).focus();
 			document.getElementById(chat_num).style.backgroundColor = "skyblue";
 		}, 1000);
 	}
