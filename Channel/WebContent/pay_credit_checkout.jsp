@@ -5,21 +5,21 @@
 <%response.setContentType("text/html; charset=UTF-8"); %>
     
 <%
- //   String name = (String)request.getAttribute("name");
- //   String email = (String)request.getAttribute("email");
- //  String phone = (String)request.getAttribute("phone");
- //  String address = (String)request.getAttribute("address");
-  //  int totalPrice = (int)request.getAttribute("totalPrice");
-     String name = (String)request.getParameter("name");
-     String email = (String)request.getParameter("email");
-     String phone = (String)request.getParameter("phone");
-     String totalPrice = (String)request.getParameter("totalPrice");
+	 //어트리뷰트만 오브젝트타입이라 형변환 필요
+	 int member_num = Integer.parseInt(request.getParameter("member_num"));
+     String name = request.getParameter("name");
+     String email = request.getParameter("email");
+     String phone = request.getParameter("phone");
+     String type = request.getParameter("type");
+     String totalPrice = request.getParameter("totalPrice");
     
+     System.out.println("member_num: "+member_num);
      System.out.println("name: "+name);
      System.out.println("email: "+email);
      System.out.println("phone: "+phone);
+     System.out.println("type: "+type);
      System.out.println("totalPrice: "+totalPrice);
- 
+     System.out.println("ordersheet에서 checkout으로 받아온값 완료");
 %>
 
 
@@ -32,8 +32,24 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <body>
+
+	<input type="hidden" id="pay_member_num" value="<%=member_num%>"/>
+	<input type="hidden" id="pay_name" value="<%=name%>"/>
+	<input type="hidden" id="pay_email" value="<%=email%>"/>
+	<input type="hidden" id="pay_phone" value="<%=phone%>"/>
+	<input type="hidden" id="pay_type" value="<%=type%>"/>
+	<input type="hidden" id="pay_totalPrice" value="<%=totalPrice%>"/>
+
     <script>
+    var  member_num = $("#pay_member_num").val();
+    var  name = $("#pay_name").val();
+    var  email = $("#pay_email").val();
+    var  phone = $("#pay_phone").val();
+    var  type = $("#pay_type").val();
+    var  totalPrice = $("#pay_totalPrice").val();
     $(function(){
+    	
+    	
         var IMP = window.IMP; // 생략가능
         IMP.init('imp98397380'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
         var msg;
@@ -43,10 +59,11 @@
             pay_method : 'card',
             merchant_uid : 'merchant_' + new Date().getTime(),
             name : 'CHANNEL 이용료 결제',
-            amount : <%=totalPrice%>,
-            buyer_email : '<%=email%>',
-            buyer_name : '<%=name%>',
-            buyer_tel : '<%=phone%>'
+            buyer_name : name,
+            buyer_email : email,
+            buyer_tel : phone,
+            pay_type : type,
+            	amount : totalPrice
             //m_redirect_url : 'http://www.naver.com'
         }, function(rsp) {
             if ( rsp.success ) {
@@ -58,11 +75,12 @@
                     data: {
                     	command : "payment",
                         imp_uid : rsp.imp_uid,
-                        amount : '<%=totalPrice%>',
-                    	buyer_email : '<%=email%>',
-                   		buyer_name : '<%=name%>',
-                  	  	buyer_tel : '<%=phone%>'
-                  	  	//pay_method : 'card'
+                        member_num : member_num,
+                        buyer_name : name,
+                    	buyer_email : email,
+                  	  	buyer_tel : phone,
+                  	  	pay_type : type,
+                  	  	amount : totalPrice
                         //기타 필요한 데이터가 있으면 추가 전달
                     }
                 }).done(function(data) {
@@ -82,13 +100,21 @@
                 });
                 //성공시 이동할 페이지
                 alert("결제 성공!")
-            	location.href="PaymentController.do?command=pay_res";	
+                <%--
+                location.href="PaymentController.do?command=pay_res";	
+                --%>
+
+            	
+            	location.href="PaymentController.do?command=pay_res&member_num="+member_num+"&name="+name+"&email="+email+"&phone="+phone+"&type="+type+"&totalPrice="+totalPrice;
+            			
+            	
+               
                 
             } else {
                 msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
                 //실패시 이동할 페이지
-                location.href="PaymentController.do?command=pay_error";
+                location.href="pay_error.jsp";
                 alert(msg);
             }
         });

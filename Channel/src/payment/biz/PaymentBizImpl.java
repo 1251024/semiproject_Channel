@@ -1,6 +1,6 @@
 package payment.biz;
 
-import java.util.List;
+
 
 import payment.dao.PaymentDao;
 import payment.dao.PaymentDaoImpl;
@@ -12,16 +12,16 @@ public class PaymentBizImpl implements PaymentBiz {
 	
 	
 	@Override
-	public int insertcredit(PaymentDto dto) {
-		System.out.println("bizimpl완료");
-		return dao.insertcredit(dto);
+	public int insertcredit(PaymentDto paydto) {
+		//System.out.println("bizimpl완료");
+		return dao.insertcredit(paydto);
 	}
-
 
 
 	@Override
-	public List<PaymentDto> paymentList(int id) {
-		return dao.paymentList(id);
+	public PaymentDto selectPaystate(int pay_member_no) {
+		return dao.selectPaystate(pay_member_no);
 	}
+
 
 }

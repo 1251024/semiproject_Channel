@@ -3,6 +3,7 @@
 <mapper namespace="paymentmapper">
 
 <resultMap type="paymentdto" id="paymap">
+	<result property="pay_member_no" column="PAY_MEMBER_NO"/>
 	<result property="pay_no" column="PAY_NO"/>
 	<result property="pay_name" column="PAY_NAME"/>
 	<result property="pay_email" column="PAY_EMAIL"/>
@@ -12,18 +13,20 @@
 	<result property="pay_date" column="PAY_DATE"/>
 </resultMap>
 
-	<insert id="insertcredit" parameterType="PaymentDto">
+	<insert id="insertcredit" parameterType="paymentdto">
         INSERT INTO PAYMENT
-        VALUES(#{pay_member_no}, PAYMENTSEQ.NEXTVAL, #{pay_name}, #{pay_email}, #{pay_phone}, 'card', #{pay_price}, SYSDATE)
+        VALUES(#{pay_member_no}, PAYMENTSEQ.NEXTVAL, #{pay_name}, #{pay_email}, #{pay_phone}, #{pay_type}, #{pay_price}, SYSDATE)
     </insert>
     
-	<select id="paymentList" resultType="PaymentDto" parameterType="_int">
-		SELECT PAY_MEMBER_NO, PAY_NO, PAY_NAME, PAY_EMAIL, PAY_PHONE, PAY_TYPE, PAY_PRICE, PAY_DATE 
-		FROM PAYMENT
-		WHERE PAY_MEMBER_NO = #{id}
-		ORDER BY PAY_DATE DESC
-	</select>
-
+	<select id="paymentList" resultType="paymentdto" parameterType="_int">
+        SELECT PAY_MEMBER_NO, PAY_NO, PAY_NAME, PAY_EMAIL, PAY_PHONE, PAY_TYPE, PAY_PRICE, PAY_DATE, ROWNUM 
+        FROM
+        (SELECT PAY_MEMBER_NO, PAY_NO, PAY_NAME, PAY_EMAIL, PAY_PHONE, PAY_TYPE, PAY_PRICE, PAY_DATE, ROWNUM 
+        FROM PAYMENT
+        WHERE PAY_MEMBER_NO = #{pay_member_no}
+        ORDER BY PAY_DATE DESC)
+        WHERE ROWNUM = 1
+    </select>
 
 
 </mapper>

@@ -5,7 +5,7 @@
 	<properties resource="payment/db/db.properties"></properties>
 	
 	<typeAliases>
-		<typeAlias type="payment.dto.PaymentDto" alias="PaymentDto"/>
+		<typeAlias type="payment.dto.PaymentDto" alias="paymentdto"/>
 	</typeAliases>
 		
   	<environments default="development">
