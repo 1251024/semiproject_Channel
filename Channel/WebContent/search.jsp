@@ -44,7 +44,7 @@
 	} else {
 		for(SearchDto rdto : resultList){	
 %>
-	<a href=""><%=rdto.getChat_content() %></a>
+	<a href="channel.jsp?command=search&workspace_num=<%=biz.workspace_num(rdto.getChannel_num()) %>&chat_num=<%=rdto.getChat_num()%>&member_num=<%=memdto.getMember_num() %>&search=y&channel_num=<%=rdto.getChannel_num()%>"><%=rdto.getChat_content() %></a>
 <%	
 		}
 	}
