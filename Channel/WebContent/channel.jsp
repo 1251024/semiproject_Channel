@@ -185,10 +185,16 @@
 		</div>
 	</div>
 
+<input type="hidden" id="search_workspace_num" value="${param.workspace_num }" >	
+<input type="hidden" id="search_channel_num" value="${param.channel_num }">
+<input type="hidden" id="search_chat_num" value="${param.chat_num }">
+<input type="hidden" id="search_member_num" value="${param.member_num }">
+<input type="hidden" id="search_value" value="${param.search }" >
 
 <script type="text/javascript" src="resources/js/channel.js"></script>
 <script type="text/javascript" src="resources/js/message.js"></script>
 <script type="text/javascript" src="resources/js/websocket.js"></script>
 <script type="text/javascript" src="resources/js/callsummernote.js"></script>
+<script type="text/javascript" src="resources/js/search.js"></script>
 </body>
 </html>

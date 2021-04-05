@@ -449,6 +449,9 @@ function selectChatList(chnum, memnum) {
 							div.style["padding-top"] = "3px;"
 							div.style["padding-bottom"] = "3px;"
 							div.innerHTML = list[0][i].chat_content;
+							
+							div.setAttribute("id", list[0][i].chat_num);
+														
 							query.appendChild(div);
 
 							var clear = document.createElement('div');
@@ -498,6 +501,9 @@ function selectChatList(chnum, memnum) {
 							div.style["padding-top"] = "3px;"
 							div.style["padding-bottom"] = "3px;"
 							div.innerHTML = list[0][i].chat_content;
+								
+							div.setAttribute("id", list[0][i].chat_num);
+							
 							query.appendChild(div);
 
 							var clear = document.createElement('div');
