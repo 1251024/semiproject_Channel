@@ -31,6 +31,7 @@
 		<mapper resource="channel/channel/db/channel-mapper-workspace.xml"/>
 		<mapper resource="channel/channel/db/channel-mapper-channel.xml"/>
 		<mapper resource="channel/channel/db/channel-mapper-chat.xml"/>
+		<mapper resource="channel/channel/db/channel-mapper-calendar.xml"/>
 	</mappers>
 
 
