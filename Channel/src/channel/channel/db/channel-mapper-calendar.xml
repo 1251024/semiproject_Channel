@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="channelmapper-calendar">
+	
+	<resultMap type="calendarDto" id="calendarMap">
+		<result property="calendar_num" column="CALENDAR_NUM"/>
+		<result property="member_num" column="MEMBER_NUM"/>
+		<result property="title" column="TITLE"/>
+		<result property="content" column="CONTENT"/>
+		<result property="start_day" column="START_DAY"/>
+		<result property="end_day" column="END_DAY"/>	
+		<result property="calendar_regdate" column="CALENDAR_REGDATE"/>	
+	</resultMap>
+		
+	<insert id="insertEvent" parameterType="calendarDto">
+		INSERT INTO CALENDAR
+		VALUES (CALENDARSEQ.NEXTVAL, #{member_num}, #{title}, #{content}, #{start_day}, #{end_day}, SYSDATE)
+	</insert>
+	
+	<select id="selectListEvent" parameterType="int" resultMap="calendarMap">
+		SELECT CALENDAR_NUM, MEMBER_NUM, TITLE, CONTENT, START_DAY, END_DAY, CALENDAR_REGDATE
+		FROM CALENDAR
+		WHERE MEMBER_NUM = #{member_num}
+	</select>
+	
+	<select id="selectoneEvent" parameterType="int" resultMap="calendarMap">
+		SELECT CALENDAR_NUM, MEMBER_NUM, TITLE, CONTENT, START_DAY, END_DAY, CALENDAR_REGDATE
+		FROM CALENDAR
+		WHERE CALENDAR_NUM = #{calendar_num}
+	</select>
+	
+	<update id="updateEvent" parameterType="calendarDto">
+		UPDATE CALENDAR
+		SET TITLE = #{title}, CONTENT = #{content}, START_DAY = #{start_day}, END_DAY = #{end_day}
+		WHERE CALENDAR_NUM = #{calendar_num}
+		AND MEMBER_NUM = #{member_num}
+	</update>
+	
+	<delete id="deleteEvent" parameterType="calendarDto">
+		DELETE FROM CALENDAR
+		WHERE CALENDAR_NUM = #{calendar_num}
+		AND MEMBER_NUM = #{member_num}
+	</delete>
+
+	
+
+</mapper>
