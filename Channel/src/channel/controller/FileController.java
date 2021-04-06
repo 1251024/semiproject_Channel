@@ -32,7 +32,7 @@ public class FileController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		System.out.println("들어왔니??");
 		 // 이미지 업로드할 경로
-		String uploadPath = "C:/Workspaces/Workspace_Project/semiPartOfChat/WebContent/resources/image/upload/";
+		String uploadPath = "C:/Workspaces/Workspace_Project/Channel/WebContent/resources/image/upload/";
 	    int size = 10 * 1024 * 1024;  // 업로드 사이즈 제한 10M 이하
 		
 		String fileName = ""; // 파일명
