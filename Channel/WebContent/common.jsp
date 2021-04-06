@@ -332,7 +332,7 @@
 					</li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href="">지도</a></li>
+                    <li><a href="calendar.jsp">Calendar</a></li>
                     <li><a href="">날씨</a></li>
 
                     <li><a href="covid.jsp">covid</a></li>
