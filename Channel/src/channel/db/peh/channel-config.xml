@@ -6,6 +6,10 @@
 
 	<typeAliases>
 		<typeAlias type="channel.alarm.AlarmDto" alias="alarmDto"/>
+		<typeAlias type="channel.member.dto.MemberDto" alias="memberDto"/>
+		<typeAlias type="channel.channel.ChannelDto" alias="channelDto"/>
+		<typeAlias type="channel.chat.ChatDto" alias="chatDto"/>
+		<typeAlias type="channel.chat.MessageDto" alias="messageDto"/>
 	</typeAliases>
 
   <environments default="development">
