@@ -23,3 +23,5 @@ CREATE TABLE MEMBER
 );
 
 SELECT * FROM MEMBER;
+
+update member set member_statement = 2;
