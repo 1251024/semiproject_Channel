@@ -63,13 +63,13 @@
 				}
 			});
 		});
-	});	
 	
-	$("#alarm").mouseleave(function(){
-		$(".alarmclass").remove();
-	});
+	
+		$("#alarm").mouseleave(function(){
+			$(".alarmclass").remove();
+		});
 		
-			
+	});			
 	
 
 
