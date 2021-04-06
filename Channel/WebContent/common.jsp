@@ -18,6 +18,7 @@
 		$.ajax({
 			type: "get",
 			url: "AlarmController?command=messageAlarm",
+			async: true,	
 			
 			success: function(result){
 				if(result>=1){
@@ -33,23 +34,44 @@
 		$('#unread').html(result);
 	}
 
+	
+	
+	
 	$(document).ready(function() {
 		$("#alarm").mouseover(function(){
 			$.ajax({
 				type: "get",
 				url: "AlarmController?command=messageAlarmList",
-				dataType: "text",
+				async: true,		
 				
 				success: function(data){
 					var jsonObj = JSON.parse(data);
-	
+					
 					var $div = $("<div>");
 					$div.append("<br/>")
-					for(i = 0; i<5; i++){
-						$div.append(jsonObj[i].member_name);
+					/*
+					$div.append(jsonObj[0].member_id);
+					$div.append(" : ");
+					$div.append(jsonObj[0].chat_content);
+					$div.append(jsonObj[1].member_id);
+					$div.append(" : ");
+					$div.append(jsonObj[1].chat_content);
+					$div.append(jsonObj[2].member_id);
+					$div.append(" : ");
+					$div.append(jsonObj[2].chat_content);
+					$div.append(jsonObj[3].member_id);
+					$div.append(" : ");
+					$div.append(jsonObj[3].chat_content);
+					//$div.append(jsonObj[4].member_id);
+					//$div.append(" : ");
+					//$div.append(jsonObj[4].chat_content);
+					*/
+					for(i = 0; i<3; i++){
+						$div.append(jsonObj[i].member_id);
 						$div.append(" : ");
 						$div.append(jsonObj[i].chat_content);
 					}
+					
 					
 					$div.append(".....")
 					$div.css("color", "black");
