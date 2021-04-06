@@ -283,7 +283,7 @@
                 </ul>
 
 
-               <form id="searchFrame" class="navbar-form navbar-right">
+               <form style="background-color:#222;" id="searchFrame" class="navbar-form navbar-right">
                     <input type="text" id="searchBox" class="form-control" placeholder="Search...">
                     <input type="button" id="searchTag" value="검색" />
                </form>
