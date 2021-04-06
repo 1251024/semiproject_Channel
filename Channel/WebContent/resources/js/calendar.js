@@ -38,10 +38,11 @@ document.addEventListener('DOMContentLoaded', function() {
 			url:"CalendarController?command=selectListEvent&member_num="+member_num,
 			dataType:"json",
 			method:"post",
+			async: true,
 			success:function(data) {
 				
 				var event = data;
-				
+				console.log(event)
 				for (var i = 0; i < event.length; i++) {
 					
 					calendar.addEvent({
