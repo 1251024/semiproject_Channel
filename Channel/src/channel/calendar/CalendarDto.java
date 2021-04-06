@@ -10,6 +10,7 @@ public class CalendarDto {
 	private String content;
 	private String start_day;
 	private String end_day;
+	private String address;
 	private Date calendar_regdate;
 	
 	public CalendarDto() {
@@ -17,13 +18,14 @@ public class CalendarDto {
 	}
 
 	public CalendarDto(int calendar_num, int member_num, String title, String content, String start_day, String end_day,
-			Date calendar_regdate) {
+			String address, Date calendar_regdate) {
 		this.calendar_num = calendar_num;
 		this.member_num = member_num;
 		this.title = title;
 		this.content = content;
 		this.start_day = start_day;
 		this.end_day = end_day;
+		this.address = address;
 		this.calendar_regdate = calendar_regdate;
 	}
 
@@ -73,6 +75,14 @@ public class CalendarDto {
 
 	public void setEnd_day(String end_day) {
 		this.end_day = end_day;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public Date getCalendar_regdate() {

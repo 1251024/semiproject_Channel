@@ -72,6 +72,8 @@ function addCalendar() {
 	var toDate = $("#toDate").val();
 	var toTime = $("#toTime option:selected").val();
 	
+	var address = $("#getAddress").val();
+	
 	var start_day = fromDate + fromTime;
 	var end_day = toDate + toTime;
 	
@@ -80,7 +82,8 @@ function addCalendar() {
 				+ "&title=" + title
 				+ "&content=" + content
 				+ "&start_day=" + start_day
-				+ "&end_day=" + end_day;
+				+ "&end_day=" + end_day
+				+ "&address=" + address;
 	}
 	$.ajax({
 		url:"CalendarController"+getParameterValues(),
