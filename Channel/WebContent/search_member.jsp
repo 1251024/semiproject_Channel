@@ -16,6 +16,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Insert title here</title>
+<style>
+	.online {
+		color: red;
+	}
+	.offline {
+		color: gray;
+	}
+
+
+</style>
+
+
+
 </head>
 <body>
 <%@ include file="common.jsp" %>
@@ -32,7 +45,7 @@
 	
 	for(MemberDto memdto : memberlist){
 %>
-		이름 : <%=memdto.getMember_name() %> (<%=(memdto.getMember_statement().equals("1"))?"온라인":"오프라인" %>)<br>
+		<%=memdto.getMember_name() %> (<%=(memdto.getMember_statement().equals("1"))?"<span class='online'>온라인</span>":"<span class='offline'>오프라인</span>" %>)<br>
 <%						
 	}
 %>	

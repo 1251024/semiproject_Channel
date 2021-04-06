@@ -200,22 +200,20 @@ button:hover {
 				</div>				
 				<br><br>
 				<div class="col-md-12">
-				<div class="col-md-3"></div>
-				<div class="col-md-3 text-center">
+				<div class="col-md-4"></div>
+				<div class="col-md-4 text-center">
 					<input type="button" class="btn btn-lg btn-primary btn-block"
 						value="비밀번호 수정"
 						onclick="location.href='MemberController?command=member_update_pw'">
 				</div>
-				<div class="col-md-3 text-center">
-					<input type="button" class="btn btn-lg btn-block" value="회원 탈퇴"
-						onclick="location.href='MemberController?command=member_delete'">
-				</div>
-				<div class="col-md-3"></div>
+				
+				<div class="col-md-4"></div>
 				
 				<br><br><br><br><br>
 				<div class="col-md-12 text-center">&copy;copyright by Coding Four lang</div>
 				
 				</div>
+	
 
 
 <script>
@@ -248,4 +246,5 @@ button:hover {
 	
 
 </body>
+		
 </html>
