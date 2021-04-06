@@ -13,6 +13,7 @@
 		<typeAlias type="channel.chat.ChatDto" alias="chatDto"/>
 		<typeAlias type="channel.chat.MessageDto" alias="messageDto"/>
 		<typeAlias type="channel.channel.MessageRoomDto" alias="messageRoomDto"/>
+		<typeAlias type="channel.calendar.CalendarDto" alias="calendarDto"/>
 	</typeAliases>
 		
   	<environments default="development">
@@ -31,6 +32,7 @@
 		<mapper resource="channel/channel/db/channel-mapper-workspace.xml"/>
 		<mapper resource="channel/channel/db/channel-mapper-channel.xml"/>
 		<mapper resource="channel/channel/db/channel-mapper-chat.xml"/>
+		<mapper resource="channel/channel/db/channel-mapper-calendar.xml"/>
 	</mappers>
 
 
