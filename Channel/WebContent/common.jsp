@@ -33,6 +33,8 @@
 	function showUnread(result){
 		$('#unread').html(result);
 	}
+	
+	
 
 	
 	
@@ -48,7 +50,7 @@
 					var jsonObj = JSON.parse(data);
 					
 					var $div = $("<div>");
-					$div.append("<br/>")
+					//$div.append("<br/>")
 					/*
 					$div.append(jsonObj[0].member_id);
 					$div.append(" : ");
@@ -66,20 +68,21 @@
 					//$div.append(" : ");
 					//$div.append(jsonObj[4].chat_content);
 					*/
+					$div.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#128365;")
+					$div.append("<br/>")
 					for(i = 0; i<3; i++){
 						$div.append(jsonObj[i].member_id);
 						$div.append(" : ");
 						$div.append(jsonObj[i].chat_content);
 					}
 					
-					
-					$div.append(".....")
+					$div.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...")
 					$div.css("color", "black");
 					$div.css("backgroundcolor", "gray");
 					$div.css("position", "fixed");
-					$div.css("width", "300px");
-					$div.css("top", "30px");
-					$div.css("right", "50px");
+					$div.css("width", "250px");
+					$div.css("top", "50px");
+					$div.css("right", "0px");
 					$div.addClass("alarmclass");
 					$("#alarm").after($div);
 				}
@@ -109,6 +112,10 @@
 					
 					var $div = $("<div>");
 					$div.append("<br/>")
+					
+					$div.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#128100;")
+					$div.append("<br/>")
+					
 					for(i = 0; i<3; i++){
 						$div.append(" 이름 : ");
 						$div.append(jsonObj[i].member_name);
@@ -117,13 +124,13 @@
 						$div.append(")");
 						$div.append("<br/>")
 					}
-					$div.append(".....")
+					$div.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...")
 					$div.css("color", "black");
 					$div.css("backgroundcolor", "gray");
 					$div.css("position", "fixed");
-					$div.css("width", "200px");
-					$div.css("top", "30px");
-					$div.css("right", "10px");
+					$div.css("width", "250px");
+					$div.css("top", "50px");
+					$div.css("right", "0px");
 					$div.addClass("memberlistclass");
 					$("#memberlist").after($div);
 				},
@@ -152,7 +159,22 @@
 
 </script>
 <style>
+	.memberlistclass{
+			background-color: #f6f9fc;	
+			font-family: sans-serif;
+			font-weight: bold;
+			padding: 0px 0px 5px 15px; 
+			box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+		}
 
+		.alarmclass{
+			background-color: #f6f9fc;	
+			font-family: sans-serif;
+			font-weight: bold;
+			padding: 5px 18px 12px 15px; 
+			box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+		}
+		
         body {
             padding-top: 50px;
         }
