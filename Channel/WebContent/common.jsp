@@ -249,9 +249,19 @@
             color:black;
             font-size: 1.5rem;
         }
-          #searchFrame{
+        #searchFrame{
         	style="background-color:#222;" 
         }
+        #searchTag {
+        	width: 45px;
+        	height: 28px;
+        	background-color: #555;
+        	color: white;
+        	border: 0px;
+        	font-size: 1.4rem;
+        	border-radius: 4px;
+        }
+        
 
 </style>
 	<input type="hidden" id="member_num" value="${loginDto.member_num }">
