@@ -46,6 +46,7 @@ public class CalendarController extends HttpServlet {
 			String content = request.getParameter("content");
 			String start_day = request.getParameter("start_day");
 			String end_day = request.getParameter("end_day");
+			String address = request.getParameter("address");
 			
 			CalendarDto dto = new CalendarDto();
 			dto.setMember_num(member_num);
@@ -53,6 +54,7 @@ public class CalendarController extends HttpServlet {
 			dto.setContent(content);
 			dto.setStart_day(start_day);
 			dto.setEnd_day(end_day);
+			dto.setAddress(address);
 			
 			int res = biz.insertEvent(dto);
 			

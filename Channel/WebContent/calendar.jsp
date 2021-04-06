@@ -22,7 +22,7 @@ response.setContentType("text/html; charset=UTF-8");
 	<%@include file="common.jsp"%>
 
 	<div id='calendar'></div>
-
+	
 	<div class="modal fade" id="addCalendarForm" tabindex="-1"
 		role="dialog" aria-labelledby="addCalendarLable" aria-hidden="true">
 		<div class="modal-dialog">
@@ -295,12 +295,23 @@ response.setContentType("text/html; charset=UTF-8");
 						</select>
 					</div>
 					</div>
-				</div>
+					<div class="recipient-name">
+						<label for="recipient-name" class="control-label">장소추가</label>
+					</div>
+					</div>
+					<div class="input-group">
+      					<input class="form-control" type="text" id="getAddress" placeholder="주소" onclick="getPostcode()">
+     						 <span class="input-group-btn">
+      	  						<button class="btn btn-success" type="button" onclick="getPostcode()">주소검색</button>
+     						 </span>
+    				</div>
+					<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 					<button type="button" class="btn btn-primary" onclick="addCalendar();">생성하기</button>
 				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -309,4 +320,7 @@ response.setContentType("text/html; charset=UTF-8");
 <script src="resources/datetimepicker/js/bootstrap-datepicker.js"></script>
 <script src="resources/datetimepicker/bootstrap-datepicker.ko.min.js"></script>
 <script src="resources/js/datepickeropener.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8b23fbdf7184ddeccfecb57797fda53f&libraries=services"></script>
+<script src="resources/js/map.js"></script>
 </html>

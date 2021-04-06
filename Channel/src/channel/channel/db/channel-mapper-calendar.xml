@@ -9,29 +9,30 @@
 		<result property="content" column="CONTENT"/>
 		<result property="start_day" column="START_DAY"/>
 		<result property="end_day" column="END_DAY"/>	
+		<result property="address" column="ADDRESS"/>	
 		<result property="calendar_regdate" column="CALENDAR_REGDATE"/>	
 	</resultMap>
 		
 	<insert id="insertEvent" parameterType="calendarDto">
 		INSERT INTO CALENDAR
-		VALUES (CALENDARSEQ.NEXTVAL, #{member_num}, #{title}, #{content}, #{start_day}, #{end_day}, SYSDATE)
+		VALUES (CALENDARSEQ.NEXTVAL, #{member_num}, #{title}, #{content}, #{start_day}, #{end_day}, #{address}, SYSDATE)
 	</insert>
 	
 	<select id="selectListEvent" parameterType="int" resultMap="calendarMap">
-		SELECT CALENDAR_NUM, MEMBER_NUM, TITLE, CONTENT, START_DAY, END_DAY, CALENDAR_REGDATE
+		SELECT CALENDAR_NUM, MEMBER_NUM, TITLE, CONTENT, START_DAY, END_DAY, ADDRESS, CALENDAR_REGDATE
 		FROM CALENDAR
 		WHERE MEMBER_NUM = #{member_num}
 	</select>
 	
 	<select id="selectoneEvent" parameterType="int" resultMap="calendarMap">
-		SELECT CALENDAR_NUM, MEMBER_NUM, TITLE, CONTENT, START_DAY, END_DAY, CALENDAR_REGDATE
+		SELECT CALENDAR_NUM, MEMBER_NUM, TITLE, CONTENT, START_DAY, END_DAY, ADDRESS, CALENDAR_REGDATE
 		FROM CALENDAR
 		WHERE CALENDAR_NUM = #{calendar_num}
 	</select>
 	
 	<update id="updateEvent" parameterType="calendarDto">
 		UPDATE CALENDAR
-		SET TITLE = #{title}, CONTENT = #{content}, START_DAY = #{start_day}, END_DAY = #{end_day}
+		SET TITLE = #{title}, CONTENT = #{content}, START_DAY = #{start_day}, END_DAY = #{end_day}, ADDRESS = #{address}
 		WHERE CALENDAR_NUM = #{calendar_num}
 		AND MEMBER_NUM = #{member_num}
 	</update>

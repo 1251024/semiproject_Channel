@@ -46,7 +46,8 @@ $(function(){
 			if(toSelect[i].value == toTime) {
 				toSelect[i].selected = true;
 			}
-		}	
+		}
+		
 })
 
 function deleteEvent(calnum, memnum) {
@@ -323,18 +324,32 @@ function deleteEvent(calnum, memnum) {
 							<option value="T23:45:00">23:45</option>					
 						</select>
 					</div>
+					<div class="recipient-name">
+						<label for="recipient-name" class="control-label">일정 장소</label>
 					</div>
+			</div>
+			<div class="input-group">
+      			<input class="form-control" type="text" id="getAddress" name="address" placeholder="주소" value="<%=dto.getAddress()%>" onclick="getPostcode()">
+     				 <span class="input-group-btn">
+      	  				<button class="btn btn-success" type="button" onclick="getPostcode()">장소 수정</button>
+     				 </span>
+    				</div>
+					<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
+				
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" onclick="location.href='calendar.jsp'">돌아가기</button>
 					<button type="button" class="btn btn-danger" onclick="deleteEvent(<%=dto.getCalendar_num()%>, ${loginDto.member_num });">삭제</button>
 					<button type="submit" class="btn btn-primary">수정</button>
-				</div>
-			
+				</div>	
 		</form>
 	</div>
+
 </body>
 <link rel="stylesheet" href="resources/datetimepicker/css/bootstrap-datepicker.css">
 <script src="resources/datetimepicker/js/bootstrap-datepicker.js"></script>
 <script src="resources/datetimepicker/bootstrap-datepicker.ko.min.js"></script>
 <script src="resources/js/datepickeropener.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8b23fbdf7184ddeccfecb57797fda53f&libraries=services"></script>
+<script src="resources/js/map.js"></script>
 </html>

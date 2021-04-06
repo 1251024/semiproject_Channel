@@ -9,47 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CHANNEL / Channel / ${loginDto.member_name }</title>
-<style type="text/css">
-/* 이용준 main css 수정 부분 */
-#channelinfo {
-	border-right: 1px solid gray;
-	border-left: 1px solid gray;
-	border-bottom: 1px solid gray;
-	height: 5em;
-}
 
-#chatarea {
-	background-color: white;
-	color: black;
-	height: 45em;
-	border-left: 1px solid gray;
-	border-right: 1px solid gray;
-	overflow: auto;
-}
-
-#textarea {
-	background-color: white;
-	border-left: 1px solid gray;
-	border-right: 1px solid gray;
-	color: black;
-	border-right: 1px solid gray;
-	color: black;
-	height: 10em;
-}
-
-#chatarea::-webkit-scrollbar {
-	width: 7px; /*스크롤바의 너비*/
-}
-
-#chatarea::-webkit-scrollbar-thumb {
-	background-color: gray; /*스크롤바의 색상*/
-	border-radius: 5px;
-}
-
-#chatarea::-webkit-scrollbar-track {
-	background-color: white; /*스크롤바 트랙 색상*/
-}
-</style>
 </head>
 <%
 	int member_num = Integer.parseInt(request.getParameter("member_num"));
@@ -196,5 +156,52 @@
 <script type="text/javascript" src="resources/js/websocket.js"></script>
 <script type="text/javascript" src="resources/js/callsummernote.js"></script>
 <script type="text/javascript" src="resources/js/search.js"></script>
+<style type="text/css">
+/* 이용준 main css 수정 부분 */
+#channelinfo {
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
+	border-bottom: 1px solid gray;
+	height: 5em;
+}
+
+#chatarea {
+	background-color: white;
+	color: black;
+	height: 45em;
+	border-left: 1px solid gray;
+	border-right: 1px solid gray;
+	overflow: auto;
+}
+
+#textarea {
+	background-color: white;
+	border-left: 1px solid gray;
+	border-right: 1px solid gray;
+	color: black;
+	border-right: 1px solid gray;
+	color: black;
+	height: 10em;
+}
+
+#chatarea::-webkit-scrollbar {
+	width: 7px; /*스크롤바의 너비*/
+}
+
+#chatarea::-webkit-scrollbar-thumb {
+	background-color: gray; /*스크롤바의 색상*/
+	border-radius: 5px;
+}
+
+#chatarea::-webkit-scrollbar-track {
+	background-color: white; /*스크롤바 트랙 색상*/
+}
+
+.note-btn-group btn-group note-mybutton {
+	float: right;
+	
+}
+
+</style>
 </body>
 </html>

@@ -274,7 +274,6 @@
         <div class="row">
             <div id="side-navbar" class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li><a href="">Main</a></li>
                     <li>
                     <div class="panel-heading" role="tab" id="collapseListWorkspace">
 							<h4 class="panel-title" id="-collapsible-list-group-">

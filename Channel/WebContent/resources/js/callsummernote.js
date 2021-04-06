@@ -1,36 +1,47 @@
 $(function(){
+	var sendButton = function () {
+		  var ui = $.summernote.ui;
 
+		  // create button
+		  var button = ui.button({
+		    contents: '<span id="sendButton" >SEND</span>',
+		    tooltip: 'send',
+		    click: function () {
+		    	var inputmsg = $('#summernote').val();
+				var outmsg = inputmsg.replace(/<(\/?)p>/gi, '');
+				inputmsg.replace('<br>', '');
+				$('#summernote').summernote('reset');
+					send(outmsg);
+		    }
+		  });
+
+		  return button.render();   // return button as jquery object
+		}
+	
 	//썸머노트 실행
-	$(document)
-			.ready(
-					function() {
-						$('#summernote')
-								.summernote(
+	$(document).ready(function() {
+		
+
+		
+		
+		$('#summernote').summernote(
 										{
-											height : 100, // set editor height
-											minHeight : 30, // set minimum height of
-											// editor
-											maxHeight : 100, // set maximum
-											// height of editor
-											focus : true, // set focus to editable
-											// area after
-											// initializing
-											// summernote
+											height : 100,
+											minHeight : 30,
+											maxHeight : 100, 
+											focus : true, 
 											dialogsInBody : true,
 											placeholder : '메세지를 입력해주세요.',
 											lang : 'ko-KR',
 											toolbar : [
 													// [groupName, [list of button]]
-													[ 'style',
-															[ 'bold', 'underline' ] ],
-													[
-															'para',
-															[ 'ul', 'ol',
-																	'paragraph' ] ],
-													[
-															'insert',
-															[ 'link', 'picture',
-																	'video' ] ] ],
+													[ 'style', [ 'bold', 'underline' ] ],
+													[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+													[ 'insert', [ 'link', 'picture', 'video' ] ] ,
+													[ 'mybutton', ['send']] ],
+													buttons:{
+														send: sendButton
+													},
 											callbacks : { // 여기 부분이 이미지를 첨부하는 부분
 												onImageUpload : function(files) {
 													sendFile(files[0], this);
@@ -84,4 +95,10 @@ $(function(){
 			}
 		});
 	}
+
+$(function(){
+
+	$("#sendButton").closest("button").css('float','right');
+	
+})
 
