@@ -13,6 +13,70 @@
 <script src="resources/summernote/summernote.js"></script>
 
 <script>
+
+	$(document).ready(function() {
+		$.ajax({
+			type: "get",
+			url: "AlarmController?command=messageAlarm",
+			
+			success: function(result){
+				if(result>=1){
+					showUnread(result);
+				} else {
+					showUnread('');
+				}
+			}
+		});
+	});
+	
+	function showUnread(result){
+		$('#unread').html(result);
+	}
+
+	$(document).ready(function() {
+		$("#alarm").mouseover(function(){
+			$.ajax({
+				type: "get",
+				url: "AlarmController?command=messageAlarmList",
+				dataType: "text",
+				
+				success: function(data){
+					var jsonObj = JSON.parse(data);
+	
+					var $div = $("<div>");
+					$div.append("<br/>")
+					for(i = 0; i<5; i++){
+						$div.append(jsonObj[i].member_name);
+						$div.append(" : ");
+						$div.append(jsonObj[i].chat_content);
+					}
+					
+					$div.append(".....")
+					$div.css("color", "black");
+					$div.css("backgroundcolor", "gray");
+					$div.css("position", "fixed");
+					$div.css("width", "300px");
+					$div.css("top", "30px");
+					$div.css("right", "50px");
+					$div.addClass("alarmclass");
+					$("#alarm").after($div);
+				}
+			});
+		});
+	});	
+	
+	$("#alarm").mouseleave(function(){
+		$(".alarmclass").remove();
+	});
+		
+			
+	
+
+
+
+
+
+
 	$(document).ready(function(){
 		$("#memberlist").mouseover(function(){	
 			$.ajax({
@@ -169,7 +233,8 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a style="font-size: 1.5rem;" href="">&#128365; alarm</a></li>
+                    <li><a id="alarm" style="font-size: 1.5rem;" href="">&#128365; alarm</a></li>
+                    <li><span id="unread" class="label label-info"></span></li>
                     <li><a style="font-size: 1.5rem;" id="memberlist" href="search_member.jsp">&#128100; my</a></li> 
                 </ul>
 
