@@ -23,6 +23,27 @@
 	overflow:auto;
 }
 
+#search_header{
+	height: 50px;
+	margin-top:50px;
+	font-size:1.5rem;
+	font-weight: bold;
+}
+
+
+.search_content{
+	height: 30px;
+	font-size: 1.6rem;
+}
+.search_writer{
+	font-size: 1.3rem;
+}
+.search_date{
+	font-size: 1.1rem;
+	font-color: gray;
+}
+
+
 
 .search_result_box{
 	float: left;
@@ -65,20 +86,32 @@
 	
 	if(resultList.size() == 0){
 %>
-	<h2>-----검색된 내용이 없습니다-----</h2>
+	<h3>----- 검색된 내용이 없습니다 -----</h3>
 <%
 	} else {
+%>
+	<table>
+		<col width="300px">
+		<col width="100px">
+		<col width="200px">
+		<tr id="search_header">
+			<td>검색한 내용</td>
+			<td>작성자</td>
+			<td>작성일</td>		
+		</tr>
+<%	
 		for(SearchDto rdto : resultList){				
 %>	
-	<span class="search_result_box">
-	<a href="channel.jsp?command=search&workspace_num=<%=biz.workspace_num(rdto.getChannel_num()) %>&chat_num=<%=rdto.getChat_num()%>&member_num=<%=memdto.getMember_num() %>&search=y&channel_num=<%=rdto.getChannel_num()%>"><%=rdto.getChat_content() %></a>
-	</span>
-	<span class="text_writer_id">(작성자 ID:<%=rdto.getMember_id() %>/<%=rdto.getChat_regdate().toLocaleString() %>)</span><br><br>
-	
+		<tr>
+			<td class="search_content"><a href="channel.jsp?command=search&workspace_num=<%=biz.workspace_num(rdto.getChannel_num()) %>&chat_num=<%=rdto.getChat_num()%>&member_num=<%=memdto.getMember_num() %>&search=y&channel_num=<%=rdto.getChannel_num()%>"><%=rdto.getChat_content() %></a></td>
+			<td class="search_writer"><%=rdto.getMember_id() %></td>
+			<td class="search_date"><%=rdto.getChat_regdate().toLocaleString() %></td>	
+		</tr>	
 <%	
 		}
 	}
 %>
+	</table>
 </div>
 
 

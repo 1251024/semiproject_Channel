@@ -19,19 +19,26 @@
 <style>
 
 	#member_title{
-		text-align: center;
-		
+		color:black;
+		text-shadow: none;	
+		transition : all 3s linear;	
 	}
-	.online {		
-		background-color: skyblue;
-	}
-	.offline {		
-		background-color: white;
-	}
+	#member_title:hover{
+		color:white;
+		text-shadow: 1px 1px black;		
+	}	
+	
 	#member_onoff_box {
-		text-align: center;
 		overflow:auto;
 	}
+	
+	#table_head {
+		font-size: 1.5rem;
+		font-weight: bold;
+		height: 50px;
+		margin-top: 50px;
+	}
+	
 	.member_onoff_name {
 		font-size: 1.8rem;
 		font-family: 고딕;
@@ -53,14 +60,13 @@
 <%@ include file="common.jsp" %>
 
 <br>
-<div class ="col-md-12" id="member_title">
+<div class ="col-md-12 text-center" id="member_title">
 	<h2>On/Off Line</h2>
 </div>
-<br>
-<div class="col-md-12"></div>
 <br><br>
-<div class="col-xs-3"></div>
-<div class="col-xs-6" id="member_onoff_box">
+<div class="col-xs-2"></div>
+<div class="col-xs-8 text-center" id="member_onoff_box">
+<table>
 <%
 	MemberDto memberdto = (MemberDto) session.getAttribute("loginDto");
 
@@ -70,17 +76,43 @@
 	List<SearchMemberDto> workspacelist = biz.searchMemberList(member_num);
 	List<MemberDto> memberlist = biz.selectedMemberList(workspacelist, member_num);
 	
-	for(MemberDto memdto : memberlist){
+	if(memberlist != null){
 %>
-		<div <%=(memdto.getMember_statement().equals("1"))?"class='online'":"class='offline'" %>>
-		<span class="member_onoff_name"><%=memdto.getMember_name() %></span> &nbsp;
-		 <%=(memdto.getMember_statement().equals("1"))?"<span class='member_online'>(온라인)</span>":"<span class='member_offline'>(오프라인)</span>" %>
-		</div>
-<%						
+		<col width="150px">
+		<col width="300px">
+		<col width="300px">
+		<tr id="table_head">
+			<td>접속</td>
+			<td>이름</td>
+			<td>on/off Line</td>
+		</tr>
+<%		
+		for(MemberDto memdto : memberlist){
+			if(memdto.getMember_statement().equals("1")){
+				//온라인
+%>
+				<tr>
+					<td class="col-xs-1 text-center"><div class="glyphicon glyphicon-user"></div></td>
+					<td class ="member_onoff_name"><%=memdto.getMember_name() %></td>
+					<td class ="member_online">온라인</td>			
+				</tr>		
+<%			
+			} else {
+				//오프라인
+%>
+				<tr>
+					<td>--</td>
+					<td class="member_onoff_name"><%=memdto.getMember_name() %></td>
+					<td class="member_offline">오프라인</td>			
+				</tr>		
+<%
+			}								
+		}
 	}
 %>	
+</table>
 </div>
-<div class="col-xs-3"></div>
+<div class="col-xs-2"></div>
 	
 
 
