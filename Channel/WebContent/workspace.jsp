@@ -13,10 +13,16 @@
 </head>
 <body>
 <%@include file="common.jsp" %>
+<div class="jumbotron">
+  <h1>Workspace</h1>
+  <p>환영합니다. ${loginDto.member_name }님, <br>
+     워크스페이스를 생성하여 동료들과 업무를 시작해주세요.     
+     </p>
+  <p><button type="button" class="btn btn-default btn-lg"
+	data-toggle="modal" data-target="#addWorkSpaceForm" >새 워크스페이스 생성 <span class="label label-primary">New</span></button></p>
+</div>
 <div id="workspaceArea">
-	워크스페이스를 선택하세요.<br>
-	<button type="button" class="btn btn-default btn-lg btn-block"
-	data-toggle="modal" data-target="#addWorkSpaceForm" >새 워크스페이스 생성</button>
+	<div class="well well-sm"><h3>Workspace List</h3></div>
 	<div class="modal fade" id="addWorkSpaceForm" tabindex="-1" role="dialog" aria-labelledby="addWorkSpaceLable" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
