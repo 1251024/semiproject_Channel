@@ -309,7 +309,7 @@
                     <li>
                     <div class="panel-heading" role="tab" id="collapseListWorkspace">
 							<h4 class="panel-title" id="-collapsible-list-group-">
-							<span class="glyphicon glyphicon-folder-close" aria-hidden="true" id="workspaceglyphicon"></span>
+							<span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
 								<a class="collapsed" data-toggle="collapse" href="#workspacelist"
 									aria-expanded="false" aria-controls="workspacelist">Workspace </a>
 							</h4>
@@ -337,7 +337,10 @@
 							role="tabpanel" aria-labelledby="collapseListChannel"
 							aria-expanded="false" style="height: 0px;">
 						<ul class="list-group" id="ChannelArea">
-
+							<li class="list-group-item">
+								<button type="button" class="btn btn-default btn-lg btn-block"
+						data-toggle="modal" data-target="#addChannelForm">새 채널 생성</button>
+							</li>
 						</ul>
 					</div>	
                     </li>
@@ -353,7 +356,10 @@
 							role="tabpanel" aria-labelledby="collapseListChannel"
 							aria-expanded="false" style="height: 0px;">
 						<ul class="list-group" id="MessageArea">
-
+							<li class="list-group-item">
+								<button type="button" class="btn btn-default btn-lg btn-block"
+								data-toggle="modal" data-target="#addMessageForm" onclick="selectInviteMessageMemberList();">새 메세지</button>
+							</li>
 						</ul>
 							
 						</div>

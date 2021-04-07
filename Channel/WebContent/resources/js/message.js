@@ -30,12 +30,17 @@ function selectMessageRoom() {
 							li.setAttribute("class","list-group-item");
 							
 							var button = document.createElement('button');
-							button.setAttribute("class","btn btn-default btn-block");
+							button.setAttribute("class","btn btn-default");
 							button.setAttribute("onclick","callMessageList("+list[0][i].messageroom_num+","+member_num+");");
 							button.innerHTML = 
 							list[0][i].member_name + "/" + list[0][i].member2_name + "의 채팅룸";
 							li.appendChild(button);
 							
+							var button = document.createElement('button');
+							button.setAttribute("class","btn btn-default btn-xs");
+							button.setAttribute("onclick","messagedelcon("+list[0][i].messageroom_num+","+member_num+");");
+							button.innerHTML = "삭제";
+							li.appendChild(button);
 							query.append(li);
 							
 						}
@@ -190,93 +195,42 @@ function createMessageRoom() {
 		
 }// 메세지방 DB 불러오는 ajax
 function callMessageList(msgRoomNum, memnum) {
-	
-	$("#channelcontentarea").children().show();
-	$("#channeljumbotron").hide();
-	
 	$('#chatarea').children().remove();
 	re_send = "";
 	var member_num = memnum;
 	var messageroom_num = msgRoomNum;
-
-	$.ajax({
-		url : "ChatController?command=callMessageList&messageroom_num="+ messageroom_num,
-		dataType : "json",
-		method : "post",
-		success : function(data) {
-			var list = data.result;
-			var firstname = "";
-			for (var i = 0; i < list[0].length; i++) {
-				
-				if (list[0][i].to_num == member_num) {
-					var query = document.querySelector('#chatarea');
-						if (list[0][i].to_name != firstname) {
-							
-							var icon = document.createElement('span');
-							icon.setAttribute("class","glyphicon glyphicon-user");
-							icon.setAttribute("aria-hidden", "true");
-							icon.style["color"] = "gold";
-							icon.style["width"] = "15px;";
-							icon.style["height"] = "15px;";
-							
-							var who = document.createElement('button');
-							who.setAttribute("class","btn btn-default");
-							who.setAttribute("data-toggle", "tooltip");
-							who.setAttribute("data-placement", "right");
-							who.setAttribute("title", list[0][i].message_regdate);
-							who.style["font-weight"] = "bold";
-							who.appendChild(icon);
-							who.append(list[0][i].to_name);
-
-							query.appendChild(who);
-
-							var clear = document.createElement('div');
-							clear.style["clear"] = "both";
-							query.appendChild(clear);
-
-							firstname = list[0][i].to_name;
-
-							}
-
-						var div = document.createElement('div');
-						div.setAttribute("data-toggle", "tooltip");
-						div.setAttribute("data-placement", "right");
-						div.setAttribute("title", list[0][i].message_regdate);
-						div.style["display"] = "inline-block";
-						div.style["padding-left"] = "10px";
-						div.style["padding-top"] = "3px;"
-						div.style["padding-bottom"] = "3px;"
-						div.innerHTML = list[0][i].message_content;
-						div.setAttribute("id", list[0][i].chat_num);
-						
-						query.appendChild(div);
-
-							var clear = document.createElement('div');
-							clear.style["clear"] = "both";
-							query.appendChild(clear);
-
-							
-						} else {
+	console.log(member_num);
+	$.ajax({url : "ChatController?command=callMessageList&messageroom_num="+ messageroom_num,
+				dataType : "json",
+				method : "post",
+				success : function(data) {
+					var list = data.result;
+					var firstname = "";
+					for (var i = 0; i < list[0].length; i++) {
+					
+						if (list[0][i].to_num == member_num) {
+							console.log(list[0][i].to_num + " : " + firstname);
 							var query = document.querySelector('#chatarea');
-
 							if (list[0][i].to_name != firstname) {
-								
+								var who = document.createElement('div');
+								// who.style["float"]="left";
+								who.style["display"] = "inline-block";
+								who.style["font-weight"] = "bold";
+								who.style["font-size"] = "14px";
+								who.style["padding-top"] = "5px;"
+								who.style["padding-bottom"] = "2px;"
+								who.style["padding-left"] = "10px;"
+								who.append(list[0][i].to_name);
+
 								var icon = document.createElement('span');
-								icon.setAttribute("class", "glyphicon glyphicon-user");
+								icon.setAttribute("class",
+										"glyphicon glyphicon-user");
 								icon.setAttribute("aria-hidden", "true");
-								icon.style["color"] = "gray";
+								icon.style["color"] = "gold";
 								icon.style["width"] = "15px;";
 								icon.style["height"] = "15px;";
-								
-								var who = document.createElement('button');
-								who.setAttribute("class","btn btn-default");
-								who.setAttribute("data-toggle", "tooltip");
-								who.setAttribute("data-placement", "right");
-								who.setAttribute("title", list[0][i].message_regdate);
-								who.style["font-weight"] = "bold";
-								who.appendChild(icon);
-								who.append(list[0][i].to_name);
-								
+
+								query.appendChild(icon);
 								query.appendChild(who);
 
 								var clear = document.createElement('div');
@@ -288,10 +242,61 @@ function callMessageList(msgRoomNum, memnum) {
 							}
 
 							var div = document.createElement('div');
-							div.setAttribute("data-toggle", "tooltip");
-							div.setAttribute("data-placement", "right");
-							div.setAttribute("title", list[0][i].message_regdate);
-							div.style["display"] = "inline-block";
+							// div.style["float"]="left";
+							div.style["display"] = "block";
+							// div.style["font-weight"]="bold";
+							div.style["color"] = "#1D1C1D";
+							div.style["padding-left"] = "10px";
+							div.style["padding-top"] = "3px;"
+							div.style["padding-bottom"] = "3px;"
+							div.innerHTML = list[0][i].message_content;
+							query.appendChild(div);
+
+							var clear = document.createElement('div');
+							clear.style["clear"] = "both";
+							query.appendChild(clear);
+
+							
+						} else {
+							var query = document.querySelector('#chatarea');
+							console.log(list[0][i].to_num + " : " + firstname);
+							if (list[0][i].to_name != firstname) {
+								
+								var who = document.createElement('div');
+								// who.style["float"]="right";
+								who.style["display"] = "inline-block";
+								who.style["font-weight"] = "bold";
+								who.style["font-size"] = "14px";
+								who.style["padding-top"] = "5px;"
+								who.style["padding-bottom"] = "2px;"
+								who.style["padding-left"] = "10px;"
+								who.innerHTML = list[0][i].to_name;
+
+								var icon = document.createElement('span');
+								// icon.style["float"]="right";
+								icon.setAttribute("class",
+										"glyphicon glyphicon-user");
+								icon.setAttribute("aria-hidden", "true");
+								icon.style["color"] = "gray";
+								icon.style["width"] = "15px;";
+								icon.style["height"] = "15px;";
+
+								query.appendChild(icon);
+								query.appendChild(who);
+
+								var clear = document.createElement('div');
+								clear.style["clear"] = "both";
+								query.appendChild(clear);
+
+								firstname = list[0][i].to_name;
+
+							}
+
+							var div = document.createElement('div');
+							// div.style["float"]="right";
+							div.style["display"] = "block";
+							// div.style["font-weight"]="bold";
+							div.style["color"] = "#1D1C1D";
 							div.style["padding-left"] = "10px";
 							div.style["padding-top"] = "3px;"
 							div.style["padding-bottom"] = "3px;"
@@ -306,24 +311,18 @@ function callMessageList(msgRoomNum, memnum) {
 
 					}
 
-			
-					var query = document.querySelector('#chatarea');
-			
-					var last = document.createElement('div');
-					last.setAttribute("class", "well");
-					last.style["clear"] = "both";
-					last.style["font-weight"] = "bold";
-					last.style["display"] = "block";
-					last.style["text-align"] = "center";
-					last.innerHTML = "------------------------------이전 메세지는 여기까지 입니다.------------------------------";
+					var div = document.createElement('div');
+					div.style["clear"] = "both";
+					div.style["font-weight"] = "bold";
+					div.style["color"] = "#1D1C1D";
+					div.style["background"] = "lightgray";
+					div.style["display"] = "block";
+					div.style["text-align"] = "center";
+					div.innerHTML = "------------------------------이전 메세지는 여기까지 입니다.------------------------------";
 
-					query.appendChild(last);
+					query.appendChild(div);
 
-					
-					const $messageTextBox = $('#chatarea'); 
-					$messageTextBox.scrollTop($messageTextBox[0].scrollHeight);
-					
-					$('[data-toggle="tooltip"]').tooltip()
+					chatarea.scrollTop = chatarea.scrollHeight;
 				},
 				error : function() {
 					alert("통신 실패")
@@ -345,9 +344,7 @@ function messsageInfo(msgRoomNum, memnum) {
 		method : "post",
 		success : function(data) {
 			var res = data.split("|\\|");
-
-			var query = document.querySelector('#roominfo');
-			
+			console.log(data);
 			var messageroom_num = res[0];
 			var workspace_num = res[1];
 			var member_num = res[2];
@@ -358,19 +355,7 @@ function messsageInfo(msgRoomNum, memnum) {
 			var member2_name = res[7];
 			var messsageroom_regdate = res[8];
 
-			var div = document.createElement('div');
-			div.setAttribute("class", "pull-left");
-			div.setAttribute("data-toggle", "tooltip");
-			div.setAttribute("data-placement", "right");
-			div.setAttribute("title", messsageroom_regdate);
-			
-			var h = document.createElement('h4');
-			h.style["font-weight"]="bold";
-			h.innerHTML = "<span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span>  " 
-				+ member_name + "(" + member_id + ")님 과 " + member2_name + "(" + member2_id + ")님 의 채팅룸입니다." ;
-			div.appendChild(h);
-			
-			query.appendChild(div);
+			var query = document.querySelector('#roominfo');
 			
 			var input = document.createElement('input');
 			input.id = "messageroom_num";
@@ -454,19 +439,16 @@ function messsageInfo(msgRoomNum, memnum) {
 				input.value = member_name;
 				query.appendChild(input);
 			}
-			
-			var div = document.createElement('div');
-			div.setAttribute("class", "pull-right");
-			
-			var button = document.createElement('button');
-			button.setAttribute("class","btn btn-danger btn-sm");
-			button.setAttribute("onclick","messagedelcon("+messageroom_num+","+member_num+");");
-			button.innerHTML = "삭제";
-			div.appendChild(button);
-			query.appendChild(div);
-			
-			$('[data-toggle="tooltip"]').tooltip()
 
+			var span = document.createElement('span');
+			span.style["font-size"] = "10px";
+			span.style["display"] = "inline-block";
+
+			span.innerHTML = " 워크스페이스 : " + workspace_num + "번의 " + member_name
+					+ "(" + member_id + ")와 " + member2_name + "(" + member2_id
+					+ ")의 채팅방 <br>" + " 채널생성일 : " + messsageroom_regdate;
+
+			query.appendChild(span);
 		},
 		error : function() {
 			alert("통신 실패")

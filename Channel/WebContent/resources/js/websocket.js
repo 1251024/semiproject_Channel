@@ -29,69 +29,55 @@ webSocket.onclose = function() {
 // 웹소캣으로 send한 메세지를 출력시켜주는 함수
 function onMessage(event) {
 
-	var today = new Date();
-	var month = today.getMonth() + 1;  // 월
-	var date = today.getDate();  // 날짜
-	
-	var hours = today.getHours(); // 시
-	var minutes = today.getMinutes();  // 분
-	var seconds = today.getSeconds();  // 초
-	
-	var realTime = month + "월 " + date +"일 "+ hours + ":" + minutes + ":" + seconds;
-	
 	var message = event.data.split("|\|");
 	
-	var query = document.querySelector('#chatarea');
-	
 	if (message[0] != re_send) {
-		
+		var who = document.createElement('div');
+		// who.style["float"]="right";
+		who.style["display"] = "inline-block";
+		who.style["font-weight"] = "bold";
+		who.style["font-size"] = "14px";
+		who.style["padding-top"] = "5px;"
+		who.style["padding-bottom"] = "2px;"
+		who.style["padding-left"] = "10px;"
+		who.innerHTML = message[0];
+
 		var icon = document.createElement('span');
+		// icon.style["float"]="right";
 		icon.setAttribute("class", "glyphicon glyphicon-user");
 		icon.setAttribute("aria-hidden", "true");
 		icon.style["color"] = "gray";
 		icon.style["width"] = "15px;";
 		icon.style["height"] = "15px;";
-		
-		var who = document.createElement('button');
-		who.setAttribute("class","btn btn-default");
-		who.setAttribute("data-toggle", "tooltip");
-		who.setAttribute("data-placement", "right");
-		who.setAttribute("title", realTime);
-		who.style["font-weight"] = "bold";
-		who.appendChild(icon);
-		who.append(message[0]);
-		query.appendChild(who);
-		
+
+		document.getElementById('chatarea').appendChild(icon);
+		document.getElementById('chatarea').appendChild(who);
+
 		var clear = document.createElement('div');
 		clear.style["clear"] = "both";
-		query.appendChild(clear);
+		document.getElementById('chatarea').appendChild(clear);
 
 		re_send = message[0];
 
 	}
 
 	var div = document.createElement('div');
-	div.setAttribute("data-toggle", "tooltip");
-	div.setAttribute("data-placement", "right");
-	div.setAttribute("title", realTime);
-	div.style["display"] = "inline-block";
+	// div.style["float"]="right";
+	div.style["display"] = "block";
+	// div.style["font-weight"]="bold";
+	div.style["color"] = "#1D1C1D";
 	div.style["padding-left"] = "10px";
 	div.style["padding-top"] = "3px;"
 	div.style["padding-bottom"] = "3px;"
+
 	div.innerHTML = message[1];
-	
-	query.appendChild(div);
+	document.getElementById('chatarea').appendChild(div);
 
 	var clear = document.createElement('div');
 	clear.style["clear"] = "both";
-	query.appendChild(clear);
+	document.getElementById('chatarea').appendChild(clear);
 
-	const $messageTextBox = $('#chatarea'); 
-	$messageTextBox.scrollTop($messageTextBox[0].scrollHeight);
-	
-	//chatarea.scrollTop = chatarea.scrollHeight;
-	
-	$('[data-toggle="tooltip"]').tooltip()
+	chatarea.scrollTop = chatarea.scrollHeight;
 
 }
 // 웹소켓에 접속시 실행되는 함수
@@ -121,16 +107,6 @@ function onError(event) {
 function send(msg) {
 	// 채팅 메세지가 널이 아니면~
 	var content = msg;
-	
-	var today = new Date();
-	var month = today.getMonth() + 1;  // 월
-	var date = today.getDate();  // 날짜
-	
-	var hours = today.getHours(); // 시
-	var minutes = today.getMinutes();  // 분
-	var seconds = today.getSeconds();  // 초
-	
-	var realTime = month + "월 " + date +"일 "+ hours + ":" + minutes + ":" + seconds;
 
 	if (content.value != "") {
 		// 맴버 2아이디가 널이 아니면~ 메세지인서트
@@ -153,7 +129,7 @@ function send(msg) {
 				return "?command=messageInsert&messageroom_num="+ messageroom_num
 				+ "&to_num=" + to_num + "&to_id=" + to_id + "&to_name="+ to_name
 				+ "&from_num=" + from_num + "&from_id=" + from_id + "&from_name="+ from_name
-				+ "&message_content=" + encodeURIComponent(message_content);
+				+ "&message_content=" + message_content;
 			}
 
 			$.ajax({
@@ -170,29 +146,29 @@ function send(msg) {
 
 			webSocket.send(to_name + "|\|" + message_content);
 			
-			var query = document.querySelector('#chatarea');
-			if (to_name != re_send) { 
+			if (to_name != re_send) {
+				var who = document.createElement('div');
+				// who.style["float"]="left";
+				who.style["display"] = "inline-block";
+				who.style["font-weight"] = "bold";
+				who.style["font-size"] = "14px";
+				who.style["padding-top"] = "5px;"
+				who.style["padding-bottom"] = "2px;"
+				who.style["padding-left"] = "10px;"
+				who.innerHTML = to_name;
+
 				var icon = document.createElement('span');
-				icon.setAttribute("class","glyphicon glyphicon-user");
-				icon.setAttribute("aria-hidden", "true");
 				icon.style["color"] = "gold";
 				icon.style["width"] = "15px;";
 				icon.style["height"] = "15px;";
-				
-				var who = document.createElement('button');
-				who.setAttribute("class","btn btn-default");
-				who.setAttribute("data-toggle", "tooltip");
-				who.setAttribute("data-placement", "right");
-				who.setAttribute("title", realTime);
-				who.style["font-weight"] = "bold";
-				who.appendChild(icon);
-				who.append(to_name);
+				icon.setAttribute("class", "glyphicon glyphicon-user");
+				icon.setAttribute("aria-hidden", "true");
 
-				query.appendChild(who);
-				
+				document.getElementById('chatarea').appendChild(icon);
+				document.getElementById('chatarea').appendChild(who);
 				var clear = document.createElement('div');
 				clear.style["clear"] = "both";
-				query.appendChild(clear);
+				document.getElementById('chatarea').appendChild(clear);
 
 				re_send = to_name;
 
@@ -200,26 +176,24 @@ function send(msg) {
 			}
 
 			var div = document.createElement('div');
-			div.setAttribute("data-toggle", "tooltip");
-			div.setAttribute("data-placement", "right");
-			div.setAttribute("title", realTime);
-			div.style["display"] = "inline-block";
+			// div.style["float"]="left";
+			div.style["display"] = "block";
+			// div.style["font-weight"]="bold";
+			div.style["color"] = "#1D1C1D";
 			div.style["padding-left"] = "10px";
 			div.style["padding-top"] = "3px;"
 			div.style["padding-bottom"] = "3px;"
+
 			div.innerHTML = message_content;
-			query.appendChild(div);
+			document.getElementById('chatarea').appendChild(div);
 
 			var clear = document.createElement('div');
 			clear.style["clear"] = "both";
-			query.appendChild(clear);
+			document.getElementById('chatarea').appendChild(clear);
 
 			message_content.value = '';
 
-			const $messageTextBox = $('#chatarea'); 
-			$messageTextBox.scrollTop($messageTextBox[0].scrollHeight);
-			
-			//chatarea.scrollTop = chatarea.scrollHeight;
+			chatarea.scrollTop = chatarea.scrollHeight;
 
 			re_send = to_name;
 
@@ -237,7 +211,7 @@ function send(msg) {
 			function getParameterValues() {
 
 				return "?command=insertChat&channel_num=" + channel_num
-						+ "&member_num=" + member_num + "&member_id=" + member_id + "&member_name="+ member_name + "&chat_content=" + encodeURIComponent(chat_content);
+						+ "&member_num=" + member_num + "&member_id=" + member_id + "&member_name="+ member_name + "&chat_content=" + chat_content;
 			}
 
 			$.ajax({
@@ -253,61 +227,58 @@ function send(msg) {
 			})
 
 			webSocket.send(member_name + "|\|" + chat_content);
-			var query = document.querySelector('#chatarea');
+			
 			if (member_name != re_send) {
-				
+				var who = document.createElement('div');
+				// who.style["float"]="left";
+				who.style["display"] = "inline-block";
+				who.style["font-weight"] = "bold";
+				who.style["font-size"] = "14px";
+				who.style["padding-top"] = "5px;"
+				who.style["padding-bottom"] = "2px;"
+				who.style["padding-left"] = "10px;"
+				who.innerHTML = member_name;
+
 				var icon = document.createElement('span');
-				icon.setAttribute("class","glyphicon glyphicon-user");
-				icon.setAttribute("aria-hidden", "true");
 				icon.style["color"] = "gold";
 				icon.style["width"] = "15px;";
 				icon.style["height"] = "15px;";
-				
-				var who = document.createElement('button');
-				who.setAttribute("class","btn btn-default");
-				who.setAttribute("data-toggle", "tooltip");
-				who.setAttribute("data-placement", "right");
-				who.setAttribute("title", realTime);
-				who.style["font-weight"] = "bold";
-				who.appendChild(icon);
-				who.append(member_name);
-				
-				query.appendChild(who);
-				
+				icon.setAttribute("class", "glyphicon glyphicon-user");
+				icon.setAttribute("aria-hidden", "true");
+
+				document.getElementById('chatarea').appendChild(icon);
+				document.getElementById('chatarea').appendChild(who);
 				var clear = document.createElement('div');
 				clear.style["clear"] = "both";
-				query.appendChild(clear);
+				document.getElementById('chatarea').appendChild(clear);
 
 				re_send = member_name;
 
 			}
 
 			var div = document.createElement('div');
-			div.setAttribute("data-toggle", "tooltip");
-			div.setAttribute("data-placement", "right");
-			div.setAttribute("title", realTime);
-			div.style["display"] = "inline-block";
+			// div.style["float"]="left";
+			div.style["display"] = "block";
+			// div.style["font-weight"]="bold";
+			div.style["color"] = "#1D1C1D";
 			div.style["padding-left"] = "10px";
 			div.style["padding-top"] = "3px;"
 			div.style["padding-bottom"] = "3px;"
+
 			div.innerHTML = chat_content;
-			query.appendChild(div);
+			document.getElementById('chatarea').appendChild(div);
 
 			var clear = document.createElement('div');
 			clear.style["clear"] = "both";
-			query.appendChild(clear);
+			document.getElementById('chatarea').appendChild(clear);
 
 			chat_content.value = '';
 
-			const $messageTextBox = $('#chatarea'); 
-			$messageTextBox.scrollTop($messageTextBox[0].scrollHeight);
-			//chatarea.scrollTop = chatarea.scrollHeight;
+			chatarea.scrollTop = chatarea.scrollHeight;
 
 			re_send = member_name;
 		}
 
 	}
-	
-	$('[data-toggle="tooltip"]').tooltip()
 
 }

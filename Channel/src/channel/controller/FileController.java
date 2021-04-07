@@ -32,7 +32,7 @@ public class FileController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		System.out.println("[fileupload]");
+
 		 // 이미지 업로드할 경로
 		String saveDirectory = request.getSession().getServletContext().getRealPath("resources/image/upload");
 		

@@ -28,7 +28,7 @@ $(function(){
 										{
 											height : 100,
 											minHeight : 30,
-											maxHeight : 500, 
+											maxHeight : 100, 
 											focus : true, 
 											dialogsInBody : true,
 											placeholder : '메세지를 입력해주세요.',
@@ -61,7 +61,7 @@ $(function(){
 												}
 											}
 										});
-						
+						$('.note-statusbar').hide();	
 						// 엔터 입력시 에어리어 초기화 및 값 전송
 						$('#summernote').on('summernote.enter', function() {
 							$(function() {

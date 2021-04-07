@@ -1,6 +1,5 @@
 // 워크스페이스 리스트 호출해주는 함수 실행
 $(function(){
-
 	var member_num = $("#member_num").val();
 	var member_id = $("#member_id").val();
 	var member_name = $("#member_name").val();
@@ -40,63 +39,29 @@ $(function(){
 				if (list != null) {
 					for (var i = 0; i < list[0].length; i++) {
 						
-						var div = document.createElement('div');
-						div.setAttribute("class","btn-group btn-block");
-						
-						var button = document.createElement('button');
-						button.setAttribute("class","btn btn-default dropdown-toggle btn-lg");
-						button.setAttribute("data-toggle","dropdown");
-						button.setAttribute("aria-expanded","false");
-						button.innerHTML = list[0][i].workspace_name+"  ";
-						
-						div.appendChild(button);
-						
-						var span = document.createElement('span');
-						span.setAttribute("class","caret");
-						button.appendChild(span);
-						
-						var span = document.createElement('span');
-						span.setAttribute("class","sr-only");
-						span.innerHTML = 'Toggle Dropdown';
-						button.appendChild(span);
-						div.appendChild(button);
-						
-						var ul = document.createElement('ul');
-						ul.setAttribute("class","dropdown-menu");
-						ul.setAttribute("role","menu");
-						
-						var workspacein = document.createElement('li');
+						var li = document.createElement('li');
+						li.setAttribute("class","list-group-item");
 						
 						var a = document.createElement('a');
 						a.setAttribute("href","ChannelController?command=channelIn&member_num="+list[0][i].member_num+"&workspace_num="+list[0][i].workspace_num);
-						a.innerHTML = "워크스페이스 들어가기";
-						workspacein.appendChild(a);
-						ul.appendChild(workspacein);
-						
-						var divider = document.createElement('li');
-						divider.setAttribute("class","divider");
-						ul.appendChild(divider);
-						
-						var update = document.createElement('li');
-						var a = document.createElement('a');
-						a.setAttribute("href","javascript:void(0);");
-						a.setAttribute("data-toggle","modal");
-						a.setAttribute("data-target","#workspaceAdminForm");
-						a.setAttribute("onclick","selectWorkspaceMemberList("+list[0][i].workspace_num+","+"'"+list[0][i].workspace_name+"'"+")");
-						a.innerHTML = "관리";
-						update.appendChild(a);
-						ul.appendChild(update);
+						a.innerHTML = list[0][i].workspace_name;
+						li.appendChild(a);
 
-						var del = document.createElement('li');
-						var a = document.createElement('a');
-						a.setAttribute("href","javascript:void(0);");
-						a.setAttribute("onclick","workspaceDelcon("+list[0][i].workspace_num+")");
-						a.innerHTML = "삭제";
-						del.appendChild(a);
-						ul.appendChild(del);
-						div.appendChild(ul);
+						var button = document.createElement('button');
+						button.setAttribute("class","btn btn-default btn-xs");
+						button.setAttribute("data-toggle","modal");
+						button.setAttribute("data-target","#workspaceAdminForm");
+						button.setAttribute("onclick","selectWorkspaceMemberList("+list[0][i].workspace_num+","+"'"+list[0][i].workspace_name+"'"+")");
+						button.innerHTML = "관리";
+						li.appendChild(button);
+						
+						var button = document.createElement('button');
+						button.setAttribute("class","btn btn-default btn-xs");
+						button.setAttribute("onclick","workspaceDelcon("+list[0][i].workspace_num+")");
+						button.innerHTML = "삭제";
+						li.appendChild(button);
 
-						$("#workspaceArea").append(div);				
+						$("#workspaceArea").append(li);				
 					}
 				} else {
 					

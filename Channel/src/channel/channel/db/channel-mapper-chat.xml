@@ -67,7 +67,6 @@
 		SELECT MESSAGE_NUM, MESSAGEROOM_NUM, TO_NUM, TO_ID, TO_NAME, FROM_NUM, FROM_ID, FROM_NAME, MESSAGE_CONTENT, MESSAGE_REGDATE
 		FROM MESSAGE
 		WHERE MESSAGEROOM_NUM = #{messageroom_num}
-		ORDER BY MESSAGE_REGDATE
 	</select>	
 	
 	<select id="msgRoomSelect" parameterType="int" resultType="messageRoomDto">
