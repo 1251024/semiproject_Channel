@@ -18,15 +18,36 @@
 <body>
 <%@include file="common.jsp" %>
 	<input type="hidden" id="workspace_num" value="<%=workspace_num %>">
-		<div class="col-xs-12" id="content_container">
-			<div id="roominfo">
-				<span>채널 or 메세지를 선택해주세요</span>
+		<div id="content_container">
+			<div class="jumbotron" id="channeljumbotron">
+  					<h1>Channel</h1>
+  				<p>${loginDto.member_name }님!<br> 
+  					채널을 생성하여 각 부서별로 채팅을 할 수 있습니다.<br> 
+    				새 채널 생성을 통해 각 부서원을 초대하고 협업을 시작해주세요!     
+     			</p>
+  				<p><button type="button" class="btn btn-default btn-lg"
+					data-toggle="modal" data-target="#addChannelForm" >새 채널 생성 <span class="label label-primary">New</span></button></p>
+			
+					<h1>Message</h1>
+				<p>	해당 워크스페이스의 맴버들과 1:1채팅을 해보세요!   			</p>
+  				<p><button type="button" class="btn btn-default btn-lg"
+					data-toggle="modal" data-target="#addMessageForm" onclick="selectInviteMessageMemberList();">새 메세지 <span class="label label-primary">New</span></button></p>
+				<p><br>이미 생성하신 채널 or 메세지가 있으면 왼쪽 네비게이션을 통해 채널로 입장이 가능합니다.<br> 
+  				   <b>the best way to coworking!</b>
+     			</p>
 			</div>
-			<div id="chatarea">
+			<div id="channelcontentarea">
+				<div id="roominfo" class="form-control">
+				
+				</div>
+				<div id="chatarea" class="form-control">
+				
+				</div>
+				<div id="textarea" class="form-control">
+					<textarea id="summernote"></textarea>
+				</div>
 			</div>
-			<div id="textarea">
-				<textarea id="summernote"></textarea>
-			</div>
+			
 		</div>
 	<div class="modal fade" id="addChannelForm" tabindex="-1" role="dialog" aria-labelledby="addChannelLable" aria-hidden="true">
 		<div class="modal-dialog">
@@ -144,7 +165,6 @@
 			</div>
 		</div>
 	</div>
-
 <input type="hidden" id="search_workspace_num" value="${param.workspace_num }" >	
 <input type="hidden" id="search_channel_num" value="${param.channel_num }">
 <input type="hidden" id="search_chat_num" value="${param.chat_num }">
@@ -158,30 +178,20 @@
 <script type="text/javascript" src="resources/js/search.js"></script>
 <style type="text/css">
 /* 이용준 main css 수정 부분 */
-#channelinfo {
-	border-right: 1px solid gray;
-	border-left: 1px solid gray;
-	border-bottom: 1px solid gray;
-	height: 5em;
+
+#roominfo {
+	height: 3em;
+
 }
 
 #chatarea {
-	background-color: white;
 	color: black;
 	height: 45em;
-	border-left: 1px solid gray;
-	border-right: 1px solid gray;
 	overflow: auto;
 }
 
 #textarea {
-	background-color: white;
-	border-left: 1px solid gray;
-	border-right: 1px solid gray;
-	color: black;
-	border-right: 1px solid gray;
-	color: black;
-	height: 10em;
+	height: 12em;
 }
 
 #chatarea::-webkit-scrollbar {
