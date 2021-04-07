@@ -1,6 +1,7 @@
 package channel.controller;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,14 +17,12 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import channel.channel.ChannelDto;
 import channel.channel.MessageRoomDto;
 import channel.chat.ChatBiz;
 import channel.chat.ChatBizImpl;
 import channel.chat.ChatDto;
 import channel.chat.MessageDto;
 import channel.common.Util;
-import channel.workspace.WorkSpaceMemberDto;
 
 @WebServlet("/ChatController")
 public class ChatController extends HttpServlet {
@@ -74,6 +73,9 @@ public class ChatController extends HttpServlet {
 			String chat_content = request.getParameter("chat_content");
 
 			ChatDto dto = new ChatDto();
+			
+			Util util = new Util();
+			
 			dto.setChannel_num(channel_num);
 			dto.setMember_num(member_num);
 			dto.setMember_id(member_id);
@@ -145,8 +147,9 @@ public class ChatController extends HttpServlet {
 			int from_num = Integer.parseInt(request.getParameter("from_num"));
 			String from_id = request.getParameter("from_id");
 			String from_name = request.getParameter("from_name");
-			String message_content = request.getParameter("message_content");	
-			
+			String message_content = request.getParameter("message_content");
+			System.out.println(message_content);
+
 			MessageDto dto = new MessageDto();
 			dto.setMessageroom_num(messageroom_num);
 			dto.setTo_num(to_num);

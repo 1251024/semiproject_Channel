@@ -1,5 +1,15 @@
 $(function(){
 	
+	$("#workspaceglyphicon").remove();
+	
+	var span = document.createElement("span");
+	span.setAttribute("class","glyphicon glyphicon-folder-open");
+	span.setAttribute("aria-hidden","true");
+	span.setAttribute("id","workspaceglyphicon");
+	$("#-collapsible-list-group-").prepend(span);
+	
+	$("#channelcontentarea").children().hide();
+	
 	var member_num = $("#member_num").val();
 	var workspace_num = $("#workspace_num").val();
 	var member_id = $("#member_id").val();
@@ -56,28 +66,9 @@ $(function(){
 						li.setAttribute("class","list-group-item");
 						
 						var button = document.createElement('button');
-						button.setAttribute("class","btn btn-default");
+						button.setAttribute("class","btn btn-default btn-block");
 						button.setAttribute("onclick","selectChatList("+list[0][i].channel_num+","+member_num+");");
 						button.innerHTML = list[0][i].channel_name;
-						li.appendChild(button);
-
-						var button = document.createElement('button');
-						button.setAttribute("class","btn btn-default btn-xs");
-						button.setAttribute("data-toggle","modal");
-						button.setAttribute("data-target","#adminChannelForm");
-						button.setAttribute("onclick",
-						"channelAdmin("
-						+list[0][i].channel_num+","
-						+member_num+","
-						+"'"+list[0][i].channel_name+"'"+","
-						+"'"+list[0][i].channel_information+"'"+");");
-						button.innerHTML = "관리";
-						li.appendChild(button);
-						
-						var button = document.createElement('button');
-						button.setAttribute("class","btn btn-default btn-xs");
-						button.setAttribute("onclick","channelDelcon("+list[0][i].channel_num+","+member_num+")");
-						button.innerHTML = "삭제";
 						li.appendChild(button);
 
 						query.append(li);
@@ -391,6 +382,10 @@ function channelDelcon(chnum, memnum) {
 }
 // 채팅방 DB 호출 ajax
 function selectChatList(chnum, memnum) {
+	
+	$("#channelcontentarea").children().show();
+	$("#channeljumbotron").hide();
+	
 	$('#chatarea').children().remove();
 	re_send = "";
 	var member_num = memnum;
@@ -411,25 +406,23 @@ function selectChatList(chnum, memnum) {
 				if (list[0][i].member_num == member_num) {
 					var query = document.querySelector('#chatarea');
 					if (list[0][i].member_name != firstname) {
-						var who = document.createElement('div');
-						// who.style["float"]="left";
-						who.style["display"] = "inline-block";
-						who.style["font-weight"] = "bold";
-						who.style["font-size"] = "14px";
-						who.style["padding-top"] = "5px;"
-						who.style["padding-bottom"] = "2px;"
-						who.style["padding-left"] = "10px;"
-						who.append(list[0][i].member_name);
 						
-							var icon = document.createElement('span');
-								icon.setAttribute("class",
-										"glyphicon glyphicon-user");
-								icon.setAttribute("aria-hidden", "true");
-								icon.style["color"] = "gold";
-								icon.style["width"] = "15px;";
-								icon.style["height"] = "15px;";
+						var icon = document.createElement('span');
+						icon.setAttribute("class","glyphicon glyphicon-user");
+						icon.setAttribute("aria-hidden", "true");
+						icon.style["color"] = "gold";
+						icon.style["width"] = "15px;";
+						icon.style["height"] = "15px;";
 
-								query.appendChild(icon);
+						var who = document.createElement('button');
+						who.setAttribute("class","btn btn-default");
+						who.setAttribute("data-toggle", "tooltip");
+						who.setAttribute("data-placement", "right");
+						who.setAttribute("title", list[0][i].chat_regdate);
+						who.style["font-weight"] = "bold";
+						who.appendChild(icon);
+						who.append(list[0][i].member_name);
+
 								query.appendChild(who);
 
 								var clear = document.createElement('div');
@@ -441,17 +434,15 @@ function selectChatList(chnum, memnum) {
 							}
 
 							var div = document.createElement('div');
-							// div.style["float"]="left";
-							div.style["display"] = "block";
-							// div.style["font-weight"]="bold";
-							div.style["color"] = "#1D1C1D";
+							div.setAttribute("data-toggle", "tooltip");
+							div.setAttribute("data-placement", "right");
+							div.setAttribute("title", list[0][i].chat_regdate);
+							div.style["display"] = "inline-block";
 							div.style["padding-left"] = "10px";
 							div.style["padding-top"] = "3px;"
 							div.style["padding-bottom"] = "3px;"
 							div.innerHTML = list[0][i].chat_content;
-							
 							div.setAttribute("id", list[0][i].chat_num);
-														
 							query.appendChild(div);
 
 							var clear = document.createElement('div');
@@ -460,27 +451,25 @@ function selectChatList(chnum, memnum) {
 
 						} else {
 							var query = document.querySelector('#chatarea');
+							
 							if (list[0][i].member_name != firstname) {
-								var who = document.createElement('div');
-								// who.style["float"]="right";
-								who.style["display"] = "inline-block";
-								who.style["font-weight"] = "bold";
-								who.style["font-size"] = "14px";
-								who.style["padding-top"] = "5px;"
-								who.style["padding-bottom"] = "2px;"
-								who.style["padding-left"] = "10px;"
-								who.innerHTML = list[0][i].member_name;
-
+								
 								var icon = document.createElement('span');
-								// icon.style["float"]="right";
-								icon.setAttribute("class",
-										"glyphicon glyphicon-user");
+								icon.setAttribute("class", "glyphicon glyphicon-user");
 								icon.setAttribute("aria-hidden", "true");
 								icon.style["color"] = "gray";
 								icon.style["width"] = "15px;";
 								icon.style["height"] = "15px;";
+								
+								var who = document.createElement('button');
+								who.setAttribute("class","btn btn-default");
+								who.setAttribute("data-toggle", "tooltip");
+								who.setAttribute("data-placement", "right");
+								who.setAttribute("title", list[0][i].chat_regdate);
+								who.style["font-weight"] = "bold";
+								who.appendChild(icon);
+								who.append(list[0][i].member_name);
 
-								query.appendChild(icon);
 								query.appendChild(who);
 
 
@@ -492,11 +481,13 @@ function selectChatList(chnum, memnum) {
 
 							}
 
+							var query = document.querySelector('#chatarea');
+							
 							var div = document.createElement('div');
-							// div.style["float"]="right";
-							div.style["display"] = "block";
-							// div.style["font-weight"]="bold";
-							div.style["color"] = "#1D1C1D";
+							div.setAttribute("data-toggle", "tooltip");
+							div.setAttribute("data-placement", "right");
+							div.setAttribute("title", list[0][i].chat_regdate);
+							div.style["display"] = "inline-block";
 							div.style["padding-left"] = "10px";
 							div.style["padding-top"] = "3px;"
 							div.style["padding-bottom"] = "3px;"
@@ -515,17 +506,23 @@ function selectChatList(chnum, memnum) {
 					}
 
 					var div = document.createElement('div');
+					div.setAttribute("class", "well");
 					div.style["clear"] = "both";
 					div.style["font-weight"] = "bold";
-					div.style["color"] = "#1D1C1D";
-					div.style["background"] = "lightgray";
+					//div.style["color"] = "#1D1C1D";
+					//div.style["background"] = "lightgray";
 					div.style["display"] = "block";
 					div.style["text-align"] = "center";
 					div.innerHTML = "------------------------------이전 채팅은 여기까지 입니다.------------------------------";
 
 					query.appendChild(div);
-
-					chatarea.scrollTop = chatarea.scrollHeight;
+					
+					const $messageTextBox = $('#chatarea'); 
+					$messageTextBox.scrollTop($messageTextBox[0].scrollHeight);
+					
+					//chatarea.scrollTop = chatarea.scrollHeight;
+					
+					$('[data-toggle="tooltip"]').tooltip()
 				},
 				error : function() {
 					alert("통신 실패")
@@ -552,6 +549,23 @@ function channelInfo(chnum) {
 			var channel_name = res[3];
 			var channel_info = res[4];
 			var channel_regdate = res[5];
+
+			var div = document.createElement('div');
+			div.setAttribute("class", "pull-left");
+			div.setAttribute("data-toggle", "tooltip");
+			div.setAttribute("data-placement", "right");
+			div.setAttribute("title", channel_regdate);
+
+			var h = document.createElement('h4');
+			h.style["font-weight"]="bold";
+			h.innerHTML = "<span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span>" + " 채널명 : " + channel_name;
+
+			var small = document.createElement('small');
+			small.innerHTML = " 채널정보 : " + channel_info;
+			h.appendChild(small);
+			div.appendChild(h);
+
+			query.appendChild(div);
 			
 			var input = document.createElement('input');
 			input.id = "channel_num";
@@ -559,16 +573,31 @@ function channelInfo(chnum) {
 			input.value = channel_num;
 			query.appendChild(input);
 
-			var span = document.createElement('span');
-			span.style["font-size"] = "10px";
-			span.style["display"] = "inline-block";
-
-			span.innerHTML = 
-			" 채널번호 : " + channel_num + " 워크스페이스 번호 : " + workspace_num + "<br>" + " 맴버 번호 : " + member_num + "<br>" + 
-			" 채널이름 : " + channel_name + " 채널정보 : " + channel_info + "<br>" + 
-			" 채널생성일 : " + channel_regdate;
-
-			query.appendChild(span);
+			var div = document.createElement('div');
+			div.setAttribute("class", "pull-right");
+			
+			var button = document.createElement('button');
+			button.setAttribute("class","btn btn-info btn-sm");
+			button.setAttribute("data-toggle","modal");
+			button.setAttribute("data-target","#adminChannelForm");
+			button.setAttribute("onclick",
+			"channelAdmin("
+			+channel_num+","
+			+member_num+","
+			+"'"+channel_name+"'"+","
+			+"'"+channel_info+"'"+");");
+			button.innerHTML = "관리";
+			div.appendChild(button);
+			
+			var button = document.createElement('button');
+			button.setAttribute("class","btn btn-danger btn-sm");
+			button.setAttribute("onclick","channelDelcon("+channel_num+","+member_num+")");
+			button.innerHTML = "삭제";
+			div.appendChild(button);
+			query.appendChild(div);
+			
+			$('[data-toggle="tooltip"]').tooltip()
+			
 		},
 		error : function() {
 			alert("통신 실패")
