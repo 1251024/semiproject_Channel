@@ -56,7 +56,7 @@ response.setContentType("text/html; charset=UTF-8");
 
 		<tr>
 			<td colspan="5" align="right">
-			<input type="button" value="메인으로" onclick="workspace.jsp" />
+			<input type="button" value="메인으로" onclick="location.href='workspace.jsp'" />
 			</td>
 		</tr>
 
