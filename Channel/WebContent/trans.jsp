@@ -41,7 +41,7 @@
 			</div>
 		-->	
 			<div>
-				<textarea id="send_text" style="width: 100%; height: 370px" placeholder="번역할 내용을 입력하세요." ></textarea>
+				<textarea id="send_text" style="width: 100%; height: 370px" placeholder="번역할 내용을 입력하세요."></textarea>
 			</div>
 		</div>
 		<div style="width: 200px; height: 400px; float: left; padding-top: 170px">
