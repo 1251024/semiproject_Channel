@@ -226,7 +226,7 @@ button:hover {
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="index.html">시작하기</a></li>
-                    <li><a href="">Channel이란?</a></li>
+                    <li><a href="instructional.html">Channel이란?</a></li>
                     <li><a href="">이용방법</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

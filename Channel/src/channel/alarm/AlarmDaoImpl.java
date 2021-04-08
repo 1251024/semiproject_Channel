@@ -53,7 +53,7 @@ public class AlarmDaoImpl extends channel.db.peh.SqlMapConfig implements AlarmDa
 		
 		try {
 			session = getSqlSessionFactory().openSession(true);
-			list = session.selectList("pehmapper.alarmLastnum", member_num);
+			list = session.selectList("pehmapper.chatnum", member_num);
 				
 			System.out.println("실행됐음");
 			
@@ -77,7 +77,7 @@ public class AlarmDaoImpl extends channel.db.peh.SqlMapConfig implements AlarmDa
 		
 		try {
 			session = getSqlSessionFactory().openSession(true);
-			list = session.selectList("pehmapper.alarmList", member_num);
+			list = session.selectList("pehmapper.chatList", member_num);
 				
 			System.out.println("실행됐음");
 			

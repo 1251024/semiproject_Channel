@@ -9,8 +9,8 @@ body{
 }
 
 .canvas{
-	width: 700px;
-	height: 700px;
+	width: 1000px;
+	height: 600px;
 	background-color: white;
 	border-radius: 15px;
 	box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -21,6 +21,7 @@ body{
 
 .controls{
 	margin-top: 50px;
+	margin-left: 180px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
