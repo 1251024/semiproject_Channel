@@ -228,7 +228,19 @@ button:hover {
                 <ul class="nav navbar-nav">
                     <li><a href="index.html">시작하기</a></li>
                     <li><a href="instructional.html">Channel이란?</a></li>
-                    <li><a href="">이용방법</a></li>
+                     <li class="dropdown">
+              <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                Developer
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="https://github.com/ftrspt">강성필</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="https://github.com/jmjnssss">박은희</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="https://github.com/RUCKUSJERRY">이용준</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="https://github.com/1251024">장보옥</a></li>
+              </ul>
+            </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="MemberController?command=member_insert_page">회원가입</a></li>
