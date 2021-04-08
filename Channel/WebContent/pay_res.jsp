@@ -13,8 +13,9 @@ response.setContentType("text/html; charset=UTF-8");
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/png" sizes="16x16"  href="resources/image/channel_favicon.png">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>CHANNEL / Pay_res / ${loginDto.member_name }</title>
 </head>
 
 <body>

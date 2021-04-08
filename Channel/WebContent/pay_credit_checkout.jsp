@@ -26,8 +26,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/png" sizes="16x16"  href="resources/image/channel_favicon.png">
 <meta charset="UTF-8">
-<title>kakao</title>
+<title>CHANNEL / kakaocheck / ${loginDto.member_name }</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>

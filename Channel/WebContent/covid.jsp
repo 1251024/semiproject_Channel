@@ -8,8 +8,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/png" sizes="16x16"  href="resources/image/channel_favicon.png">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>CHANNEL / Covid / ${loginDto.member_name }</title>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="covidAjax.js"></script>
