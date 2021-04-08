@@ -366,7 +366,7 @@
                 </ul>
                 <ul class="nav nav-sidebar">
                     <li><a href="calendar.jsp"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;&nbsp;Calendar</a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>&nbsp;&nbsp;날씨</a></li>
+                    <li><a href="weather.jsp"><span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>&nbsp;&nbsp;날씨</a></li>
 
                     <li><a href="covid.jsp"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>&nbsp;&nbsp;covid</a></li>
                     <li><a href="paint.jsp"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;&nbsp;그림판</a></li>
