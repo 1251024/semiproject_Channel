@@ -1,6 +1,13 @@
 // 워크스페이스 리스트 호출해주는 함수 실행
 $(function(){
 
+        $('a[href="#"]').click(function(ignore) {
+
+            ignore.preventDefault();
+
+        });
+
+
 	var member_num = $("#member_num").val();
 	var member_id = $("#member_id").val();
 	var member_name = $("#member_name").val();
@@ -79,17 +86,19 @@ $(function(){
 						
 						var update = document.createElement('li');
 						var a = document.createElement('a');
-						a.setAttribute("href","javascript:void(0);");
+						a.setAttribute("href","#");
 						a.setAttribute("data-toggle","modal");
 						a.setAttribute("data-target","#workspaceAdminForm");
-						a.setAttribute("onclick","selectWorkspaceMemberList("+list[0][i].workspace_num+","+"'"+list[0][i].workspace_name+"'"+")");
+						a.setAttribute("onclick","selectWorkspaceMemberList("+list[0][i].workspace_num+","
+								+"'"+list[0][i].workspace_name+"'"
+								+")");
 						a.innerHTML = "관리";
 						update.appendChild(a);
 						ul.appendChild(update);
 
 						var del = document.createElement('li');
 						var a = document.createElement('a');
-						a.setAttribute("href","javascript:void(0);");
+						a.setAttribute("href","#");
 						a.setAttribute("onclick","workspaceDelcon("+list[0][i].workspace_num+")");
 						a.innerHTML = "삭제";
 						del.appendChild(a);
@@ -128,15 +137,19 @@ function workspaceDelcon(wsnum) {
 	}
 }
 //워크스페이스 관리 클릭시 해당 워크스페이스의 맴버 목록 호출
-function selectWorkspaceMemberList(wsnum, wsname) {
+function selectWorkspaceMemberList(wsnum, wsname, wsinfo) {
 
 	var workspace_num = wsnum;
 	var workspace_name = wsname;
+	var workspace_information = wsinfo;
 	var member_num = $("#member_num").val();
 	
 	// 워크스페이스 수정 모달 안에 히든 인풋으로 넣어주기
 	
 	$("#workspaceAdminCommand").children().remove();
+	
+	$("input[name=workspace_name]").val(workspace_name);
+	$("input[name=workspace_information]").val(workspace_information);
 	
 	var res = document.querySelector('#workspaceAdminCommand');
 	var input = document.createElement("input");

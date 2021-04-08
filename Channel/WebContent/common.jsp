@@ -54,15 +54,15 @@
 					//$div.append("<br/>")
 					
 					$div.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#128233;")
-					$div.append(jsonObj[0].member_id);
+					$div.append(jsonObj[0].member_name);
 					$div.append(" : ");
 					$div.append(jsonObj[0].chat_content);
 					//$div.append("<br/>")
-					$div.append(jsonObj[1].member_id);
+					$div.append(jsonObj[1].member_name);
 					$div.append(" : ");
 					$div.append(jsonObj[1].chat_content);
 					//$div.append("<br/>")
-					$div.append(jsonObj[2].member_id);
+					$div.append(jsonObj[2].member_name);
 					$div.append(" : ");
 					$div.append(jsonObj[2].chat_content);
 					/*

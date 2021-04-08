@@ -316,12 +316,12 @@ response.setContentType("text/html; charset=UTF-8");
 			</div>
 		</div>
 	</div>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8b23fbdf7184ddeccfecb57797fda53f&libraries=services"></script>
+<script src="resources/js/map.js"></script>
 </body>
 <link rel="stylesheet" href="resources/datetimepicker/css/bootstrap-datepicker.css">
 <script src="resources/datetimepicker/js/bootstrap-datepicker.js"></script>
 <script src="resources/datetimepicker/bootstrap-datepicker.ko.min.js"></script>
 <script src="resources/js/datepickeropener.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8b23fbdf7184ddeccfecb57797fda53f&libraries=services"></script>
-<script src="resources/js/map.js"></script>
 </html>
