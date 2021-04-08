@@ -7,12 +7,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/png" sizes="16x16"  href="resources/image/channel_favicon.png">
 <meta charset="UTF-8">
 <style type="text/css">
 
 
 </style>
-<title>Insert title here</title>
+<title>CHANNEL / Paint / ${loginDto.member_name }</title>
 </head>
 
 

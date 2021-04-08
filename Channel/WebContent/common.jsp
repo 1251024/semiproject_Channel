@@ -3,6 +3,7 @@
 
 <% request.setCharacterEncoding("UTF-8"); %>    
 <% response.setContentType("text/html; charset=UTF-8"); %> 
+
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -269,6 +270,7 @@
         
 
 </style>
+
 	<input type="hidden" id="member_num" value="${loginDto.member_num }">
 	<input type="hidden" id="member_id" value="${loginDto.member_id }">
 	<input type="hidden" id="member_name" value="${loginDto.member_name }">

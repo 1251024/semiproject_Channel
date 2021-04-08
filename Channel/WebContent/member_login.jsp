@@ -10,12 +10,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/png" sizes="16x16"  href="resources/image/channel_favicon.png">
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="resources/imgage/favicon.ico">
 
-<title>Login</title>
+<title>CHANNEL / Login</title>
 
 <script src="resources/js/jquery-3.6.0.min.js"></script>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">

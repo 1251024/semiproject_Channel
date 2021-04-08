@@ -135,6 +135,12 @@ function callWeather(city) {
                 small.innerHTML = "현재시각 : " + today;
                 query.appendChild(small);
                 
+                var h2 = document.createElement('h2');
+                h2.innerHTML = "선택한 도시 : " + city;
+                query.prepend(h2);
+                
+                
+                
                 var query = document.getElementById('current_weather');
                 var tr = document.createElement('tr');
                 var td1 = document.createElement('td');

@@ -7,8 +7,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/png" sizes="16x16"  href="resources/image/channel_favicon.png">
 <meta charset="UTF-8">
-<title>CHANNEL 이용료 결제</title>
+<title>CHANNEL / OrderSheet / ${loginDto.member_name }</title>
 <style>
 span {
 	width: 60px;

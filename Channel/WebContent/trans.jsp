@@ -8,8 +8,10 @@
 
 <html>
 <head>
+
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="icon" type="image/png" sizes="16x16"  href="resources/image/channel_favicon.png">
+<title>CHANNEL / Translation / ${loginDto.member_name }</title>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
