@@ -43,7 +43,8 @@
 			</div>
 		</div>
 		<div style="width: 200px; height: 400px; float: left; padding-top: 170px">
-			<button id="trans" type="button" style="font-size: 18px; font-family:fantasy; margin-left: 25px; padding: 3px 8px 3px 8px; font-style: inherit; font-weight: bold;" >
+			<button id="trans" type="button" style="font-size: 18px; font-family:fantasy; margin-left: 25px; padding: 3px 8px 3px 8px; font-style: inherit; font-weight: bold; 			box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+			" >
 				번역하기
 			</button>
 		</div>
