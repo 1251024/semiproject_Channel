@@ -311,7 +311,7 @@ public class MemberController extends HttpServlet {
 			String query = "code=" + code;
 			query += "&client_id=" + "533483186463-e0gd75qd2j8d8pko7p48mvee4md6p0d5.apps.googleusercontent.com";
 			query += "&client_secret=" + "MFAidZ3fXwmpY3cdAW0FYBA1";
-			query += "&redirect_uri=" + "http://localhost:8787/Channel/MemberController?command=googlelogin";
+			query += "&redirect_uri=" + "http://qclass.iptime.org:8686/Channel/MemberController?command=googlelogin";
 			query += "&grant_type=authorization_code";
 			String tokenJson = getHttpConnection("https://accounts.google.com/o/oauth2/token", query);
 			//System.out.println(tokenJson.toString());

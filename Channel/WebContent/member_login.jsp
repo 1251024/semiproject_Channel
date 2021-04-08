@@ -119,10 +119,18 @@
         }
                 
         #loginbox{
-        	background-image: url('resources/image/bg1.jpg');
+        	background-image: url('resources/image/bg3.jpg');
         	background-size: cover;
         	background-color:transparent;
         }
+        
+        #loginbackbox{	
+        	background-color: white;
+        	margin-top: 100px;
+        	padding-bottom: 100px;
+        	opacity: 0.95;
+        	border-radius: 18px;
+       	}
 	
 	
 	
@@ -135,7 +143,7 @@
 <%
 
     String NclientId = "BAEN9bUjlj2M_oHlFbAi";//애플리케이션 클라이언트 아이디값";
-    String NredirectURI = URLEncoder.encode("http://localhost:8787/Channel/MemberController?command=naverlogin", "UTF-8");
+    String NredirectURI = URLEncoder.encode("http://qclass.iptime.org:8686/Channel/MemberController?command=naverlogin", "UTF-8");
     SecureRandom Nrandom = new SecureRandom();
     String Nstate = new BigInteger(130, Nrandom).toString();
     String NapiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
@@ -145,7 +153,7 @@
     session.setAttribute("Nstate", Nstate);
     	
 	String GclientId = "533483186463-e0gd75qd2j8d8pko7p48mvee4md6p0d5.apps.googleusercontent.com";
-	String GredirectURI = URLEncoder.encode("http://localhost:8787/Channel/MemberController?command=googlelogin", "UTF-8");
+	String GredirectURI = URLEncoder.encode("http://qclass.iptime.org:8686/Channel/MemberController?command=googlelogin", "UTF-8");
 	String GapiUrl = "https://accounts.google.com/o/oauth2/auth?client_id="+ GclientId
 	 				+ "&redirect_uri="+ GredirectURI 
 	 				+ "&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email&approval_prompt=force&access_type=offline";
@@ -166,7 +174,6 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.html">시작하기</a></li>
                     <li><a href="instructional.html">Channel이란?</a></li>
                      <li class="dropdown">
               <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
@@ -191,7 +198,11 @@
     </nav>
 
 	<div class="col-xs-12" id="loginbox">
+	
+	
 	<div class="container">
+	<div class="col-sm-4"></div> 
+	<div class="col-sm-4" id="loginbackbox">
 		<form class="form-signin" action="MemberController" method="post">
 			<input type="hidden" name="command" value="member_login">
 			<h3 class="form-signin-heading">환영합니다!</h3>
@@ -222,11 +233,15 @@
 			</div>
 			<div class="col-xs-2"></div>
 		</form>
+		
+	</div>
+	<div class="col-sm-4"></div> 
 	</div>
 	
 	
 		<div class="col-md-12 text-center" style="margin-top: 15%; color:rgb(180,180,180);">
-			&copy; copyright by <i>Coding_Four_Lang</i>.
+		<p>&copy;copyright by Coding four lang <a href="https://github.com/1251024/semiproject_Channel">@github</a></p>
+
 		</div>
 	
 	</div>
