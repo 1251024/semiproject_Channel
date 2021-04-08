@@ -43,7 +43,7 @@ public class AlarmController extends HttpServlet {
 		ChatBiz biz = new ChatBizImpl();
 		AlarmDao alarmdao = new AlarmDaoImpl();
 		
-		if(command.equals("messageAlarm")) {
+		if(command.equals("alarmNum")) {
 			
 			HttpSession session = request.getSession(); 
 			MemberDto memberDto = (MemberDto)session.getAttribute("loginDto");
@@ -57,7 +57,7 @@ public class AlarmController extends HttpServlet {
             
             
             
-		} else if(command.equals("messageAlarmList")) {
+		} else if(command.equals("chatAlarmList")) {
 			HttpSession session = request.getSession(); 
 			MemberDto memberDto = (MemberDto)session.getAttribute("loginDto");
 			

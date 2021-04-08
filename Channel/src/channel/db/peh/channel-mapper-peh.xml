@@ -37,11 +37,11 @@
   </select>
   
   
-  <select id="alarmLastnum" parameterType="int" resultType="chatDto">
+  <select id="chatnum" parameterType="int" resultType="chatDto">
  	SELECT * FROM (SELECT * FROM CHAT WHERE CHAT_NUM > (SELECT MAX(CHAT_NUM) FROM CHAT WHERE MEMBER_NUM = #{member_num}) AND CHANNEL_NUM IN (SELECT CHANNEL_NUM FROM CHAT WHERE MEMBER_NUM = #{member_num}) ORDER BY CHAT_NUM DESC)
   </select>
   
-  <select id="alarmList" parameterType="int" resultMap="chatMap">
+  <select id="chatList" parameterType="int" resultMap="chatMap">
  	SELECT * FROM (SELECT * FROM CHAT WHERE CHAT_NUM > (SELECT MAX(CHAT_NUM) FROM CHAT WHERE MEMBER_NUM = #{member_num}) AND CHANNEL_NUM IN (SELECT CHANNEL_NUM FROM CHAT WHERE MEMBER_NUM = #{member_num}) ORDER BY CHAT_NUM DESC)
   </select>
   

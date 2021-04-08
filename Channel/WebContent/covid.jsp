@@ -26,6 +26,8 @@ table {
 	left: 950px;
 	margin: 10px;
 	border-spacing: 3 5px;
+	box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+	
 }
 
 #map_img {
@@ -48,12 +50,13 @@ input{
 	text-align: center;
 }
 
+
 #seoul{
 	width: 55px;
 	height: 50px;
 	position: absolute;
 	top: 220px;
-	left:485px;
+	left:465px;
 	text-align: center;
 	font-weight: bold;
 	margin: 0px;
@@ -73,7 +76,7 @@ input{
 	height: 50px;
 	position: absolute;
 	top: 190px;
-	left:580px;
+	left:565px;
 	text-align: center;
 	font-weight: bold;
 	margin: 0px;
@@ -113,7 +116,7 @@ input{
 	height: 55px;
 	position: absolute;
 	top: 220px;
-	left:360px;
+	left:355px;
 	text-align: center;
 	font-weight: bold;
 	margin: 2px;
@@ -132,7 +135,7 @@ input{
 	height: 55px;
 	position: absolute;
 	top: 300px;
-	left:445px;
+	left:440px;
 	text-align: center;
 	font-weight: bold;
 	margin: 2px;
@@ -151,7 +154,7 @@ input{
 	height: 55px;
 	position: absolute;
 	top: 330px;
-	left:380px;
+	left:370px;
 	text-align: center;
 	font-weight: bold;
 	margin: 2px;
@@ -189,7 +192,7 @@ input{
 	height: 55px;
 	position: absolute;
 	top: 320px;
-	left:515px;
+	left:510px;
 	text-align: center;
 	font-weight: bold;
 	margin: 2px;
@@ -208,7 +211,7 @@ input{
 	height: 55px;
 	position: absolute;
 	top: 410px;
-	left:455px;
+	left:445px;
 	text-align: center;
 	font-weight: bold;
 	margin: 2px;
@@ -246,7 +249,7 @@ input{
 	height: 55px;
 	position: absolute;
 	top: 480px;
-	left:460px;
+	left:455px;
 	text-align: center;
 	font-weight: bold;
 	margin: 2px;
@@ -265,7 +268,7 @@ input{
 	height: 55px;
 	position: absolute;
 	top: 290px;
-	left:640px;
+	left:630px;
 	text-align: center;
 	font-weight: bold;
 	margin: 2px;
@@ -284,7 +287,7 @@ input{
 	height: 55px;
 	position: absolute;
 	top: 450px;
-	left:560px;
+	left:545px;
 	text-align: center;
 	font-weight: bold;
 	margin: 2px;
@@ -303,7 +306,7 @@ input{
 	height: 55px;
 	position: absolute;
 	top: 365px;
-	left:630px;
+	left:615px;
 	text-align: center;
 	font-weight: bold;
 	margin: 2px;
@@ -322,7 +325,7 @@ input{
 	height: 55px;
 	position: absolute;
 	top: 445px;
-	left:700px;
+	left:680px;
 	text-align: center;
 	font-weight: bold;
 	margin: 2px;
@@ -341,7 +344,7 @@ input{
 	height: 55px;
 	position: absolute;
 	top: 500px;
-	left:645px;
+	left:615px;
 	text-align: center;
 	font-weight: bold;
 	margin: 2px;
@@ -360,7 +363,7 @@ input{
 	height: 55px;
 	position: absolute;
 	top: 640px;
-	left:370px;
+	left:360px;
 	text-align: center;
 	font-weight: bold;
 	margin: 2px;
@@ -373,6 +376,7 @@ input{
 	border-radius: 2px;
 	line-height: 3ex;
 }
+
 
 
 </style>
@@ -445,7 +449,7 @@ input{
 			<updateDt>수정일시분초</updateDt>
 
 	 -->
-	 	<img src="resources/image/covidmap.png" id="map_img" width="650" height="600">
+	 	<img src="resources/image/covidmap.png" id="map_img" width="600" height="600">
 	
 		<table>
 			<tr>

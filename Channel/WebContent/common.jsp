@@ -17,7 +17,7 @@
 	$(document).ready(function() {
 		$.ajax({
 			type: "get",
-			url: "AlarmController?command=messageAlarm",
+			url: "AlarmController?command=alarmNum",
 			async: true,	
 			
 			success: function(result){
@@ -43,7 +43,7 @@
 		$("#alarm").mouseover(function(){
 			$.ajax({
 				type: "get",
-				url: "AlarmController?command=messageAlarmList",
+				url: "AlarmController?command=chatAlarmList",
 				async: true,		
 				
 				success: function(data){
@@ -51,31 +51,36 @@
 					
 					var $div = $("<div>");
 					//$div.append("<br/>")
-					/*
+					
+					$div.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#128233;")
 					$div.append(jsonObj[0].member_id);
 					$div.append(" : ");
 					$div.append(jsonObj[0].chat_content);
+					//$div.append("<br/>")
 					$div.append(jsonObj[1].member_id);
 					$div.append(" : ");
 					$div.append(jsonObj[1].chat_content);
+					//$div.append("<br/>")
 					$div.append(jsonObj[2].member_id);
 					$div.append(" : ");
 					$div.append(jsonObj[2].chat_content);
+					/*
 					$div.append(jsonObj[3].member_id);
 					$div.append(" : ");
 					$div.append(jsonObj[3].chat_content);
 					//$div.append(jsonObj[4].member_id);
 					//$div.append(" : ");
 					//$div.append(jsonObj[4].chat_content);
-					*/
-					$div.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#128365;")
+					
+					$div.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#128233;")
 					$div.append("<br/>")
 					for(i = 0; i<3; i++){
 						$div.append(jsonObj[i].member_id);
 						$div.append(" : ");
 						$div.append(jsonObj[i].chat_content);
+						//$div.append("<br/>")
 					}
-					
+					*/
 					$div.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...")
 					$div.css("color", "black");
 					$div.css("backgroundcolor", "gray");
@@ -163,7 +168,7 @@
 			background-color: #f6f9fc;	
 			font-family: sans-serif;
 			font-weight: bold;
-			padding: 0px 0px 5px 15px; 
+			padding: 0px 0px 28px 15px; 
 			box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 		}
 
@@ -171,7 +176,7 @@
 			background-color: #f6f9fc;	
 			font-family: sans-serif;
 			font-weight: bold;
-			padding: 5px 18px 12px 15px; 
+			padding: 15px 10px 10px 15px; 
 			box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 		}
 		
