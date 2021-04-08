@@ -316,7 +316,7 @@
 							<h4 class="panel-title" id="-collapsible-list-group-">
 							<span class="glyphicon glyphicon-folder-close" aria-hidden="true" id="workspaceglyphicon"></span>
 								<a class="collapsed" data-toggle="collapse" href="#workspacelist"
-									aria-expanded="false" aria-controls="workspacelist">Workspace </a>
+									aria-expanded="false" aria-controls="workspacelist">&nbsp;&nbsp;Workspace </a>
 							</h4>
 					</div>
                     <div id="workspacelist" class="panel-collapse collapse"
@@ -335,7 +335,7 @@
 						<h4 class="panel-title" id="-collapsible-list-group-">
 						<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
 						<a class="collapsed" data-toggle="collapse" href="#channellist"
-						aria-expanded="false" aria-controls="channellist">Channel </a>
+						aria-expanded="false" aria-controls="channellist">&nbsp;&nbsp;Channel </a>
 						</h4>
 					</div>
 					<div id="channellist" class="panel-collapse collapse"
@@ -351,7 +351,7 @@
 							<h4 class="panel-title" id="-collapsible-list-group-">
 							<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
 								<a class="collapsed" data-toggle="collapse" href="#messagelist"
-									aria-expanded="false" aria-controls="messagelist">Message </a>
+									aria-expanded="false" aria-controls="messagelist">&nbsp;&nbsp;Message </a>
 							</h4>
 						</div>
 						<div id="messagelist" class="panel-collapse collapse"
@@ -365,18 +365,18 @@
 					</li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href="calendar.jsp"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Calendar</a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> 날씨</a></li>
+                    <li><a href="calendar.jsp"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;&nbsp;Calendar</a></li>
+                    <li><a href=""><span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>&nbsp;&nbsp;날씨</a></li>
 
-                    <li><a href="covid.jsp"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> covid</a></li>
-                    <li><a href="paint.jsp"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 그림판</a></li>
-                    <li><a href="trans.jsp"><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span> 번역</a></li>
+                    <li><a href="covid.jsp"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>&nbsp;&nbsp;covid</a></li>
+                    <li><a href="paint.jsp"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;&nbsp;그림판</a></li>
+                    <li><a href="trans.jsp"><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>&nbsp;&nbsp;번역</a></li>
 
 
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href="member_update.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 회원정보 수정</a></li>
-                    <li><a href="MemberController?command=logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> LogOut</a></li>
+                    <li><a href="member_update.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;회원정보 수정</a></li>
+                    <li><a href="MemberController?command=logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;LogOut</a></li>
                 </ul>
             </div>
             
