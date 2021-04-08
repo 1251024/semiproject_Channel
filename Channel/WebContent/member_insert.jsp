@@ -226,7 +226,6 @@ button:hover {
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.html">시작하기</a></li>
                     <li><a href="instructional.html">Channel이란?</a></li>
                      <li class="dropdown">
               <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">

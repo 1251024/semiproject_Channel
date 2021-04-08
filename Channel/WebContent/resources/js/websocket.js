@@ -1,5 +1,5 @@
 //채팅영역 Websocket 접속 함수들
-var webSocket = new WebSocket('ws://localhost:8787/Channel/websocket');
+var webSocket = new WebSocket('ws://qclass.iptime.org:8686/Channel/websocket');
 var re_send = "";
 webSocket.onerror = function(event) {
 	onError(event)
