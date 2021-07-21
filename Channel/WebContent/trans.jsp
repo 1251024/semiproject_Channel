@@ -30,7 +30,6 @@
 
 <%@ include file="common.jsp" %>
 
-<!-- 클론 테스트 -->
 <div style="width: 1200px; margin: 0px auto; margin-top: 40px; text-align: center">
 		<div style="width: 500px; height: 400px; float: left">
 		<!--  
